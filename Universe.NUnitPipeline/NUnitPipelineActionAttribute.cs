@@ -112,9 +112,24 @@ namespace Universe {
                 else if (stage.NUnitActionAppliedTo == NUnitActionAppliedTo.Assembly)
                 {
                 }
+
+                IndexState indexState = new IndexState() { FixtureIndex = stage.FixtureIndex, TestIndex = stage.TestIndex };
+                var _ = test.GetPropertyOrAdd("Index State", t => indexState);
+            }
+            else if (stage.Side == NUnitActionSide.Finish)
+            {
+                var indexState = test.GetPropertyOrAdd<IndexState>("Index State", null);
+                stage.FixtureIndex = indexState.FixtureIndex;
+                stage.TestIndex = indexState.TestIndex;
             }
 
             Console.WriteLine($"[DEBUG Action:On{actionSide}] STAGE {stage.Side} '{stage.NUnitActionAppliedTo} Counter={counter}': {stage.FormattedIndex} [{string.Join(", ", stage.StructuredFullName)}]");
+        }
+
+        class IndexState
+        {
+            public int? FixtureIndex { get; set; }
+            public int? TestIndex { get; set; } // If applied to test only
         }
 
 
