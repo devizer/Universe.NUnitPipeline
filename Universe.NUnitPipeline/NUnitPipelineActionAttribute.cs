@@ -40,7 +40,7 @@ namespace Universe {
             else
             {
                 stage.FixtureFullName = NUnitActionAppliedTo.Fixture.GetType().FullName;
-                var testParts = Array.Empty<string>();
+                var testParts = new string[0];
                 if (test.Method == null)
                 {
                     stage.NUnitActionAppliedTo = NUnitActionAppliedTo.Fixture;

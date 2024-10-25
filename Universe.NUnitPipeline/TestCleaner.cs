@@ -33,7 +33,7 @@ namespace Universe.NUnitPipeline
 
             var testAdapter = TestContext.CurrentContext.Test;
             var testName = testAdapter.Name;
-            bool isActualTest = !string.IsNullOrWhiteSpace(testAdapter.MethodName); // false for onetimesetup/onetimeteardown
+            bool isActualTest = !string.IsNullOrEmpty(testAdapter.MethodName); // false for onetimesetup/onetimeteardown
             if (!isActualTest && isTestCase)
             {
                 isTestCase = false;
@@ -83,7 +83,7 @@ namespace Universe.NUnitPipeline
                 AsyncDisposeWaiter.AddWaiter(manualWait.WaitHandle);
                 actionWrapped = () =>
                 {
-                    Task.Run(() =>
+                    ThreadPool.QueueUserWorkItem(_ =>
                     {
                         try
                         {

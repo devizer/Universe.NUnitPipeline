@@ -6,13 +6,14 @@ using System.Linq;
 using System.Threading;
 using NUnit.Framework;
 
-namespace MyTests
+namespace Universe.NUnitPipeline
 {
     public class PropertyBagVisualizer
     {
         public static string ShowHumanString(string title)
         {
-            var temp = string.Join(", ", (TestContext.CurrentContext?.Test?.Properties?.Keys ?? Array.Empty<string>()).Select(x => $"'{x}' is {GetTypeDescription(TestContext.CurrentContext?.Test?.Properties[x])}"));
+            string[] emptyStrings = new string[0];
+            var temp = string.Join(", ", (TestContext.CurrentContext?.Test?.Properties?.Keys ?? emptyStrings).Select(x => $"'{x}' is {GetTypeDescription(TestContext.CurrentContext?.Test?.Properties[x])}").ToArray());
             var ret = $"{title } Properties [{temp}] (Thread ID is {Thread.CurrentThread.ManagedThreadId})";
             Debug.WriteLine(ret);
             return ret;

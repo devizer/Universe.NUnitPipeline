@@ -1,9 +1,7 @@
-using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 
-namespace MyTests
+namespace Universe.NUnitPipeline.Tests
 {
     public class CpuLoad
     {

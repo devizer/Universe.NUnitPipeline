@@ -17,13 +17,18 @@ namespace Universe.NUnitPipeline
                 return elapsed.TotalMilliseconds.ToString("n1") + " milliseconds";
 
             else if (totalSeconds <= 50 * 60)
-                return elapsed.ToString("mm':'ss'.'f");
+                // return elapsed.ToString("mm':'ss'.'f");
+                return new DateTime(0).Add(elapsed).ToString("mm':'ss'.'f");
 
             else if (totalSeconds <= 20 * 3600)
-                return elapsed.ToString("hh':'mm':'ss'.'f");
+                return new DateTime(0).Add(elapsed).ToString("hh':'mm':'ss'.'f");
 
             else
-                return elapsed.ToString("d'.'hh':'mm':'ss'.'f");
+            {
+                int totalDays = (int)Math.Ceiling(elapsed.TotalDays);
+                // return elapsed.ToString("d'.'hh':'mm':'ss'.'f");
+                return totalDays.ToString("0") + "." + new DateTime(0).Add(elapsed).ToString("hh':'mm':'ss'.'f");
+            }
         }
 
     }

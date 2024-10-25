@@ -1,5 +1,3 @@
-using MyTests;
-
 namespace Universe.NUnitPipeline.Tests;
 
 [NUnitPipelineAction]
