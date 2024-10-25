@@ -358,8 +358,26 @@ jobs:
       cd bin/Release/net8.0
       Say "mono $nunitexe Universe.NUnitPipeline.Tests.dll"
       mono $nunitexe Universe.NUnitPipeline.Tests.dll
-    condition: eq(variables['Agent.OS'], 'Linux')
-    displayName: 'Test by Console Runner'
+    # condition: eq(variables['Agent.OS'], 'Linux')
+    condition: false()
+    displayName: 'Test Linux by Console Runner'
+
+  - bash: |
+      set -eu; set -o pipefail
+      mkdir -p $HOME/nunit
+      pushd $HOME/nunit
+      nuget install nunit.consolerunner -version 3.12.0
+      cd NUnit*; cd tools;
+      export nunitexe=$(pwd)/nunit3-console.exe 
+      popd
+      cd Universe.NUnitPipeline.Tests
+      cd bin/Release/net8.0
+      ls -la
+      Say "mono $nunitexe Universe.NUnitPipeline.Tests.dll"
+      $nunitexe Universe.NUnitPipeline.Tests.dll
+    condition: eq(variables['Agent.OS'], 'Windows_NT')
+    displayName: 'Test Linux by Console Runner'
+
 
   - bash: |
        set -eu; set -o pipefail
