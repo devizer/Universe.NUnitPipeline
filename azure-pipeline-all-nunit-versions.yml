@@ -278,8 +278,12 @@ jobs:
       set -eu; set -o pipefail
       for folder in Universe.NUnitPipeline.Tests Universe.NUnitPipeline; do
         pushd $folder
+        echo; echo "REMOVE"
         dotnet remove package NUnit
+        echo; echo "ADD"
         dotnet add package NUnit -v $NUNIT_VERSION
+        Say "Project: $(ls *.csproj)"
+        cat *.csproj
         popd
       done
     # condition: eq(variables['Agent.OS'], 'Linux')
