@@ -67,12 +67,14 @@ public class TestsSync
     }
 
     [Test]
+    [Explicit, Category("Fail")]
     public void SimpleFail()
     {
         Assert.Fail("Fail on purpose");
     }
 
     [Test]
+    [Explicit, Category("Fail")]
     public void SimpleException()
     {
         throw new InvalidOperationException("Exception on purpose");

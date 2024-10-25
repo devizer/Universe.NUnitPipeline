@@ -26,6 +26,7 @@ public class TestsAsync
     }
 
     [Test]
+    [Explicit, Category("Fail")]
     public async Task AsyncFail()
     {
         await Task.Run(function: async () =>
@@ -37,6 +38,7 @@ public class TestsAsync
     }
 
     [Test]
+    [Explicit, Category("Fail")]
     public async Task AsyncException()
     {
         await Task.Run(function: async () =>
