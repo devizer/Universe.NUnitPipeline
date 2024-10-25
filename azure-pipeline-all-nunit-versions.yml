@@ -400,7 +400,7 @@ jobs:
     # condition: succeededOrFailed()
     displayName: 'Download of all versions'
     inputs:
-      path: '$(SYSTEM.ARTIFACTSDIRECTORY)\All'
+      path: '$(SYSTEM.ARTIFACTSDIRECTORY)/All'
       patterns: 
         "**"
 
