@@ -341,7 +341,7 @@ jobs:
       cd Universe.NUnitPipeline.Tests
       dotnet test -c Release -f $FWVERSION --logger "console;verbosity=normal;consoleLoggerParameters=ErrorsOnly" -verbosity:minimal
     # condition: eq(variables['Agent.OS'], 'Linux')
-    displayName: 'Test'
+    displayName: 'Test by dotnet test'
 
   - bash: |
       set -eu; set -o pipefail
@@ -403,7 +403,7 @@ jobs:
 - job: 'Combine'
   condition: succeededOrFailed()
   pool:
-    vmImage: 'linux-latest'
+    vmImage: 'ubuntu-latest'
   timeoutInMinutes: 15
   dependsOn:
     - TestAndPack
