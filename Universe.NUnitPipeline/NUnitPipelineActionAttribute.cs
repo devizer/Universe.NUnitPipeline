@@ -135,7 +135,7 @@ namespace Universe {
 
         static string EmptyLineBetweenTests()
         {
-#if NETFRAMEWORK
+#if NETFRAMEWORK && false
             return Environment.NewLine;
 #else
             return string.Empty;
