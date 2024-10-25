@@ -272,8 +272,6 @@ jobs:
       Say --Reset-Stopwatch
       Say "CPU: $(Get-CpuName)"
       dotnet --info
-
-      
     # condition: eq(variables['Agent.OS'], 'Linux')
     displayName: 'Bootstrap'
 
@@ -326,13 +324,6 @@ jobs:
       # msbuild /t:Build /p:Configuration=Release /verbosity:quiet Universe.NUnitPipeline.Tests.csproj
       dotnet build -c Release -verbosity:quiet Universe.NUnitPipeline.Tests.csproj
       popd
-      
-      if [[ "$(uname -s)" == Linux ]]; then
-         Say "Packing $SELF_VERSION"
-         pushd Universe.NUnitPipeline
-         dotnet pack -c Release -p:PackageVersion=$SELF_VERSION -p:Version=$SELF_VERSION -p:IncludeSymbols=True -p:SymbolPackageFormat=snupkg
-         popd
-      fi
     # condition: eq(variables['Agent.OS'], 'Linux')
     displayName: 'Build'
 
@@ -365,6 +356,15 @@ jobs:
     condition: succeededOrFailed()
     displayName: 'Test by Console Runner'
 
+  - bash: |
+      # if Tests fails than nugets are not produced
+      set -eu; set -o pipefail
+      Say "Packing $SELF_VERSION"
+      pushd Universe.NUnitPipeline
+      dotnet pack -c Release -p:PackageVersion=$SELF_VERSION -p:Version=$SELF_VERSION -p:IncludeSymbols=True -p:SymbolPackageFormat=snupkg
+      popd
+    condition: eq(variables['Agent.OS'], 'Linux')
+    displayName: 'Pack (S)NuGet'
 
   - bash: |
        set -eu; set -o pipefail
@@ -372,7 +372,6 @@ jobs:
        7z a "$SYSTEM_ARTIFACTSDIRECTORY/Sources $AGENT_JOBNAME $BUILD_BUILDNUMBER.7z" -mx=1
 
        for ext in nupkg snupkg; do
-         find . -name "*.$ext"
          find . -name "*.$ext" -exec cp -v {} $SYSTEM_ARTIFACTSDIRECTORY \;
        done
     condition: succeededOrFailed()
