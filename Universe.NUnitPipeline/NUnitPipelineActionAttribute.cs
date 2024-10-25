@@ -10,7 +10,7 @@ using Universe.CpuUsage;
 using Universe.NUnitPipeline;
 
 /*
- * Supported NUnit (and Console Runner): 3.12 ... 3.18.3
+ * Supported NUnit (and Console Runner): 3.12 ... 3.18.3 and 4x
  */
 namespace Universe {
 
@@ -28,6 +28,7 @@ namespace Universe {
             var selfCounter = test.GetPropertyOrAdd<SelfCounter>("Is First", t => new SelfCounter() { Count = 0});
             selfCounter.Count++;
             bool isNext = selfCounter.Count > 1;
+            if (!isNext) Console.WriteLine("");
 
             NUnitStage stage = new NUnitStage() { Side = NUnitActionSide.Start, };
             if (test.Fixture == null)
