@@ -15,7 +15,7 @@ jobs:
   displayName: 'Pack'
   pool:
     vmImage: '$(VMIMAGE)'
-  timeoutInMinutes: 20
+  timeoutInMinutes: 8
   strategy:
     maxParallel: 10
     matrix:
