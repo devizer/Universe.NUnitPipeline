@@ -276,7 +276,7 @@ jobs:
 
   - bash: |
       set -eu; set -o pipefail
-      if [[ "$(uname -m)" == Linux ]]; then
+      if [[ "$(uname -s)" == Linux ]]; then
         if [[ "$NUNIT_VERSION" == 3* ]]; then
           tf="netstandard2.0;net35;net40"
         else
