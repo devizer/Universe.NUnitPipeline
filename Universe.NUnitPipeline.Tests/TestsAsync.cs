@@ -1,49 +1,59 @@
-namespace Universe.NUnitPipeline.Tests;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
-[NUnitPipelineAction]
-[TestFixture]
-public class TestsAsync
+namespace Universe.NUnitPipeline.Tests
 {
-    [Test]
-    [TestCase("First")]
-    /*[TestCase("Next")]*/
-    public async Task Test1Async_111_Milliseconds(string title)
-    {
-        TestCleaner.OnDispose("Delete File Temporary.Temp (from test body)", () => File.Delete("Temporary.Temp"), TestDisposeOptions.Global);
-        Console.WriteLine(PropertyBagVisualizer.ShowHumanString("SYNCHRONOUS"));
-        await CpuLoad.RunAsync(111);
-    }
 
-    /*[Test]*/
-    [TestCase("First")]
-    [TestCase("Next")]
-    public async Task Test2Async_777_Milliseconds(string title)
+    [NUnitPipelineAction]
+    [TestFixture]
+    public class TestsAsync
     {
-        Console.WriteLine(PropertyBagVisualizer.ShowHumanString("SYNCHRONOUS"));
-        await CpuLoad.RunAsync(777);
-    }
-
-    [Test]
-    [Explicit, Category("Fail")]
-    public async Task AsyncFail()
-    {
-        await Task.Run(function: async () =>
+        [Test]
+        [TestCase("First")]
+        /*[TestCase("Next")]*/
+        public async Task Test1Async_111_Milliseconds(string title)
         {
-            TestCleaner.OnDispose("Delete File TempAsync.Temp (from test's body)", () => File.Delete("TempAsync.Temp"), TestDisposeOptions.TestCase);
-            await CpuLoad.RunAsync(42);
-            Assert.Fail("Fail on purpose");
-        });
-    }
+            TestCleaner.OnDispose("Delete File Temporary.Temp (from test body)", () => File.Delete("Temporary.Temp"), TestDisposeOptions.Global);
+            Console.WriteLine(PropertyBagVisualizer.ShowHumanString("SYNCHRONOUS"));
+            await CpuLoad.RunAsync(111);
+        }
 
-    [Test]
-    [Explicit, Category("Fail")]
-    public async Task AsyncException()
-    {
-        await Task.Run(function: async () =>
+        /*[Test]*/
+        [TestCase("First")]
+        [TestCase("Next")]
+        public async Task Test2Async_777_Milliseconds(string title)
         {
-            await CpuLoad.RunAsync(42);
-            throw new InvalidOperationException("Exception on purpose");
-        });
-    }
+            Console.WriteLine(PropertyBagVisualizer.ShowHumanString("SYNCHRONOUS"));
+            await CpuLoad.RunAsync(777);
+        }
 
+        [Test]
+        [Explicit, Category("Fail")]
+        public async Task AsyncFail()
+        {
+            await Task.Run(function: async () =>
+            {
+                TestCleaner.OnDispose("Delete File TempAsync.Temp (from test's body)", () => File.Delete("TempAsync.Temp"), TestDisposeOptions.TestCase);
+                await CpuLoad.RunAsync(42);
+                Assert.Fail("Fail on purpose");
+            });
+        }
+
+        [Test]
+        [Explicit, Category("Fail")]
+        public async Task AsyncException()
+        {
+            await Task.Run(function: async () =>
+            {
+                await CpuLoad.RunAsync(42);
+                throw new InvalidOperationException("Exception on purpose");
+            });
+        }
+
+    }
 }
