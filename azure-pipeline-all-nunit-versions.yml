@@ -1,4 +1,5 @@
 variables:
+  FWVERSION: "net8.0"
 
 trigger:
   branches:
@@ -295,6 +296,6 @@ jobs:
   - bash: |
       set -eu; set -o pipefail
       cd Universe.NUnitPipeline.Tests
-      dotnet test -c Release -f net8.0 --logger "console;verbosity=normal;consoleLoggerParameters=ErrorsOnly" -verbosity:minimal
+      dotnet test -c Release -f $FWVERSION --logger "console;verbosity=normal;consoleLoggerParameters=ErrorsOnly" -verbosity:minimal
     # condition: eq(variables['Agent.OS'], 'Linux')
     displayName: 'Test'
