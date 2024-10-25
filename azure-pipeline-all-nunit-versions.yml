@@ -289,7 +289,8 @@ jobs:
       set -eu; set -o pipefail
       cd Universe.NUnitPipeline.Tests
       try-and-retry dotnet restore -v:q
-      msbuild /t:Build /p:Configuration=Release /verbosity:quiet Universe.NUnitPipeline.Tests.csproj
+      # msbuild /t:Build /p:Configuration=Release /verbosity:quiet Universe.NUnitPipeline.Tests.csproj
+      dotnet build -c Release -verbosity:quiet Universe.NUnitPipeline.Tests.csproj
     # condition: eq(variables['Agent.OS'], 'Linux')
     displayName: 'Build'
 
