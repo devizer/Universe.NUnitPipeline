@@ -1,20 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  
-  <PropertyGroup Condition="$(NUNIT_VERSION) == ''">>
-    <NUNIT_VERSION>3.14.0</NUNIT_VERSION>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(NUNIT_VERSION) == ''">>
-    <NUNIT_VERSION>3.14.0</NUNIT_VERSION>
-  </PropertyGroup>
-
-    <!-- NUnit 3x OK 
-    <TargetFramework>netstandard2.0</TargetFramework>
-    -->
-	<!-- NUnit supports only net 4.6.2 and 6.0 -->
-    <TargetFrameworks>net6.0;net462</TargetFrameworks>
-  </PropertyGroup>
-
   <PropertyGroup>
     <!-- NUnit 3x OK 
     <TargetFramework>netstandard2.0</TargetFramework>
