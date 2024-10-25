@@ -353,9 +353,10 @@ jobs:
       popd
       cd Universe.NUnitPipeline.Tests
       Say "Building"
-      Reset-Target-Framework -fw net48
-      dotnet build -f net48 -c Release
-      cd bin/Release/net48
+      Reset-Target-Framework -fw net8.0
+      dotnet build -f net8.0 -c Release
+      cd bin/Release/net8.0
+      Say "mono $nunitexe Universe.NUnitPipeline.Tests.dll"
       mono $nunitexe Universe.NUnitPipeline.Tests.dll
     condition: eq(variables['Agent.OS'], 'Linux')
     displayName: 'Test by Console Runner'
