@@ -21,13 +21,13 @@ namespace Universe.NUnitPipeline
                 return new DateTime(0).Add(elapsed).ToString("mm':'ss'.'f");
 
             else if (totalSeconds <= 20 * 3600)
-                return new DateTime(0).Add(elapsed).ToString("hh':'mm':'ss'.'f");
+                return new DateTime(0).Add(elapsed).ToString("HH':'mm':'ss'.'f");
 
             else
             {
-                int totalDays = (int)Math.Ceiling(elapsed.TotalDays);
+                int totalDays = (int)Math.Floor(elapsed.TotalDays);
                 // return elapsed.ToString("d'.'hh':'mm':'ss'.'f");
-                return totalDays.ToString("0") + "." + new DateTime(0).Add(elapsed).ToString("hh':'mm':'ss'.'f");
+                return totalDays.ToString("0") + "." + new DateTime(0).Add(elapsed).ToString("HH':'mm':'ss'.'f");
             }
         }
 
