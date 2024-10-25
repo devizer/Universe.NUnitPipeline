@@ -356,28 +356,14 @@ jobs:
       Reset-Target-Framework -fw net8.0
       dotnet build -f net8.0 -c Release
       cd bin/Release/net8.0
-      Say "mono $nunitexe Universe.NUnitPipeline.Tests.dll"
-      mono $nunitexe Universe.NUnitPipeline.Tests.dll
-    condition: eq(variables['Agent.OS'], 'Linux')
-    # condition: succeededOrFailed()
-    # condition: ${{ false }}
-    displayName: 'Test Linux by Console Runner'
-
-  - bash: |
-      set -eu; set -o pipefail
-      mkdir -p $HOME/nunit
-      pushd $HOME/nunit
-      nuget install nunit.consolerunner -version 3.18.3
-      cd NUnit*; cd tools;
-      export nunitexe=$(pwd)/nunit3-console.exe 
-      popd
-      cd Universe.NUnitPipeline.Tests
-      cd bin/Release/net8.0
-      ls -la
       Say "$nunitexe Universe.NUnitPipeline.Tests.dll"
-      $nunitexe Universe.NUnitPipeline.Tests.dll
-    condition: eq(variables['Agent.OS'], 'Windows_NT')
-    displayName: 'Test Windows by Console Runner'
+      if [[ "$AGENT_OS" == "Windows_NT" ]]; then
+        $nunitexe Universe.NUnitPipeline.Tests.dll
+      else
+        mono $nunitexe Universe.NUnitPipeline.Tests.dll
+      fi
+    condition: succeededOrFailed()
+    displayName: 'Test by Console Runner'
 
 
   - bash: |
