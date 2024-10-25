@@ -8,7 +8,7 @@ using Universe;
 using Universe.NUnitPipeline;
 
 /*[assembly: NUnitGlobalDispose]*/
-/*[assembly: NUnitCpuUsageAction]*/
+/*[assembly: NUnitPipelineActionAttribute]*/
 /*[assembly: NUnitConsoleOutputAction]*/
 
 /*[assembly: NUnitPipeline]*/

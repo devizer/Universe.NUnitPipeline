@@ -6,6 +6,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="NUnit" Version="3.14.0" />
+		<PackageReference Include="Universe.CpuUsage" Version="2.2.497.598" />
 	</ItemGroup>
 
 </Project>
