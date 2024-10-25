@@ -344,7 +344,8 @@ jobs:
 
   - bash: |
        set -eu; set -o pipefail
-       7z a "$SYSTEM_ARTIFACTSDIRECTORY/Sources $AGENT_JOBNAME $BUILD_BUILDNUMBER.7z" -mx1 "$BUILD_SOURCESDIRECTORY"
+       cd "$BUILD_SOURCESDIRECTORY"
+       7z a "$SYSTEM_ARTIFACTSDIRECTORY/Sources $AGENT_JOBNAME $BUILD_BUILDNUMBER.7z" -mx=1
     condition: succeededOrFailed()
     displayName: 'Pack Artifact'
 
