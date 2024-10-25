@@ -351,7 +351,7 @@ jobs:
 
 
 - job: 'Combine'
-  # condition: succeededOrFailed()
+  condition: succeededOrFailed()
   pool:
     vmImage: 'windows-latest'
   timeoutInMinutes: 30
