@@ -304,3 +304,10 @@ jobs:
       dotnet test -c Release -f $FWVERSION --logger "console;verbosity=normal;consoleLoggerParameters=ErrorsOnly" -verbosity:minimal
     # condition: eq(variables['Agent.OS'], 'Linux')
     displayName: 'Test'
+
+  - task: PublishBuildArtifacts@1
+    condition: succeededOrFailed()
+    displayName: 'Publish Patched Sources'
+    inputs:
+      pathtoPublish: '$(Build.SourcesDirectory)'
+      artifactName: 'Sources $(Agent.JobName)-$(Build.BUILDNUMBER)'
