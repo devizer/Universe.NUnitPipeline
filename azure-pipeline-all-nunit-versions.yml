@@ -276,6 +276,20 @@ jobs:
 
   - bash: |
       set -eu; set -o pipefail
+      if [[ "$(uname -m)" == Linux ]]; then
+        if [[ "$NUNIT_VERSION" == 3* ]]; then
+          tf="netstandard2.0;net35;net40"
+        else
+          tf="net462;net6.0"
+        fi
+        pushd Universe.NUnitPipeline
+          Say "TARGET FRAMEWORKS: [$tf]"
+          Reset-Target-Framework -fw "$tf"
+          cmd="dotnet add package Microsoft.NETFramework.ReferenceAssemblies"
+          Say "$cmd"
+          try-and-retry eval $cmd
+        popd
+      fi
       for folder in Universe.NUnitPipeline.Tests Universe.NUnitPipeline; do
         pushd $folder
         echo; echo "REMOVE"
@@ -287,7 +301,7 @@ jobs:
         popd
       done
     # condition: eq(variables['Agent.OS'], 'Linux')
-    displayName: 'Assign Version'
+    displayName: 'Assign Version and Target Frameworks'
 
   - bash: |
       set -eu; set -o pipefail
