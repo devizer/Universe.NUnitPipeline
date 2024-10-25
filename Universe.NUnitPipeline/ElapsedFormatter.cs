@@ -10,6 +10,9 @@ namespace Universe.NUnitPipeline
         {
             var totalSeconds = elapsed.TotalSeconds;
 
+            int hoursTotalInt = (int)Math.Floor(totalSeconds / 3600);
+            int daysTotalInt = hoursTotalInt / 24;
+
             if (totalSeconds <= 0.09)
                 return elapsed.TotalMilliseconds.ToString("n2") + " milliseconds";
 
@@ -21,13 +24,12 @@ namespace Universe.NUnitPipeline
                 return new DateTime(0).Add(elapsed).ToString("mm':'ss'.'f");
 
             else if (totalSeconds <= 20 * 3600)
-                return new DateTime(0).Add(elapsed).ToString("HH':'mm':'ss'.'f");
-
+                // return new DateTime(0).Add(elapsed).ToString("HH':'mm':'ss'.'f");
+                return hoursTotalInt.ToString("00") + ":" + new DateTime(0).Add(elapsed).ToString("mm':'ss'.'f");
             else
             {
-                int totalDays = (int)Math.Floor(elapsed.TotalDays);
                 // return elapsed.ToString("d'.'hh':'mm':'ss'.'f");
-                return totalDays.ToString("0") + "." + new DateTime(0).Add(elapsed).ToString("HH':'mm':'ss'.'f");
+                return daysTotalInt.ToString("0") + "." + (hoursTotalInt % 24).ToString("00") + ":" + new DateTime(0).Add(elapsed).ToString("mm':'ss'.'f");
             }
         }
 
