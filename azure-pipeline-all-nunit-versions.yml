@@ -342,11 +342,17 @@ jobs:
     # condition: eq(variables['Agent.OS'], 'Linux')
     displayName: 'Test'
 
+  - bash: |
+       set -eu; set -o pipefail
+       7z a "$SYSTEM_ARTIFACTSDIRECTORY/Sources $AGENT_JOBNAME $BUILD_BUILDNUMBER.7z" -mx1 "$BUILD_SOURCESDIRECTORY"
+    condition: succeededOrFailed()
+    displayName: 'Pack Artifact'
+
   - task: PublishBuildArtifacts@1
     condition: succeededOrFailed()
     displayName: 'Publish Patched Sources'
     inputs:
-      pathtoPublish: '$(Build.SourcesDirectory)'
+      pathtoPublish: '$(SYSTEM.ARTIFACTSDIRECTORY)'
       artifactName: 'Sources $(Agent.JobName)-$(Build.BUILDNUMBER)'
 
 
@@ -354,7 +360,7 @@ jobs:
   condition: succeededOrFailed()
   pool:
     vmImage: 'windows-latest'
-  timeoutInMinutes: 30
+  timeoutInMinutes: 15
   dependsOn:
     - TestAndPack
 
