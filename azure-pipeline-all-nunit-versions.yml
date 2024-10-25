@@ -347,8 +347,10 @@ jobs:
        cd "$BUILD_SOURCESDIRECTORY"
        7z a "$SYSTEM_ARTIFACTSDIRECTORY/Sources $AGENT_JOBNAME $BUILD_BUILDNUMBER.7z" -mx=1
 
-       find . -name "*.nupkg" -or -name "*.snupkg"
-       find . -name "*.nupkg" -or -name "*.snupkg" -exec cp -v {} $SYSTEM_ARTIFACTSDIRECTORY \;
+       for ext in nupkg snupkg; do
+         find . -name "*.$ext"
+         find . -name "*.$ext" -exec cp -v {} $SYSTEM_ARTIFACTSDIRECTORY \;
+       done
     condition: succeededOrFailed()
     displayName: 'Pack Artifact'
 
