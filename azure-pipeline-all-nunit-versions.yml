@@ -359,7 +359,7 @@ jobs:
       Say "mono $nunitexe Universe.NUnitPipeline.Tests.dll"
       mono $nunitexe Universe.NUnitPipeline.Tests.dll
     # condition: eq(variables['Agent.OS'], 'Linux')
-    condition: false()
+    condition: ${{ false }}
     displayName: 'Test Linux by Console Runner'
 
   - bash: |
@@ -376,7 +376,7 @@ jobs:
       Say "mono $nunitexe Universe.NUnitPipeline.Tests.dll"
       $nunitexe Universe.NUnitPipeline.Tests.dll
     condition: eq(variables['Agent.OS'], 'Windows_NT')
-    displayName: 'Test Linux by Console Runner'
+    displayName: 'Test Windows by Console Runner'
 
 
   - bash: |
@@ -428,7 +428,7 @@ jobs:
 
     
   - task: PublishBuildArtifacts@1
-    # condition: succeededOrFailed()
+    condition: succeededOrFailed()
     displayName: 'Publish'
     inputs:
       pathtoPublish: '$(SYSTEM.ARTIFACTSDIRECTORY)'
