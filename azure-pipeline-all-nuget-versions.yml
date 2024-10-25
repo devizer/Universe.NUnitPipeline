@@ -1,0 +1,300 @@
+variables:
+
+trigger:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - '**'
+
+jobs:
+
+- job: Tests
+  pool:
+    vmImage: '$(VMIMAGE)'
+  timeoutInMinutes: 20
+  strategy:
+    maxParallel: 10
+    matrix:
+      "4.2.2 Windows":
+         NUNIT_VERSION: "4.2.2"
+         VMIMAGE: "windows-latest"
+      "4.2.2 Linux":
+         NUNIT_VERSION: "4.2.2"
+         VMIMAGE: "ubuntu-latest"
+      "4.2.2 MacOs":
+         NUNIT_VERSION: "4.2.2"
+         VMIMAGE: "macos-latest"
+      "4.2.1 Windows":
+         NUNIT_VERSION: "4.2.1"
+         VMIMAGE: "windows-latest"
+      "4.2.1 Linux":
+         NUNIT_VERSION: "4.2.1"
+         VMIMAGE: "ubuntu-latest"
+      "4.2.1 MacOs":
+         NUNIT_VERSION: "4.2.1"
+         VMIMAGE: "macos-latest"
+      "4.1.0 Windows":
+         NUNIT_VERSION: "4.1.0"
+         VMIMAGE: "windows-latest"
+      "4.1.0 Linux":
+         NUNIT_VERSION: "4.1.0"
+         VMIMAGE: "ubuntu-latest"
+      "4.1.0 MacOs":
+         NUNIT_VERSION: "4.1.0"
+         VMIMAGE: "macos-latest"
+      "4.0.1 Windows":
+         NUNIT_VERSION: "4.0.1"
+         VMIMAGE: "windows-latest"
+      "4.0.1 Linux":
+         NUNIT_VERSION: "4.0.1"
+         VMIMAGE: "ubuntu-latest"
+      "4.0.1 MacOs":
+         NUNIT_VERSION: "4.0.1"
+         VMIMAGE: "macos-latest"
+      "3.14.0 Windows":
+         NUNIT_VERSION: "3.14.0"
+         VMIMAGE: "windows-latest"
+      "3.14.0 Linux":
+         NUNIT_VERSION: "3.14.0"
+         VMIMAGE: "ubuntu-latest"
+      "3.14.0 MacOs":
+         NUNIT_VERSION: "3.14.0"
+         VMIMAGE: "macos-latest"
+      "3.13.3 Windows":
+         NUNIT_VERSION: "3.13.3"
+         VMIMAGE: "windows-latest"
+      "3.13.3 Linux":
+         NUNIT_VERSION: "3.13.3"
+         VMIMAGE: "ubuntu-latest"
+      "3.13.3 MacOs":
+         NUNIT_VERSION: "3.13.3"
+         VMIMAGE: "macos-latest"
+      "3.13.2 Windows":
+         NUNIT_VERSION: "3.13.2"
+         VMIMAGE: "windows-latest"
+      "3.13.2 Linux":
+         NUNIT_VERSION: "3.13.2"
+         VMIMAGE: "ubuntu-latest"
+      "3.13.2 MacOs":
+         NUNIT_VERSION: "3.13.2"
+         VMIMAGE: "macos-latest"
+      "3.13.1 Windows":
+         NUNIT_VERSION: "3.13.1"
+         VMIMAGE: "windows-latest"
+      "3.13.1 Linux":
+         NUNIT_VERSION: "3.13.1"
+         VMIMAGE: "ubuntu-latest"
+      "3.13.1 MacOs":
+         NUNIT_VERSION: "3.13.1"
+         VMIMAGE: "macos-latest"
+      "3.13.0 Windows":
+         NUNIT_VERSION: "3.13.0"
+         VMIMAGE: "windows-latest"
+      "3.13.0 Linux":
+         NUNIT_VERSION: "3.13.0"
+         VMIMAGE: "ubuntu-latest"
+      "3.13.0 MacOs":
+         NUNIT_VERSION: "3.13.0"
+         VMIMAGE: "macos-latest"
+      "3.12.0 Windows":
+         NUNIT_VERSION: "3.12.0"
+         VMIMAGE: "windows-latest"
+      "3.12.0 Linux":
+         NUNIT_VERSION: "3.12.0"
+         VMIMAGE: "ubuntu-latest"
+      "3.12.0 MacOs":
+         NUNIT_VERSION: "3.12.0"
+         VMIMAGE: "macos-latest"
+      "3.11.0 Windows":
+         NUNIT_VERSION: "3.11.0"
+         VMIMAGE: "windows-latest"
+      "3.11.0 Linux":
+         NUNIT_VERSION: "3.11.0"
+         VMIMAGE: "ubuntu-latest"
+      "3.11.0 MacOs":
+         NUNIT_VERSION: "3.11.0"
+         VMIMAGE: "macos-latest"
+      "3.10.1 Windows":
+         NUNIT_VERSION: "3.10.1"
+         VMIMAGE: "windows-latest"
+      "3.10.1 Linux":
+         NUNIT_VERSION: "3.10.1"
+         VMIMAGE: "ubuntu-latest"
+      "3.10.1 MacOs":
+         NUNIT_VERSION: "3.10.1"
+         VMIMAGE: "macos-latest"
+      "3.10.0 Windows":
+         NUNIT_VERSION: "3.10.0"
+         VMIMAGE: "windows-latest"
+      "3.10.0 Linux":
+         NUNIT_VERSION: "3.10.0"
+         VMIMAGE: "ubuntu-latest"
+      "3.10.0 MacOs":
+         NUNIT_VERSION: "3.10.0"
+         VMIMAGE: "macos-latest"
+      "3.9.0 Windows":
+         NUNIT_VERSION: "3.9.0"
+         VMIMAGE: "windows-latest"
+      "3.9.0 Linux":
+         NUNIT_VERSION: "3.9.0"
+         VMIMAGE: "ubuntu-latest"
+      "3.9.0 MacOs":
+         NUNIT_VERSION: "3.9.0"
+         VMIMAGE: "macos-latest"
+      "3.8.1 Windows":
+         NUNIT_VERSION: "3.8.1"
+         VMIMAGE: "windows-latest"
+      "3.8.1 Linux":
+         NUNIT_VERSION: "3.8.1"
+         VMIMAGE: "ubuntu-latest"
+      "3.8.1 MacOs":
+         NUNIT_VERSION: "3.8.1"
+         VMIMAGE: "macos-latest"
+      "3.8.0 Windows":
+         NUNIT_VERSION: "3.8.0"
+         VMIMAGE: "windows-latest"
+      "3.8.0 Linux":
+         NUNIT_VERSION: "3.8.0"
+         VMIMAGE: "ubuntu-latest"
+      "3.8.0 MacOs":
+         NUNIT_VERSION: "3.8.0"
+         VMIMAGE: "macos-latest"
+      "3.7.1 Windows":
+         NUNIT_VERSION: "3.7.1"
+         VMIMAGE: "windows-latest"
+      "3.7.1 Linux":
+         NUNIT_VERSION: "3.7.1"
+         VMIMAGE: "ubuntu-latest"
+      "3.7.1 MacOs":
+         NUNIT_VERSION: "3.7.1"
+         VMIMAGE: "macos-latest"
+      "3.7.0 Windows":
+         NUNIT_VERSION: "3.7.0"
+         VMIMAGE: "windows-latest"
+      "3.7.0 Linux":
+         NUNIT_VERSION: "3.7.0"
+         VMIMAGE: "ubuntu-latest"
+      "3.7.0 MacOs":
+         NUNIT_VERSION: "3.7.0"
+         VMIMAGE: "macos-latest"
+      "3.6.1 Windows":
+         NUNIT_VERSION: "3.6.1"
+         VMIMAGE: "windows-latest"
+      "3.6.1 Linux":
+         NUNIT_VERSION: "3.6.1"
+         VMIMAGE: "ubuntu-latest"
+      "3.6.1 MacOs":
+         NUNIT_VERSION: "3.6.1"
+         VMIMAGE: "macos-latest"
+      "3.6.0 Windows":
+         NUNIT_VERSION: "3.6.0"
+         VMIMAGE: "windows-latest"
+      "3.6.0 Linux":
+         NUNIT_VERSION: "3.6.0"
+         VMIMAGE: "ubuntu-latest"
+      "3.6.0 MacOs":
+         NUNIT_VERSION: "3.6.0"
+         VMIMAGE: "macos-latest"
+      "3.5.0 Windows":
+         NUNIT_VERSION: "3.5.0"
+         VMIMAGE: "windows-latest"
+      "3.5.0 Linux":
+         NUNIT_VERSION: "3.5.0"
+         VMIMAGE: "ubuntu-latest"
+      "3.5.0 MacOs":
+         NUNIT_VERSION: "3.5.0"
+         VMIMAGE: "macos-latest"
+      "3.4.1 Windows":
+         NUNIT_VERSION: "3.4.1"
+         VMIMAGE: "windows-latest"
+      "3.4.1 Linux":
+         NUNIT_VERSION: "3.4.1"
+         VMIMAGE: "ubuntu-latest"
+      "3.4.1 MacOs":
+         NUNIT_VERSION: "3.4.1"
+         VMIMAGE: "macos-latest"
+      "3.4.0 Windows":
+         NUNIT_VERSION: "3.4.0"
+         VMIMAGE: "windows-latest"
+      "3.4.0 Linux":
+         NUNIT_VERSION: "3.4.0"
+         VMIMAGE: "ubuntu-latest"
+      "3.4.0 MacOs":
+         NUNIT_VERSION: "3.4.0"
+         VMIMAGE: "macos-latest"
+      "3.2.1 Windows":
+         NUNIT_VERSION: "3.2.1"
+         VMIMAGE: "windows-latest"
+      "3.2.1 Linux":
+         NUNIT_VERSION: "3.2.1"
+         VMIMAGE: "ubuntu-latest"
+      "3.2.1 MacOs":
+         NUNIT_VERSION: "3.2.1"
+         VMIMAGE: "macos-latest"
+      "3.2.0 Windows":
+         NUNIT_VERSION: "3.2.0"
+         VMIMAGE: "windows-latest"
+      "3.2.0 Linux":
+         NUNIT_VERSION: "3.2.0"
+         VMIMAGE: "ubuntu-latest"
+      "3.2.0 MacOs":
+         NUNIT_VERSION: "3.2.0"
+         VMIMAGE: "macos-latest"
+      "3.0.1 Windows":
+         NUNIT_VERSION: "3.0.1"
+         VMIMAGE: "windows-latest"
+      "3.0.1 Linux":
+         NUNIT_VERSION: "3.0.1"
+         VMIMAGE: "ubuntu-latest"
+      "3.0.1 MacOs":
+         NUNIT_VERSION: "3.0.1"
+         VMIMAGE: "macos-latest"
+      "3.0.0 Windows":
+         NUNIT_VERSION: "3.0.0"
+         VMIMAGE: "windows-latest"
+      "3.0.0 Linux":
+         NUNIT_VERSION: "3.0.0"
+         VMIMAGE: "ubuntu-latest"
+      "3.0.0 MacOs":
+         NUNIT_VERSION: "3.0.0"
+         VMIMAGE: "macos-latest"
+
+  steps:
+
+
+  - bash: |
+      set -eu; set -o pipefail
+      cd build-tools
+      script=https://raw.githubusercontent.com/devizer/test-and-build/master/install-build-tools-bundle.sh; (wget -q -nv --no-check-certificate -O - $script 2>/dev/null || curl -ksSL $script) | bash >/dev/null
+      Say --Reset-Stopwatch
+      Say "CPU: $(Get-CpuName)"
+    # condition: eq(variables['Agent.OS'], 'Linux')
+    displayName: 'Bootstrap'
+
+  - bash: |
+      set -eu; set -o pipefail
+      for folder in Universe.NUnitPipeline.Tests Universe.NUnitPipeline; do
+        pushd $folder
+        dotnet remove package NUnit
+        dotnet add package NUnit -v $NUNIT_VERSION
+        popd
+      done
+    # condition: eq(variables['Agent.OS'], 'Linux')
+    displayName: 'Assign Version'
+
+  - bash: |
+      set -eu; set -o pipefail
+      cd Universe.NUnitPipeline.Tests
+      try-and-retry dotnet restore -v:q
+      msbuild /t:Build /p:Configuration=Release /verbosity:quiet Universe.NUnitPipeline.Tests.csproj
+    # condition: eq(variables['Agent.OS'], 'Linux')
+    displayName: 'Build'
+
+  - bash: |
+      set -eu; set -o pipefail
+      cd Universe.NUnitPipeline.Tests
+      dotnet test -c Release -f net8.0 --logger "console;verbosity=normal;consoleLoggerParameters=ErrorsOnly" -verbosity:minimal
+    # condition: eq(variables['Agent.OS'], 'Linux')
+    displayName: 'Test'
