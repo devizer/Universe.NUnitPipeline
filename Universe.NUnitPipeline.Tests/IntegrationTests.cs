@@ -1,22 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
 using MyTests;
-using NUnit.Framework;
 using Universe;
-using Universe.NUnitPipeline;
 
-/*[assembly: NUnitGlobalDispose]*/
-/*[assembly: NUnitPipelineActionAttribute]*/
-/*[assembly: NUnitConsoleOutputAction]*/
+[assembly: NUnitPipelineAction]
 
-/*[assembly: NUnitPipeline]*/
-
-namespace MyTests
+namespace Universe.NUnitPipeline.Tests
 {
 
-    /*[NUnitGlobalDispose]*/
+    [NUnitPipelineAction]
     [TestFixture]
     public class TestsSync
     {
