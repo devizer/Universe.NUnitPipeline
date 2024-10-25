@@ -347,7 +347,8 @@ jobs:
        cd "$BUILD_SOURCESDIRECTORY"
        7z a "$SYSTEM_ARTIFACTSDIRECTORY/Sources $AGENT_JOBNAME $BUILD_BUILDNUMBER.7z" -mx=1
 
-       find . -name "*.nupkg" -or -name "*.nupkg" -exec cp -v {} $SYSTEM_ARTIFACTSDIRECTORY \;
+       find . -name "*.nupkg" -or -name "*.snupkg"
+       find . -name "*.nupkg" -or -name "*.snupkg" -exec cp -v {} $SYSTEM_ARTIFACTSDIRECTORY \;
     condition: succeededOrFailed()
     displayName: 'Pack Artifact'
 
