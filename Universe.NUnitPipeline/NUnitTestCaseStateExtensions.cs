@@ -22,8 +22,20 @@ namespace Universe
             // Console.WriteLine($"[DEBUG] SET {propertyName} for '{test.Name}'");
             T state = default(T);
             bool isFound = false;
-            var rawArray = ((IEnumerable)test.Properties[propertyName]).Cast<IEnumerable<object>>().ToArray();
-            var mutableValue = rawArray.OfType<MutableValue>().FirstOrDefault();
+            var tempCopy = test.Properties[propertyName];
+            // version 1
+            MutableValue mutableValue = null;
+            foreach (var v2 in tempCopy)
+            {
+                if (v2 is MutableValue mv2)
+                {
+                    mutableValue = mv2;
+                    break;
+                }
+            }
+            // version 2
+            // var rawArray = (test.Properties[propertyName]).Cast<IEnumerable<object>>().ToArray();
+            // MutableValue mutableValue = rawArray.OfType<MutableValue>().FirstOrDefault();
             isFound = mutableValue != null;
             if (isFound) state = (T)(object)mutableValue.Value;
 
@@ -32,7 +44,7 @@ namespace Universe
             else if (getPropertyValue != null)
             {
                 state = getPropertyValue(test);
-                test.Properties.Set(propertyName, new MutableValue() { Value = state });
+                test.Properties.Add(propertyName, new MutableValue() { Value = state });
                 return state;
             }
             else
@@ -43,8 +55,20 @@ namespace Universe
         {
             T state = default(T);
             bool isFound = false;
-            var rawArray = ((IEnumerable)test.Properties[propertyName]).Cast<IEnumerable<object>>().ToArray();
-            var mutableValue = rawArray.OfType<MutableValue>().FirstOrDefault();
+            var tempCopy = test.Properties[propertyName];
+            // version 1
+            MutableValue mutableValue = null;
+            foreach (var v2 in tempCopy)
+            {
+                if (v2 is MutableValue mv2)
+                {
+                    mutableValue = mv2;
+                    break;
+                }
+            }
+            // version 2
+            // var rawArray = (test.Properties[propertyName]).Cast<IEnumerable<object>>().ToArray();
+            // MutableValue mutableValue = rawArray.OfType<MutableValue>().FirstOrDefault();
             isFound = mutableValue != null;
             if (isFound) state = (T)(object)mutableValue.Value;
 
@@ -58,8 +82,20 @@ namespace Universe
         {
             T state = default(T);
             bool isFound = false;
-            var rawArray = ((IEnumerable)test.Properties[propertyName]).Cast<IEnumerable<object>>().ToArray();
-            var mutableValue = rawArray.OfType<MutableValue>().FirstOrDefault();
+            var tempCopy = test.Properties[propertyName];
+            // version 1
+            MutableValue mutableValue = null;
+            foreach (var v2 in tempCopy)
+            {
+                if (v2 is MutableValue mv2)
+                {
+                    mutableValue = mv2;
+                    break;
+                }
+            }
+            // version 2
+            // var rawArray = (test.Properties[propertyName]).Cast<IEnumerable<object>>().ToArray();
+            // MutableValue mutableValue = rawArray.OfType<MutableValue>().FirstOrDefault();
             isFound = mutableValue != null;
             if (isFound) state = (T)(object)mutableValue.Value;
 

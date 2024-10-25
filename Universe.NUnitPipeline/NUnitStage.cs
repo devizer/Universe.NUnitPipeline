@@ -10,7 +10,6 @@ namespace Universe.NUnitPipeline
         public int? FixtureIndex { get; set; }
         public int? TestIndex { get; set; } // If applied to test only
         public string FixtureFullName { get; set; }
-        public string FixtureName { get; set; }
         public string[] StructuredFullName { get; set; } // tail is optional TestName
 
         public Type FixtureType { get; set; }
