@@ -19,18 +19,50 @@ namespace Universe {
     {
         public ActionTargets Targets => ActionTargets.Test | ActionTargets.Suite;
 
+        public void BeforeTest(ITest test)
+        {
+            BuildNUnitStage(test, NUnitActionSide.Start, out var stage, out var counter);
+            if (counter != 1) return;
+
+
+            var actions = NUnitPipelineChain.OnStart;
+            if (actions == null) return;
+            foreach (var a in actions)
+            {
+                Console.WriteLine($"[DEBUG Action:OnStart] Invoke Action '{a.Title}'");
+                a.Action(stage);
+            }
+        }
+
+
+        public void AfterTest(ITest test)
+        {
+            BuildNUnitStage(test, NUnitActionSide.Finish, out var stage, out var counter);
+            bool isFirst = counter == 1;
+            if (counter != 1) return;
+
+            var actions = NUnitPipelineChain.OnStart;
+            if (actions == null) return;
+            foreach (var a in actions)
+            {
+                Console.WriteLine($"[DEBUG Pipeline.Action:OnFinish] Invoke Action '{a.Title}'");
+                a.Action(stage);
+            }
+        }
+
         class SelfCounter
         {
             public int Count = 0;
         }
-        public void BeforeTest(ITest test)
-        {
-            var selfCounter = test.GetPropertyOrAdd<SelfCounter>("Is First", t => new SelfCounter() { Count = 0});
-            selfCounter.Count++;
-            bool isNext = selfCounter.Count > 1;
-            if (!isNext) Console.WriteLine("");
 
-            NUnitStage stage = new NUnitStage() { Side = NUnitActionSide.Start, };
+        void BuildNUnitStage(ITest test, NUnitActionSide actionSide, out NUnitStage stage, out int counter)
+        {
+            var selfCounter = test.GetPropertyOrAdd<SelfCounter>($"Is First on {actionSide}", t => new SelfCounter() { Count = 0 });
+            selfCounter.Count++;
+            counter = selfCounter.Count;
+            if (counter == 1 && actionSide == NUnitActionSide.Start) Console.WriteLine(EmptyLineBetweenTests());
+
+            stage = new NUnitStage() { Side = actionSide, ITest = test };
             if (test.Fixture == null)
             {
                 stage.NUnitActionAppliedTo = NUnitActionAppliedTo.Assembly;
@@ -39,7 +71,7 @@ namespace Universe {
             }
             else
             {
-                stage.FixtureFullName = NUnitActionAppliedTo.Fixture.GetType().FullName;
+                stage.FixtureFullName = test.Fixture.GetType().FullName;
                 var testParts = new string[0];
                 if (test.Method == null)
                 {
@@ -56,20 +88,35 @@ namespace Universe {
                         testParts = new[] { stage.TestName };
                 }
 
-                
+
                 stage.StructuredFullName = stage.FixtureFullName.Split('.')
                     .Union(testParts)
                     .Where(x => !string.IsNullOrEmpty(x))
                     .ToArray();
             }
 
-            Console.WriteLine($"STAGE {stage.Side} '{stage.NUnitActionAppliedTo} Counter={selfCounter.Count}': [{string.Join(", ", stage.StructuredFullName)}]");
+            if (stage.Side == NUnitActionSide.Start)
+            {
+                if (stage.NUnitActionAppliedTo == NUnitActionAppliedTo.Test)
+                {
+                    var testCaseIndex = test.GetTestCaseIndex();
+                    stage.FixtureIndex = testCaseIndex.ClassIndex;
+                    stage.TestIndex = testCaseIndex.TestIndex;
+                }
+                else if (stage.NUnitActionAppliedTo == NUnitActionAppliedTo.Fixture)
+                {
+                    var testCaseIndex = test.GetTestCaseIndex();
+                    stage.FixtureIndex = testCaseIndex.ClassIndex;
+                    stage.TestIndex = null;
+                }
+                else if (stage.NUnitActionAppliedTo == NUnitActionAppliedTo.Assembly)
+                {
+                }
+            }
+
+            Console.WriteLine($"[DEBUG Action:On{actionSide}] STAGE {stage.Side} '{stage.NUnitActionAppliedTo} Counter={counter}': {stage.FormattedIndex} [{string.Join(", ", stage.StructuredFullName)}]");
         }
 
-
-        public void AfterTest(ITest test)
-        {
-        }
 
         static string EmptyLineBetweenTests()
         {
