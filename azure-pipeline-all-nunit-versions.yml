@@ -358,8 +358,8 @@ jobs:
       cd bin/Release/net8.0
       Say "mono $nunitexe Universe.NUnitPipeline.Tests.dll"
       mono $nunitexe Universe.NUnitPipeline.Tests.dll
-    # condition: eq(variables['Agent.OS'], 'Linux')
-    condition: succeededOrFailed()
+    condition: eq(variables['Agent.OS'], 'Linux')
+    # condition: succeededOrFailed()
     # condition: ${{ false }}
     displayName: 'Test Linux by Console Runner'
 
