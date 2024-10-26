@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Universe {
     internal class AsyncDisposeWaiter
@@ -13,7 +14,7 @@ namespace Universe {
             public int Incomplete { get; set; }
         }
 
-        static List<WaitHandle> Waiters = new List<WaitHandle>();
+        static readonly List<WaitHandle> Waiters = new List<WaitHandle>();
         static readonly object Sync = new object();
 
         public static void AddWaiter(WaitHandle waiter)

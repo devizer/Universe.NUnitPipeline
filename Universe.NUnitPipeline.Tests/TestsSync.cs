@@ -19,6 +19,7 @@ namespace Universe.NUnitPipeline.Tests
             TestCleaner.OnDispose("Delete GLOBAL.Temp (from test's *OneTimeSetUp*)", () => { }, TestDisposeOptions.Global);
 			// Test ➛ Class for onetimesetup/onetimeteardown
 			TestCleaner.OnDispose("Delete TEST➛CLASS.Temp (from test's *OneTimeSetUp*)", () => { }, TestDisposeOptions.TestCase);
+			Console.WriteLine("WHATS UP. I'm OneTimeSetUp that runs before any test");
         }
 
         [SetUp]
@@ -32,7 +33,7 @@ namespace Universe.NUnitPipeline.Tests
         {
 	        TestCleaner.OnDispose("Delete File GLOBAL.Temp (from test's *TearDown*)", () => { }, TestDisposeOptions.Global);
 	        TestCleaner.OnDispose("Delete File CLASS.Temp (from test's *TearDown*)", () => { }, TestDisposeOptions.Class);
-			TestCleaner.OnDispose("Delete File TEST2CLASS.Temp (from test's *TearDown*)", () => { }, TestDisposeOptions.TestCase);
+			TestCleaner.OnDispose("Delete File TEST.Temp (from test's *TearDown*)", () => { }, TestDisposeOptions.TestCase);
         }
 
 		[OneTimeTearDown]
@@ -40,7 +41,7 @@ namespace Universe.NUnitPipeline.Tests
         {
 	        TestCleaner.OnDispose("Delete File GLOBAL.Temp (from test's *OneTimeTearDown*)", () => { }, TestDisposeOptions.Global);
 			TestCleaner.OnDispose("Delete File CLASS.Temp (from test's *OneTimeTearDown*)", () => { }, TestDisposeOptions.Class);
-			TestCleaner.OnDispose("Delete File TEST2CLASS.Temp (from test's *OneTimeTearDown*)", () => { }, TestDisposeOptions.TestCase);
+			TestCleaner.OnDispose("Delete File TEST➛CLASS.Temp (from test's *OneTimeTearDown*)", () => { }, TestDisposeOptions.TestCase);
         }
 
 

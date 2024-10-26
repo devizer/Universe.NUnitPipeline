@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -135,7 +135,7 @@ namespace Universe
             DebugConsole.WriteLine($"[DEBUG Action:On{actionSide}] STAGE {stage.Side} '{stage.NUnitActionAppliedTo} Counter={counter}': {stage.FormattedIndex} [{string.Join(", ", stage.StructuredFullName)}]");
         }
 
-        class IndexState
+        internal class IndexState
         {
             public int? FixtureIndex { get; set; }
             public int? TestIndex { get; set; } // If applied to test only

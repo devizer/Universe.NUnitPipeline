@@ -1,4 +1,4 @@
-﻿using NUnit.Framework.Interfaces;
+using NUnit.Framework.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -44,7 +44,7 @@ namespace Universe.NUnitPipeline
 
             if (actionList != null && actionList.Count > 0)
             {
-                if (isGlobalDispose) Console.WriteLine($"{Environment.NewLine}[Dispose] String Global Dispose");
+                if (isGlobalDispose) Console.WriteLine($"{Environment.NewLine}[Dispose] Starting Global Dispose");
                 Stopwatch sw = Stopwatch.StartNew();
                 foreach (var action in actionList) action();
                 var msec = sw.ElapsedTicks * 1000d / Stopwatch.Frequency;

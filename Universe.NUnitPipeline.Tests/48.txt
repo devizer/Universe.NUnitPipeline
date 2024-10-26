@@ -1,10 +1,10 @@
 
 C:\_GIT\Universe.NUnitPipeline\Universe.NUnitPipeline.Tests>msbuild /t:Build /p:Configuration=Release /verbosity:quiet Universe.NUnitPipeline.Tests.csproj 
 MSBuild version 17.10.4+10fbfbf2e for .NET Framework
+C:\_GIT\Universe.NUnitPipeline\Universe.NUnitPipeline\TestCleaner.cs(74,17): warning CS0219: The variable 'letsDebug' is assigned but its value is never used [C:\_GIT\Universe.NUnitPipeline\Universe.NUnitPipeline\Universe.NUnitPipeline.csproj::TargetFramework=net6.0]
 C:\_GIT\Universe.NUnitPipeline\Universe.NUnitPipeline\Shared\DebugConsole.cs(18,30): warning CS0168: The variable 'ex' is declared but never used [C:\_GIT\Universe.NUnitPipeline\Universe.NUnitPipeline\Universe.NUnitPipeline.csproj::TargetFramework=net6.0]
-C:\_GIT\Universe.NUnitPipeline\Universe.NUnitPipeline\TestCleaner.cs(70,17): warning CS0219: The variable 'letsDebug' is assigned but its value is never used [C:\_GIT\Universe.NUnitPipeline\Universe.NUnitPipeline\Universe.NUnitPipeline.csproj::TargetFramework=net6.0]
+C:\_GIT\Universe.NUnitPipeline\Universe.NUnitPipeline\TestCleaner.cs(74,17): warning CS0219: The variable 'letsDebug' is assigned but its value is never used [C:\_GIT\Universe.NUnitPipeline\Universe.NUnitPipeline\Universe.NUnitPipeline.csproj::TargetFramework=net462]
 C:\_GIT\Universe.NUnitPipeline\Universe.NUnitPipeline\Shared\DebugConsole.cs(18,30): warning CS0168: The variable 'ex' is declared but never used [C:\_GIT\Universe.NUnitPipeline\Universe.NUnitPipeline\Universe.NUnitPipeline.csproj::TargetFramework=net462]
-C:\_GIT\Universe.NUnitPipeline\Universe.NUnitPipeline\TestCleaner.cs(70,17): warning CS0219: The variable 'letsDebug' is assigned but its value is never used [C:\_GIT\Universe.NUnitPipeline\Universe.NUnitPipeline\Universe.NUnitPipeline.csproj::TargetFramework=net462]
 
 C:\_GIT\Universe.NUnitPipeline\Universe.NUnitPipeline.Tests>nunit3-console-v3.18.exe --workers=3 --noheader --work=bin\Release\net48 bin\Release\net48\Universe.NUnitPipeline.Tests.dll 
 Runtime Environment
@@ -19,47 +19,53 @@ Test Files
 [DEBUG Pipeline.Action:OnStart] Invoke START Action 'Cpu Usage Visualizer' for `Test Universe.NUnitPipeline.Tests.TestsAsync::Test1Async_111_Milliseconds("First")` (Test)
 
 → 1.1 Universe.NUnitPipeline.Tests.TestsAsync::Test1Async_111_Milliseconds("First") is starting
-SYNCHRONOUS Properties: 'Is First on Start' is [PrivateCounter {1}], 'Test Case Index' is [TestCaseIndex {1.1}], 'Index State' is [IndexState {1.1}], 'CpuUsageState' is [CpuUsageState {Finished: False}] (TID is 8)
-A-SYNCHRONOUS Properties: 'Is First on Start' is [PrivateCounter {1}], 'Test Case Index' is [TestCaseIndex {1.1}], 'Index State' is [IndexState {1.1}], 'CpuUsageState' is [CpuUsageState {Finished: False}] (TID is 9)
+[DEBUG Action:OnStart] STAGE Start 'Test Counter=2': 1.1 [Universe, NUnitPipeline, Tests, TestsAsync, Test1Async_111_Milliseconds, Test1Async_111_Milliseconds("First")]
+SYNCHRONOUS Properties: 'Is First on Start' is [PrivateCounter {2}], 'Test Case Index' is [TestCaseIndex {1.1}], 'Index State' is [IndexState {1.1}], 'CpuUsageState' is [CpuUsageState {Finished: False}] (TID is 9)
+A-SYNCHRONOUS Properties: 'Is First on Start' is [PrivateCounter {2}], 'Test Case Index' is [TestCaseIndex {1.1}], 'Index State' is [IndexState {1.1}], 'CpuUsageState' is [CpuUsageState {Finished: False}] (TID is 10)
 [Test Cleaner] Enlisted dispose 'Delete CLASS.TMP (from test body)' for KEY='Class Universe.NUnitPipeline.Tests.TestsAsync'
 [Test Cleaner] Postpone asynchronously 'Delete CLASS.ASYNC.TMP (from test body)' for KEY='Class Universe.NUnitPipeline.Tests.TestsAsync'
 [Test Cleaner] Enlisted dispose 'Delete GLOBAL.TMP (from test body)' for KEY='Global'
 [DEBUG Action:OnFinish] STAGE Finish 'Test Counter=1': 1.1 [Universe, NUnitPipeline, Tests, TestsAsync, Test1Async_111_Milliseconds, Test1Async_111_Milliseconds("First")]
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Cpu Usage' for `Test Universe.NUnitPipeline.Tests.TestsAsync::Test1Async_111_Milliseconds("First")` (Test)
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Cpu Usage Visualizer' for `Test Universe.NUnitPipeline.Tests.TestsAsync::Test1Async_111_Milliseconds("First")` (Test)
-← 1.1 Universe.NUnitPipeline.Tests.TestsAsync::Test1Async_111_Milliseconds("First") >PASSED< in 132.2 milliseconds (cpu: 95%, 125.000 = 15.625 [user] + 109.375 [kernel])
+← 1.1 Universe.NUnitPipeline.Tests.TestsAsync::Test1Async_111_Milliseconds("First") >PASSED< in 137.2 milliseconds (cpu: 114%, 156.250 = 62.500 [user] + 93.750 [kernel])
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Dispose' for `Test Universe.NUnitPipeline.Tests.TestsAsync::Test1Async_111_Milliseconds("First")` (Test)
 [DISPOSE] Starting Dispose 'Test Universe.NUnitPipeline.Tests.TestsAsync::Test1Async_111_Milliseconds("First")'. Actions: ""
+[DEBUG Action:OnFinish] STAGE Finish 'Test Counter=2': 1.1 [Universe, NUnitPipeline, Tests, TestsAsync, Test1Async_111_Milliseconds, Test1Async_111_Milliseconds("First")]
 [DEBUG Action:OnStart] STAGE Start 'Test Counter=1': 1.2 [Universe, NUnitPipeline, Tests, TestsAsync, Test2Async_777_Milliseconds, Test2Async_777_Milliseconds("First")]
 [DEBUG Pipeline.Action:OnStart] Invoke START Action 'Cpu Usage' for `Test Universe.NUnitPipeline.Tests.TestsAsync::Test2Async_777_Milliseconds("First")` (Test)
 [DEBUG Pipeline.Action:OnStart] Invoke START Action 'Cpu Usage Visualizer' for `Test Universe.NUnitPipeline.Tests.TestsAsync::Test2Async_777_Milliseconds("First")` (Test)
 
 → 1.2 Universe.NUnitPipeline.Tests.TestsAsync::Test2Async_777_Milliseconds("First") is starting
-SYNCHRONOUS Properties: 'Is First on Start' is [PrivateCounter {1}], 'Test Case Index' is [TestCaseIndex {1.2}], 'Index State' is [IndexState {1.2}], 'CpuUsageState' is [CpuUsageState {Finished: False}] (TID is 8)
-A-SYNCHRONOUS Properties: 'Is First on Start' is [PrivateCounter {1}], 'Test Case Index' is [TestCaseIndex {1.2}], 'Index State' is [IndexState {1.2}], 'CpuUsageState' is [CpuUsageState {Finished: False}] (TID is 9)
+[DEBUG Action:OnStart] STAGE Start 'Test Counter=2': 1.2 [Universe, NUnitPipeline, Tests, TestsAsync, Test2Async_777_Milliseconds, Test2Async_777_Milliseconds("First")]
+SYNCHRONOUS Properties: 'Is First on Start' is [PrivateCounter {2}], 'Test Case Index' is [TestCaseIndex {1.2}], 'Index State' is [IndexState {1.2}], 'CpuUsageState' is [CpuUsageState {Finished: False}] (TID is 9)
+A-SYNCHRONOUS Properties: 'Is First on Start' is [PrivateCounter {2}], 'Test Case Index' is [TestCaseIndex {1.2}], 'Index State' is [IndexState {1.2}], 'CpuUsageState' is [CpuUsageState {Finished: False}] (TID is 11)
 [Test Cleaner] Enlisted dispose 'Delete CLASS.TMP (from test body)' for KEY='Class Universe.NUnitPipeline.Tests.TestsAsync'
 [Test Cleaner] Postpone asynchronously 'Delete CLASS.ASYNC.TMP (from test body)' for KEY='Class Universe.NUnitPipeline.Tests.TestsAsync'
 [DEBUG Action:OnFinish] STAGE Finish 'Test Counter=1': 1.2 [Universe, NUnitPipeline, Tests, TestsAsync, Test2Async_777_Milliseconds, Test2Async_777_Milliseconds("First")]
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Cpu Usage' for `Test Universe.NUnitPipeline.Tests.TestsAsync::Test2Async_777_Milliseconds("First")` (Test)
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Cpu Usage Visualizer' for `Test Universe.NUnitPipeline.Tests.TestsAsync::Test2Async_777_Milliseconds("First")` (Test)
-← 1.2 Universe.NUnitPipeline.Tests.TestsAsync::Test2Async_777_Milliseconds("First") >PASSED< in 779.2 milliseconds (cpu: 100%, 781.250 = 62.500 [user] + 718.750 [kernel])
+← 1.2 Universe.NUnitPipeline.Tests.TestsAsync::Test2Async_777_Milliseconds("First") >PASSED< in 779.2 milliseconds (cpu: 92%, 718.750 = 125.000 [user] + 593.750 [kernel])
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Dispose' for `Test Universe.NUnitPipeline.Tests.TestsAsync::Test2Async_777_Milliseconds("First")` (Test)
 [DISPOSE] Starting Dispose 'Test Universe.NUnitPipeline.Tests.TestsAsync::Test2Async_777_Milliseconds("First")'. Actions: ""
+[DEBUG Action:OnFinish] STAGE Finish 'Test Counter=2': 1.2 [Universe, NUnitPipeline, Tests, TestsAsync, Test2Async_777_Milliseconds, Test2Async_777_Milliseconds("First")]
 [DEBUG Action:OnStart] STAGE Start 'Test Counter=1': 1.3 [Universe, NUnitPipeline, Tests, TestsAsync, Test2Async_777_Milliseconds, Test2Async_777_Milliseconds("Next")]
 [DEBUG Pipeline.Action:OnStart] Invoke START Action 'Cpu Usage' for `Test Universe.NUnitPipeline.Tests.TestsAsync::Test2Async_777_Milliseconds("Next")` (Test)
 [DEBUG Pipeline.Action:OnStart] Invoke START Action 'Cpu Usage Visualizer' for `Test Universe.NUnitPipeline.Tests.TestsAsync::Test2Async_777_Milliseconds("Next")` (Test)
 
 → 1.3 Universe.NUnitPipeline.Tests.TestsAsync::Test2Async_777_Milliseconds("Next") is starting
-SYNCHRONOUS Properties: 'Is First on Start' is [PrivateCounter {1}], 'Test Case Index' is [TestCaseIndex {1.3}], 'Index State' is [IndexState {1.3}], 'CpuUsageState' is [CpuUsageState {Finished: False}] (TID is 8)
-A-SYNCHRONOUS Properties: 'Is First on Start' is [PrivateCounter {1}], 'Test Case Index' is [TestCaseIndex {1.3}], 'Index State' is [IndexState {1.3}], 'CpuUsageState' is [CpuUsageState {Finished: False}] (TID is 9)
+[DEBUG Action:OnStart] STAGE Start 'Test Counter=2': 1.3 [Universe, NUnitPipeline, Tests, TestsAsync, Test2Async_777_Milliseconds, Test2Async_777_Milliseconds("Next")]
+SYNCHRONOUS Properties: 'Is First on Start' is [PrivateCounter {2}], 'Test Case Index' is [TestCaseIndex {1.3}], 'Index State' is [IndexState {1.3}], 'CpuUsageState' is [CpuUsageState {Finished: False}] (TID is 9)
+A-SYNCHRONOUS Properties: 'Is First on Start' is [PrivateCounter {2}], 'Test Case Index' is [TestCaseIndex {1.3}], 'Index State' is [IndexState {1.3}], 'CpuUsageState' is [CpuUsageState {Finished: False}] (TID is 11)
 [Test Cleaner] Enlisted dispose 'Delete CLASS.TMP (from test body)' for KEY='Class Universe.NUnitPipeline.Tests.TestsAsync'
 [Test Cleaner] Postpone asynchronously 'Delete CLASS.ASYNC.TMP (from test body)' for KEY='Class Universe.NUnitPipeline.Tests.TestsAsync'
 [DEBUG Action:OnFinish] STAGE Finish 'Test Counter=1': 1.3 [Universe, NUnitPipeline, Tests, TestsAsync, Test2Async_777_Milliseconds, Test2Async_777_Milliseconds("Next")]
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Cpu Usage' for `Test Universe.NUnitPipeline.Tests.TestsAsync::Test2Async_777_Milliseconds("Next")` (Test)
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Cpu Usage Visualizer' for `Test Universe.NUnitPipeline.Tests.TestsAsync::Test2Async_777_Milliseconds("Next")` (Test)
-← 1.3 Universe.NUnitPipeline.Tests.TestsAsync::Test2Async_777_Milliseconds("Next") >PASSED< in 778.4 milliseconds (cpu: 100%, 781.250 = 78.125 [user] + 703.125 [kernel])
+← 1.3 Universe.NUnitPipeline.Tests.TestsAsync::Test2Async_777_Milliseconds("Next") >PASSED< in 778.2 milliseconds (cpu: 98%, 765.625 = 140.625 [user] + 625.000 [kernel])
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Dispose' for `Test Universe.NUnitPipeline.Tests.TestsAsync::Test2Async_777_Milliseconds("Next")` (Test)
 [DISPOSE] Starting Dispose 'Test Universe.NUnitPipeline.Tests.TestsAsync::Test2Async_777_Milliseconds("Next")'. Actions: ""
+[DEBUG Action:OnFinish] STAGE Finish 'Test Counter=2': 1.3 [Universe, NUnitPipeline, Tests, TestsAsync, Test2Async_777_Milliseconds, Test2Async_777_Milliseconds("Next")]
 [DEBUG Action:OnStart] STAGE Start 'Fixture Counter=1': 1 [Universe, NUnitPipeline, Tests, TestsAsync]
 [DEBUG Pipeline.Action:OnStart] Invoke START Action 'Cpu Usage' for `Class Universe.NUnitPipeline.Tests.TestsAsync` (Fixture)
 [DEBUG Pipeline.Action:OnStart] Invoke START Action 'Cpu Usage Visualizer' for `Class Universe.NUnitPipeline.Tests.TestsAsync` (Fixture)
@@ -68,21 +74,23 @@ A-SYNCHRONOUS Properties: 'Is First on Start' is [PrivateCounter {1}], 'Test Cas
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Cpu Usage Visualizer' for `Class Universe.NUnitPipeline.Tests.TestsAsync` (Fixture)
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Dispose' for `Class Universe.NUnitPipeline.Tests.TestsAsync` (Fixture)
 [DISPOSE] Starting Dispose 'Class Universe.NUnitPipeline.Tests.TestsAsync'. Actions: "6"
-[Dispose Class Universe.NUnitPipeline.Tests.TestsAsync::Test1Async_111_Milliseconds("First")] 'Delete CLASS.TMP (from test body)' success (took 0.0 milliseconds)
-[Dispose Class Universe.NUnitPipeline.Tests.TestsAsync::Test2Async_777_Milliseconds("First")] 'Delete CLASS.TMP (from test body)' success (took 0.0 milliseconds)
-[Dispose Class Universe.NUnitPipeline.Tests.TestsAsync::Test2Async_777_Milliseconds("Next")] 'Delete CLASS.TMP (from test body)' success (took 0.0 milliseconds)
+[Dispose for Class 1.1 Universe.NUnitPipeline.Tests.TestsAsync::Test1Async_111_Milliseconds("First")] 'Delete CLASS.TMP (from test body)' success (took 0.0 milliseconds)
+[Dispose for Class 1.2 Universe.NUnitPipeline.Tests.TestsAsync::Test2Async_777_Milliseconds("First")] 'Delete CLASS.TMP (from test body)' success (took 0.0 milliseconds)
+[Dispose for Class 1.3 Universe.NUnitPipeline.Tests.TestsAsync::Test2Async_777_Milliseconds("Next")] 'Delete CLASS.TMP (from test body)' success (took 0.0 milliseconds)
 [DEBUG Action:OnStart] STAGE Start 'Test Counter=1': 2.1 [Universe, NUnitPipeline, Tests, TestShell, ShowInfo]
 [DEBUG Pipeline.Action:OnStart] Invoke START Action 'Cpu Usage' for `Test Universe.NUnitPipeline.Tests.TestShell::ShowInfo` (Test)
 [DEBUG Pipeline.Action:OnStart] Invoke START Action 'Cpu Usage Visualizer' for `Test Universe.NUnitPipeline.Tests.TestShell::ShowInfo` (Test)
 
 → 2.1 Universe.NUnitPipeline.Tests.TestShell::ShowInfo is starting
+[DEBUG Action:OnStart] STAGE Start 'Test Counter=2': 2.1 [Universe, NUnitPipeline, Tests, TestShell, ShowInfo]
 PROCESS: System.Diagnostics.Process (nunit-agent)
 [DEBUG Action:OnFinish] STAGE Finish 'Test Counter=1': 2.1 [Universe, NUnitPipeline, Tests, TestShell, ShowInfo]
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Cpu Usage' for `Test Universe.NUnitPipeline.Tests.TestShell::ShowInfo` (Test)
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Cpu Usage Visualizer' for `Test Universe.NUnitPipeline.Tests.TestShell::ShowInfo` (Test)
-← 2.1 Universe.NUnitPipeline.Tests.TestShell::ShowInfo >PASSED< in 14.55 milliseconds (cpu: 107%, 15.625 = 0.000 [user] + 15.625 [kernel])
+← 2.1 Universe.NUnitPipeline.Tests.TestShell::ShowInfo >PASSED< in 12.69 milliseconds (cpu: 123%, 15.625 = 15.625 [user] + 0.000 [kernel])
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Dispose' for `Test Universe.NUnitPipeline.Tests.TestShell::ShowInfo` (Test)
 [DISPOSE] Starting Dispose 'Test Universe.NUnitPipeline.Tests.TestShell::ShowInfo'. Actions: ""
+[DEBUG Action:OnFinish] STAGE Finish 'Test Counter=2': 2.1 [Universe, NUnitPipeline, Tests, TestShell, ShowInfo]
 [DEBUG Action:OnStart] STAGE Start 'Fixture Counter=1': 2 [Universe, NUnitPipeline, Tests, TestShell]
 [DEBUG Pipeline.Action:OnStart] Invoke START Action 'Cpu Usage' for `Class Universe.NUnitPipeline.Tests.TestShell` (Fixture)
 [DEBUG Pipeline.Action:OnStart] Invoke START Action 'Cpu Usage Visualizer' for `Class Universe.NUnitPipeline.Tests.TestShell` (Fixture)
@@ -96,8 +104,9 @@ PROCESS: System.Diagnostics.Process (nunit-agent)
 [DEBUG Pipeline.Action:OnStart] Invoke START Action 'Cpu Usage Visualizer' for `Test Universe.NUnitPipeline.Tests.TestsSync::FormatElapsedTest` (Test)
 
 → 3.1 Universe.NUnitPipeline.Tests.TestsSync::FormatElapsedTest is starting
+[DEBUG Action:OnStart] STAGE Start 'Test Counter=2': 3.1 [Universe, NUnitPipeline, Tests, TestsSync, FormatElapsedTest]
 [Test Cleaner] Enlisted dispose "Delete CLASS.Temp (from test's *SetUp*)" for KEY='Class Universe.NUnitPipeline.Tests.TestsSync'
-SYNCHRONOUS Properties: 'Is First on Start' is [PrivateCounter {1}], 'Test Case Index' is [TestCaseIndex {3.1}], 'Index State' is [IndexState {3.1}], 'CpuUsageState' is [CpuUsageState {Finished: False}] (TID is 8)
+SYNCHRONOUS Properties: 'Is First on Start' is [PrivateCounter {2}], 'Test Case Index' is [TestCaseIndex {3.1}], 'Index State' is [IndexState {3.1}], 'CpuUsageState' is [CpuUsageState {Finished: False}] (TID is 9)
 TIMESPAN 7.15:20:34.5680000 --> "7.15:20:34.5"
 TIMESPAN 15:20:34.5680000 --> "15:20:34.5"
 TIMESPAN 01:20:34.5680000 --> "01:20:34.5"
@@ -111,56 +120,62 @@ TIMESPAN 00:00:00.0120000 --> "12.00 milliseconds"
 [Test Cleaner] Postpone asynchronously 'Delete File GlobalAsyncTemporary.Temp (from test body)' for KEY='Global'
 [Test Cleaner] Enlisted dispose "Delete File GLOBAL.Temp (from test's *TearDown*)" for KEY='Global'
 [Test Cleaner] Enlisted dispose "Delete File CLASS.Temp (from test's *TearDown*)" for KEY='Class Universe.NUnitPipeline.Tests.TestsSync'
-[Test Cleaner] Enlisted dispose "Delete File TEST2CLASS.Temp (from test's *TearDown*)" for KEY='Test Universe.NUnitPipeline.Tests.TestsSync::FormatElapsedTest'
+[Test Cleaner] Enlisted dispose "Delete File TEST.Temp (from test's *TearDown*)" for KEY='Test Universe.NUnitPipeline.Tests.TestsSync::FormatElapsedTest'
 [DEBUG Action:OnFinish] STAGE Finish 'Test Counter=1': 3.1 [Universe, NUnitPipeline, Tests, TestsSync, FormatElapsedTest]
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Cpu Usage' for `Test Universe.NUnitPipeline.Tests.TestsSync::FormatElapsedTest` (Test)
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Cpu Usage Visualizer' for `Test Universe.NUnitPipeline.Tests.TestsSync::FormatElapsedTest` (Test)
-← 3.1 Universe.NUnitPipeline.Tests.TestsSync::FormatElapsedTest >PASSED< in 3.37 milliseconds (cpu: 0%, 0.000 = 0.000 [user] + 0.000 [kernel])
+← 3.1 Universe.NUnitPipeline.Tests.TestsSync::FormatElapsedTest >PASSED< in 2.08 milliseconds (cpu: 0%, 0.000 = 0.000 [user] + 0.000 [kernel])
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Dispose' for `Test Universe.NUnitPipeline.Tests.TestsSync::FormatElapsedTest` (Test)
 [DISPOSE] Starting Dispose 'Test Universe.NUnitPipeline.Tests.TestsSync::FormatElapsedTest'. Actions: "2"
-[Dispose Universe.NUnitPipeline.Tests.TestsSync::FormatElapsedTest] "Delete File TEST2CLASS.Temp (from test's *TearDown*)" success (took 0.0 milliseconds)
+[Dispose for 3.1 Universe.NUnitPipeline.Tests.TestsSync::FormatElapsedTest] "Delete File TEST.Temp (from test's *TearDown*)" success (took 0.0 milliseconds)
+[DEBUG Action:OnFinish] STAGE Finish 'Test Counter=2': 3.1 [Universe, NUnitPipeline, Tests, TestsSync, FormatElapsedTest]
 [DEBUG Action:OnStart] STAGE Start 'Test Counter=1': 3.2 [Universe, NUnitPipeline, Tests, TestsSync, Test1, Test1("First 222 milliseconds")]
 [DEBUG Pipeline.Action:OnStart] Invoke START Action 'Cpu Usage' for `Test Universe.NUnitPipeline.Tests.TestsSync::Test1("First 222 milliseconds")` (Test)
 [DEBUG Pipeline.Action:OnStart] Invoke START Action 'Cpu Usage Visualizer' for `Test Universe.NUnitPipeline.Tests.TestsSync::Test1("First 222 milliseconds")` (Test)
 
 → 3.2 Universe.NUnitPipeline.Tests.TestsSync::Test1("First 222 milliseconds") is starting
+[DEBUG Action:OnStart] STAGE Start 'Test Counter=2': 3.2 [Universe, NUnitPipeline, Tests, TestsSync, Test1, Test1("First 222 milliseconds")]
 [Test Cleaner] Enlisted dispose "Delete CLASS.Temp (from test's *SetUp*)" for KEY='Class Universe.NUnitPipeline.Tests.TestsSync'
 [Test Cleaner] Enlisted dispose "Delete File '::Temporary.Temp' (from test body)" for KEY='Global'
-SYNCHRONOUS Properties: 'Is First on Start' is [PrivateCounter {1}], 'Test Case Index' is [TestCaseIndex {3.2}], 'Index State' is [IndexState {3.2}], 'CpuUsageState' is [CpuUsageState {Finished: False}] (TID is 8)
+SYNCHRONOUS Properties: 'Is First on Start' is [PrivateCounter {2}], 'Test Case Index' is [TestCaseIndex {3.2}], 'Index State' is [IndexState {3.2}], 'CpuUsageState' is [CpuUsageState {Finished: False}] (TID is 9)
 [Test Cleaner] Enlisted dispose 'Delete File TestCase.Temp (from test body)' for KEY='Test Universe.NUnitPipeline.Tests.TestsSync::Test1("First 222 milliseconds")'
 [Test Cleaner] Enlisted dispose "Delete File GLOBAL.Temp (from test's *TearDown*)" for KEY='Global'
 [Test Cleaner] Enlisted dispose "Delete File CLASS.Temp (from test's *TearDown*)" for KEY='Class Universe.NUnitPipeline.Tests.TestsSync'
-[Test Cleaner] Enlisted dispose "Delete File TEST2CLASS.Temp (from test's *TearDown*)" for KEY='Test Universe.NUnitPipeline.Tests.TestsSync::Test1("First 222 milliseconds")'
+[Test Cleaner] Enlisted dispose "Delete File TEST.Temp (from test's *TearDown*)" for KEY='Test Universe.NUnitPipeline.Tests.TestsSync::Test1("First 222 milliseconds")'
 [DEBUG Action:OnFinish] STAGE Finish 'Test Counter=1': 3.2 [Universe, NUnitPipeline, Tests, TestsSync, Test1, Test1("First 222 milliseconds")]
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Cpu Usage' for `Test Universe.NUnitPipeline.Tests.TestsSync::Test1("First 222 milliseconds")` (Test)
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Cpu Usage Visualizer' for `Test Universe.NUnitPipeline.Tests.TestsSync::Test1("First 222 milliseconds")` (Test)
-← 3.2 Universe.NUnitPipeline.Tests.TestsSync::Test1("First 222 milliseconds") >PASSED< in 222.9 milliseconds (cpu: 105%, 234.375 = 46.875 [user] + 187.500 [kernel])
+← 3.2 Universe.NUnitPipeline.Tests.TestsSync::Test1("First 222 milliseconds") >PASSED< in 223.4 milliseconds (cpu: 98%, 218.750 = 0.000 [user] + 218.750 [kernel])
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Dispose' for `Test Universe.NUnitPipeline.Tests.TestsSync::Test1("First 222 milliseconds")` (Test)
 [DISPOSE] Starting Dispose 'Test Universe.NUnitPipeline.Tests.TestsSync::Test1("First 222 milliseconds")'. Actions: "2"
-[Dispose Universe.NUnitPipeline.Tests.TestsSync::Test1("First 222 milliseconds")] 'Delete File TestCase.Temp (from test body)' success (took 0.2 milliseconds)
-[Dispose Universe.NUnitPipeline.Tests.TestsSync::Test1("First 222 milliseconds")] "Delete File TEST2CLASS.Temp (from test's *TearDown*)" success (took 0.0 milliseconds)
+[Dispose for 3.2 Universe.NUnitPipeline.Tests.TestsSync::Test1("First 222 milliseconds")] 'Delete File TestCase.Temp (from test body)' success (took 0.2 milliseconds)
+[Dispose for 3.2 Universe.NUnitPipeline.Tests.TestsSync::Test1("First 222 milliseconds")] "Delete File TEST.Temp (from test's *TearDown*)" success (took 0.0 milliseconds)
+[DEBUG Action:OnFinish] STAGE Finish 'Test Counter=2': 3.2 [Universe, NUnitPipeline, Tests, TestsSync, Test1, Test1("First 222 milliseconds")]
 [DEBUG Action:OnStart] STAGE Start 'Test Counter=1': 3.3 [Universe, NUnitPipeline, Tests, TestsSync, Test1, Test1("Next 222 milliseconds")]
 [DEBUG Pipeline.Action:OnStart] Invoke START Action 'Cpu Usage' for `Test Universe.NUnitPipeline.Tests.TestsSync::Test1("Next 222 milliseconds")` (Test)
 [DEBUG Pipeline.Action:OnStart] Invoke START Action 'Cpu Usage Visualizer' for `Test Universe.NUnitPipeline.Tests.TestsSync::Test1("Next 222 milliseconds")` (Test)
 
 → 3.3 Universe.NUnitPipeline.Tests.TestsSync::Test1("Next 222 milliseconds") is starting
+[DEBUG Action:OnStart] STAGE Start 'Test Counter=2': 3.3 [Universe, NUnitPipeline, Tests, TestsSync, Test1, Test1("Next 222 milliseconds")]
 [Test Cleaner] Enlisted dispose "Delete CLASS.Temp (from test's *SetUp*)" for KEY='Class Universe.NUnitPipeline.Tests.TestsSync'
 [Test Cleaner] Enlisted dispose "Delete File '::Temporary.Temp' (from test body)" for KEY='Global'
-SYNCHRONOUS Properties: 'Is First on Start' is [PrivateCounter {1}], 'Test Case Index' is [TestCaseIndex {3.3}], 'Index State' is [IndexState {3.3}], 'CpuUsageState' is [CpuUsageState {Finished: False}] (TID is 8)
+SYNCHRONOUS Properties: 'Is First on Start' is [PrivateCounter {2}], 'Test Case Index' is [TestCaseIndex {3.3}], 'Index State' is [IndexState {3.3}], 'CpuUsageState' is [CpuUsageState {Finished: False}] (TID is 9)
 [Test Cleaner] Enlisted dispose 'Delete File TestCase.Temp (from test body)' for KEY='Test Universe.NUnitPipeline.Tests.TestsSync::Test1("Next 222 milliseconds")'
 [Test Cleaner] Enlisted dispose "Delete File GLOBAL.Temp (from test's *TearDown*)" for KEY='Global'
 [Test Cleaner] Enlisted dispose "Delete File CLASS.Temp (from test's *TearDown*)" for KEY='Class Universe.NUnitPipeline.Tests.TestsSync'
-[Test Cleaner] Enlisted dispose "Delete File TEST2CLASS.Temp (from test's *TearDown*)" for KEY='Test Universe.NUnitPipeline.Tests.TestsSync::Test1("Next 222 milliseconds")'
+[Test Cleaner] Enlisted dispose "Delete File TEST.Temp (from test's *TearDown*)" for KEY='Test Universe.NUnitPipeline.Tests.TestsSync::Test1("Next 222 milliseconds")'
 [DEBUG Action:OnFinish] STAGE Finish 'Test Counter=1': 3.3 [Universe, NUnitPipeline, Tests, TestsSync, Test1, Test1("Next 222 milliseconds")]
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Cpu Usage' for `Test Universe.NUnitPipeline.Tests.TestsSync::Test1("Next 222 milliseconds")` (Test)
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Cpu Usage Visualizer' for `Test Universe.NUnitPipeline.Tests.TestsSync::Test1("Next 222 milliseconds")` (Test)
-← 3.3 Universe.NUnitPipeline.Tests.TestsSync::Test1("Next 222 milliseconds") >PASSED< in 222.5 milliseconds (cpu: 98%, 218.750 = 46.875 [user] + 171.875 [kernel])
+← 3.3 Universe.NUnitPipeline.Tests.TestsSync::Test1("Next 222 milliseconds") >PASSED< in 222.7 milliseconds (cpu: 98%, 218.750 = 15.625 [user] + 203.125 [kernel])
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Dispose' for `Test Universe.NUnitPipeline.Tests.TestsSync::Test1("Next 222 milliseconds")` (Test)
 [DISPOSE] Starting Dispose 'Test Universe.NUnitPipeline.Tests.TestsSync::Test1("Next 222 milliseconds")'. Actions: "2"
-[Dispose Universe.NUnitPipeline.Tests.TestsSync::Test1("Next 222 milliseconds")] 'Delete File TestCase.Temp (from test body)' success (took 0.0 milliseconds)
-[Dispose Universe.NUnitPipeline.Tests.TestsSync::Test1("Next 222 milliseconds")] "Delete File TEST2CLASS.Temp (from test's *TearDown*)" success (took 0.0 milliseconds)
+[Dispose for 3.3 Universe.NUnitPipeline.Tests.TestsSync::Test1("Next 222 milliseconds")] 'Delete File TestCase.Temp (from test body)' success (took 0.0 milliseconds)
+[Dispose for 3.3 Universe.NUnitPipeline.Tests.TestsSync::Test1("Next 222 milliseconds")] "Delete File TEST.Temp (from test's *TearDown*)" success (took 0.0 milliseconds)
+[DEBUG Action:OnFinish] STAGE Finish 'Test Counter=2': 3.3 [Universe, NUnitPipeline, Tests, TestsSync, Test1, Test1("Next 222 milliseconds")]
 [Test Cleaner] Enlisted dispose "Delete GLOBAL.Temp (from test's *OneTimeSetUp*)" for KEY='Global'
-[Test Cleaner] Enlisted dispose "Delete TEST➛CLASS.Temp (from test's *OneTimeSetUp*)" for KEY='Global'
+[Test Cleaner] Enlisted dispose "Delete TEST➛CLASS.Temp (from test's *OneTimeSetUp*)" for KEY='Class Universe.NUnitPipeline.Tests.TestsSync'
+WHATS UP. I'm OneTimeSetUp that runs before any test
 [DEBUG Action:OnStart] STAGE Start 'Fixture Counter=1': 3 [Universe, NUnitPipeline, Tests, TestsSync]
 [DEBUG Pipeline.Action:OnStart] Invoke START Action 'Cpu Usage' for `Class Universe.NUnitPipeline.Tests.TestsSync` (Fixture)
 [DEBUG Pipeline.Action:OnStart] Invoke START Action 'Cpu Usage Visualizer' for `Class Universe.NUnitPipeline.Tests.TestsSync` (Fixture)
@@ -168,16 +183,46 @@ SYNCHRONOUS Properties: 'Is First on Start' is [PrivateCounter {1}], 'Test Case 
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Cpu Usage' for `Class Universe.NUnitPipeline.Tests.TestsSync` (Fixture)
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Cpu Usage Visualizer' for `Class Universe.NUnitPipeline.Tests.TestsSync` (Fixture)
 [DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Dispose' for `Class Universe.NUnitPipeline.Tests.TestsSync` (Fixture)
-[DISPOSE] Starting Dispose 'Class Universe.NUnitPipeline.Tests.TestsSync'. Actions: "6"
-[Dispose Class Universe.NUnitPipeline.Tests.TestsSync::FormatElapsedTest] "Delete CLASS.Temp (from test's *SetUp*)" success (took 0.2 milliseconds)
-[Dispose Class Universe.NUnitPipeline.Tests.TestsSync::FormatElapsedTest] "Delete File CLASS.Temp (from test's *TearDown*)" success (took 0.0 milliseconds)
-[Dispose Class Universe.NUnitPipeline.Tests.TestsSync::Test1("First 222 milliseconds")] "Delete CLASS.Temp (from test's *SetUp*)" success (took 0.0 milliseconds)
-[Dispose Class Universe.NUnitPipeline.Tests.TestsSync::Test1("First 222 milliseconds")] "Delete File CLASS.Temp (from test's *TearDown*)" success (took 0.0 milliseconds)
-[Dispose Class Universe.NUnitPipeline.Tests.TestsSync::Test1("Next 222 milliseconds")] "Delete CLASS.Temp (from test's *SetUp*)" success (took 0.0 milliseconds)
-[Dispose Class Universe.NUnitPipeline.Tests.TestsSync::Test1("Next 222 milliseconds")] "Delete File CLASS.Temp (from test's *TearDown*)" success (took 0.0 milliseconds)
+[DISPOSE] Starting Dispose 'Class Universe.NUnitPipeline.Tests.TestsSync'. Actions: "7"
+[Dispose for Class Universe.NUnitPipeline.Tests.TestsSync] "Delete TEST➛CLASS.Temp (from test's *OneTimeSetUp*)" success (took 0.1 milliseconds)
+[Dispose for Class 3.1 Universe.NUnitPipeline.Tests.TestsSync::FormatElapsedTest] "Delete CLASS.Temp (from test's *SetUp*)" success (took 0.1 milliseconds)
+[Dispose for Class 3.1 Universe.NUnitPipeline.Tests.TestsSync::FormatElapsedTest] "Delete File CLASS.Temp (from test's *TearDown*)" success (took 0.0 milliseconds)
+[Dispose for Class 3.2 Universe.NUnitPipeline.Tests.TestsSync::Test1("First 222 milliseconds")] "Delete CLASS.Temp (from test's *SetUp*)" success (took 0.0 milliseconds)
+[Dispose for Class 3.2 Universe.NUnitPipeline.Tests.TestsSync::Test1("First 222 milliseconds")] "Delete File CLASS.Temp (from test's *TearDown*)" success (took 0.0 milliseconds)
+[Dispose for Class 3.3 Universe.NUnitPipeline.Tests.TestsSync::Test1("Next 222 milliseconds")] "Delete CLASS.Temp (from test's *SetUp*)" success (took 0.0 milliseconds)
+[Dispose for Class 3.3 Universe.NUnitPipeline.Tests.TestsSync::Test1("Next 222 milliseconds")] "Delete File CLASS.Temp (from test's *TearDown*)" success (took 0.0 milliseconds)
 [Test Cleaner] Enlisted dispose "Delete File GLOBAL.Temp (from test's *OneTimeTearDown*)" for KEY='Global'
 [Test Cleaner] Enlisted dispose "Delete File CLASS.Temp (from test's *OneTimeTearDown*)" for KEY='Class Universe.NUnitPipeline.Tests.TestsSync'
-[Test Cleaner] Enlisted dispose "Delete File TEST2CLASS.Temp (from test's *OneTimeTearDown*)" for KEY='Global'
+[Test Cleaner] Enlisted dispose "Delete File TEST➛CLASS.Temp (from test's *OneTimeTearDown*)" for KEY='Class Universe.NUnitPipeline.Tests.TestsSync'
+[DEBUG Action:OnStart] STAGE Start 'Assembly Counter=1':  [Universe.NUnitPipeline.Tests.dll]
+[DEBUG Action:OnFinish] STAGE Finish 'Assembly Counter=1':  [Universe.NUnitPipeline.Tests.dll]
+[DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Cpu Usage' for `Global` (Assembly)
+[DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Cpu Usage Visualizer' for `Global` (Assembly)
+[DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action 'Dispose' for `Global` (Assembly)
+[DISPOSE] Starting Dispose 'Global'. Actions: "9"
+
+[Dispose] Starting Global Dispose
+[Dispose for 1.1 Universe.NUnitPipeline.Tests.TestsAsync::Test1Async_111_Milliseconds("First")] 'Delete GLOBAL.TMP (from test body)' success (took 0.1 milliseconds)
+[Dispose for Universe.NUnitPipeline.Tests.TestsSync] "Delete GLOBAL.Temp (from test's *OneTimeSetUp*)" success (took 0.0 milliseconds)
+[Dispose for 3.1 Universe.NUnitPipeline.Tests.TestsSync::FormatElapsedTest] "Delete File GLOBAL.Temp (from test's *TearDown*)" success (took 0.0 milliseconds)
+[Dispose for 3.1 Universe.NUnitPipeline.Tests.TestsSync::FormatElapsedTest asynchronously] 'Delete File GlobalAsyncTemporary.Temp (from test body)' success (took 0.1 milliseconds)
+[Dispose for 3.2 Universe.NUnitPipeline.Tests.TestsSync::Test1("First 222 milliseconds")] "Delete File '::Temporary.Temp' (from test body)" failed (took 0.4 milliseconds)
+System.NotSupportedException: The given path's format is not supported.
+   at System.Security.Permissions.FileIOPermission.EmulateFileIOPermissionChecks(String fullPath)
+   at System.Security.Permissions.FileIOPermission.QuickDemand(FileIOPermissionAccess access, String fullPath, Boolean checkForDuplicates, Boolean needFullPath)
+   at System.IO.File.InternalDelete(String path, Boolean checkHost)
+   at Universe.NUnitPipeline.TestCleaner.<>c__DisplayClass0_0.<OnDispose>b__0() in C:\_GIT\Universe.NUnitPipeline\Universe.NUnitPipeline\TestCleaner.cs:line 81
+[Dispose for 3.2 Universe.NUnitPipeline.Tests.TestsSync::Test1("First 222 milliseconds")] "Delete File GLOBAL.Temp (from test's *TearDown*)" success (took 0.0 milliseconds)
+[Dispose for 3.3 Universe.NUnitPipeline.Tests.TestsSync::Test1("Next 222 milliseconds")] "Delete File '::Temporary.Temp' (from test body)" failed (took 0.1 milliseconds)
+System.NotSupportedException: The given path's format is not supported.
+   at System.Security.Permissions.FileIOPermission.EmulateFileIOPermissionChecks(String fullPath)
+   at System.Security.Permissions.FileIOPermission.QuickDemand(FileIOPermissionAccess access, String fullPath, Boolean checkForDuplicates, Boolean needFullPath)
+   at System.IO.File.InternalDelete(String path, Boolean checkHost)
+   at Universe.NUnitPipeline.TestCleaner.<>c__DisplayClass0_0.<OnDispose>b__0() in C:\_GIT\Universe.NUnitPipeline\Universe.NUnitPipeline\TestCleaner.cs:line 81
+[Dispose for 3.3 Universe.NUnitPipeline.Tests.TestsSync::Test1("Next 222 milliseconds")] "Delete File GLOBAL.Temp (from test's *TearDown*)" success (took 0.0 milliseconds)
+[Dispose for 3 Universe.NUnitPipeline.Tests.TestsSync] "Delete File GLOBAL.Temp (from test's *OneTimeTearDown*)" success (took 0.0 milliseconds)
+[Dispose Global] Completed in 48.2 milliseconds
+[Global Dispose] All the 5 async cleaner(s) is (are) finished
 
 Tests Not Run
 
@@ -203,8 +248,8 @@ Test Run Summary
   Overall result: Passed
   Test Count: 11, Passed: 7, Failed: 0, Warnings: 0, Inconclusive: 0, Skipped: 4
     Skipped Tests - Ignored: 0, Explicit: 4, Other: 0
-  Start time: 2024-10-26 15:14:44Z
-    End time: 2024-10-26 15:14:46Z
-    Duration: 2.653 seconds
+  Start time: 2024-10-26 16:43:42Z
+    End time: 2024-10-26 16:43:45Z
+    Duration: 2.937 seconds
 
 Results (nunit3) saved as TestResult.xml

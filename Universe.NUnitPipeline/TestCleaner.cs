@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 
 namespace Universe.NUnitPipeline
 {
@@ -43,28 +44,31 @@ namespace Universe.NUnitPipeline
             if (!isActualTest && needTestCase)
             {
                 needTestCase = false;
-                needGlobal = true;
+                needClass = true;
             }
 
             string collectionKey = needGlobal ? "Global" : $"Test {testAdapter.ClassName}::{testAdapter.Name}";
             if (needClass) collectionKey = $"Class {testAdapter.ClassName}";
 
-            // testIndex is only for log
-            // var tIndex = TestContext.CurrentContext.Test.GetProperty<TestCaseIndex>(NUnitTestCaseCounter.COUNTER_PROPERTY_NAME);
-            // var testIndexFullName = tIndex == null ? "" : $"{tIndex.ClassIndex}.{tIndex.TestIndex} ";
-            var testIndexFullName = "";
+			// testIndex is only for log
+			// var tIndex = TestContext.CurrentContext.Test.GetProperty<TestCaseIndex>(NUnitTestCaseCounter.COUNTER_PROPERTY_NAME);
+			// var testIndexFullName = tIndex == null ? "" : $"{tIndex.ClassIndex}.{tIndex.TestIndex} ";
+			
+			var indexState = TestContext.CurrentContext.Test.GetProperty<NUnitPipelineActionAttribute.IndexState>("Index State");
+			var testIndexFullName = indexState == null ? "" :  $"{indexState} ";
+
             string isAsyncHumanized = $"{(needAsync ? " asynchronously" : "")}";
             string testFullName = $"{testAdapter.ClassName}::{testAdapter.Name}";
             if (!isActualTest) testFullName = $"{testAdapter.ClassName}";
 
-            string prefix = $"Dispose {testIndexFullName}{testFullName}{isAsyncHumanized}";
+            string prefix = $"Dispose for {testIndexFullName}{testFullName}{isAsyncHumanized}";
             if (needGlobal)
             {
-                prefix = $"Dispose Global {testIndexFullName}{testFullName}{isAsyncHumanized}";
+                prefix = $"Dispose for {testIndexFullName}{testFullName}{isAsyncHumanized}";
             }
             else if (needClass)
             {
-                prefix = $"Dispose Class {testIndexFullName}{testFullName}{isAsyncHumanized}";
+                prefix = $"Dispose for Class {testIndexFullName}{testFullName}{isAsyncHumanized}";
             }
 
             var letsDebug = "ok";
