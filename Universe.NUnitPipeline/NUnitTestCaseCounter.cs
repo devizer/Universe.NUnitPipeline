@@ -8,6 +8,11 @@ namespace Universe.NUnitPipeline
         public int ClassIndex { get; set; }
         
         public int TestIndex { get; set; }
+
+        public override string ToString()
+        {
+            return $"{ClassIndex}.{TestIndex}";
+        }
     }
 
     public static class NUnitTestCaseCounter

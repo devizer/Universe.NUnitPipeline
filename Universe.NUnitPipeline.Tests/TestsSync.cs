@@ -60,9 +60,8 @@ namespace Universe.NUnitPipeline.Tests
                 Console.WriteLine($"TIMESPAN {timeSpan} --> \"{ElapsedFormatter.FormatElapsed(timeSpan)}\"");
             }
 
-            TestCleaner.OnDispose("ASYNC Delete File AsyncTemporary.Temp (from test body)", () => File.WriteAllText($"AsyncTemporary {DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")}.Tmp", "OK"),
-                TestDisposeOptions.TestCase | TestDisposeOptions.Async);
-            TestCleaner.OnDispose("Delete File GlobalAsyncTemporary.Temp (from test body)", () => File.Delete("GlobalAsyncTemporary.Temp"), TestDisposeOptions.Global | TestDisposeOptions.Async);
+            TestCleaner.OnDispose("ASYNC Delete File AsyncTemporary.Temp (from test body)", () => File.WriteAllText($"AsyncTemporary {DateTime.Now:yyyy-MM-dd HH-mm-ss}.Tmp", "OK"), TestDisposeOptions.AsyncTestCase);
+            TestCleaner.OnDispose("Delete File GlobalAsyncTemporary.Temp (from test body)", () => File.Delete("GlobalAsyncTemporary.Temp"), TestDisposeOptions.AsyncGlobal);
         }
 
         [Test]

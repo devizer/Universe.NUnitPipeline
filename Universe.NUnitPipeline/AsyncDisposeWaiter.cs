@@ -4,8 +4,6 @@ using System.Linq;
 using System.Threading;
 
 namespace Universe {
-
-
     internal class AsyncDisposeWaiter
     {
         public class WaiterCount

@@ -13,23 +13,29 @@ namespace Universe.NUnitPipeline
         Class = 2, // It needs [Action]-Attribute on each test fixture
         TestCase = 4,
         Async = 8,
+        AsyncGlobal = Async | Global,
+        AsyncClass = Async | Class,
+        AsyncTestCase = Async | TestCase,
         IgnoreError = 16,
         // Async+Global Has No Sense?
     }
 
     public class TestCleaner
     {
-        public static void OnDispose(string title, Action action, TestDisposeOptions mode)
+        public static void OnDispose(string title, Action action, TestDisposeOptions modeWhen)
         {
             if (title.IndexOf('\'') < 0)
                 title = $"'{title}'";
             else if (title.IndexOf("\"") < 0)
                 title = $"\"{title}\"";
 
-            bool isIgnoringError = (mode & TestDisposeOptions.IgnoreError) != 0;
-            bool isGlobal = (mode & TestDisposeOptions.Global) != 0;
-            bool isTestCase = !isGlobal;
-            var isAsync = (mode & TestDisposeOptions.Async) != 0;
+            if (modeWhen == TestDisposeOptions.Async) modeWhen = TestDisposeOptions.AsyncGlobal;
+
+            bool isIgnoringError = (modeWhen & TestDisposeOptions.IgnoreError) != 0;
+            bool isGlobal = (modeWhen & TestDisposeOptions.Global) != 0;
+            bool isClass = (modeWhen & TestDisposeOptions.Class) != 0;
+            bool isTestCase = !isGlobal && !isClass;
+            var isAsync = (modeWhen & TestDisposeOptions.Async) != 0;
 
             var testAdapter = TestContext.CurrentContext.Test;
             var testName = testAdapter.Name;
@@ -41,6 +47,7 @@ namespace Universe.NUnitPipeline
             }
 
             string collectionKey = isGlobal ? "Global" : $"Test Case {testAdapter.ClassName}::{testAdapter.Name}";
+            if (isTestCase) collectionKey = $"Class {testAdapter.ClassName}";
 
             // testIndex is only for log
             // var tIndex = TestContext.CurrentContext.Test.GetProperty<TestCaseIndex>(NUnitTestCaseCounter.COUNTER_PROPERTY_NAME);
@@ -54,6 +61,10 @@ namespace Universe.NUnitPipeline
             if (isGlobal)
             {
                 prefix = $"Dispose Global {testIndexFullName}{testFullName}{isAsyncHumanized}";
+            }
+            else if (isClass)
+            {
+                prefix = $"Dispose Class {testIndexFullName}{testFullName}{isAsyncHumanized}";
             }
 
             var letsDebug = "ok";

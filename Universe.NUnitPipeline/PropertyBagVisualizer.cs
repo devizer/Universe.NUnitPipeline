@@ -14,7 +14,7 @@ namespace Universe.NUnitPipeline
         {
             string[] emptyStrings = new string[0];
             var temp = string.Join(", ", (TestContext.CurrentContext?.Test?.Properties?.Keys ?? emptyStrings).Select(x => $"'{x}' is {GetTypeDescription(TestContext.CurrentContext?.Test?.Properties[x])}").ToArray());
-            var ret = $"{title } Properties [{temp}] (Thread ID is {Thread.CurrentThread.ManagedThreadId})";
+            var ret = $"{title} Properties: {temp} (TID is {Thread.CurrentThread.ManagedThreadId})";
             Debug.WriteLine(ret);
             return ret;
         }
@@ -28,7 +28,13 @@ namespace Universe.NUnitPipeline
                 ret = $"Empty Enumerable Length={copy.Length}";
                 var item = copy.FirstOrDefault();
                 if (item != null)
+                {
                     ret = $"{item.GetType()}[] Length={copy.Length}";
+                    if (item is NUnitTestCaseStateExtensions.MutableValue mv)
+                    {
+                        ret = $"{(mv.Value == null ? "mutable null" : $"[{mv.Value.GetType().Name} {{{mv.Value}}}]")}";
+                    }
+                }
             }
             return ret;
         }

@@ -24,13 +24,12 @@ namespace Universe {
             BuildNUnitStage(test, NUnitActionSide.Start, out var stage, out var counter);
             if (counter != 1) return;
 
-
             var actions = NUnitPipelineChain.OnStart;
             if (actions == null) return;
             foreach (var a in actions)
             {
-                Console.WriteLine($"[DEBUG Action:OnStart] Invoke Action '{a.Title}'");
-                a.Action(stage);
+                DebugConsole.WriteLine($"[DEBUG Pipeline.Action:OnStart] Invoke Action '{a.Title}'");
+                a.Action(stage, test);
             }
         }
 
@@ -41,18 +40,23 @@ namespace Universe {
             bool isFirst = counter == 1;
             if (counter != 1) return;
 
-            var actions = NUnitPipelineChain.OnStart;
+            var actions = NUnitPipelineChain.OnEnd;
             if (actions == null) return;
             foreach (var a in actions)
             {
-                Console.WriteLine($"[DEBUG Pipeline.Action:OnFinish] Invoke Action '{a.Title}'");
-                a.Action(stage);
+                DebugConsole.WriteLine($"[DEBUG Pipeline.Action:OnFinish] Invoke Action '{a.Title}'");
+                a.Action(stage, test);
             }
         }
 
         class SelfCounter
         {
             public int Count = 0;
+
+            public override string ToString()
+            {
+                return $"{nameof(Count)}: {Count}";
+            }
         }
 
         void BuildNUnitStage(ITest test, NUnitActionSide actionSide, out NUnitStage stage, out int counter)
@@ -62,7 +66,7 @@ namespace Universe {
             counter = selfCounter.Count;
             if (counter == 1 && actionSide == NUnitActionSide.Start) Console.WriteLine(EmptyLineBetweenTests());
 
-            stage = new NUnitStage() { Side = actionSide, ITest = test };
+            stage = new NUnitStage() { Side = actionSide };
             if (test.Fixture == null)
             {
                 stage.NUnitActionAppliedTo = NUnitActionAppliedTo.Assembly;
@@ -123,13 +127,18 @@ namespace Universe {
                 stage.TestIndex = indexState.TestIndex;
             }
 
-            Console.WriteLine($"[DEBUG Action:On{actionSide}] STAGE {stage.Side} '{stage.NUnitActionAppliedTo} Counter={counter}': {stage.FormattedIndex} [{string.Join(", ", stage.StructuredFullName)}]");
+            DebugConsole.WriteLine($"[DEBUG Action:On{actionSide}] STAGE {stage.Side} '{stage.NUnitActionAppliedTo} Counter={counter}': {stage.FormattedIndex} [{string.Join(", ", stage.StructuredFullName)}]");
         }
 
         class IndexState
         {
             public int? FixtureIndex { get; set; }
             public int? TestIndex { get; set; } // If applied to test only
+
+            public override string ToString()
+            {
+                return FixtureIndex.HasValue ? TestIndex.HasValue ? $"{FixtureIndex.Value}.{TestIndex.Value}" : $"{FixtureIndex.Value}" : "";
+            }
         }
 
 

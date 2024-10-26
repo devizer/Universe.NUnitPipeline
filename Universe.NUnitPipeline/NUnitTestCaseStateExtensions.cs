@@ -11,7 +11,7 @@ namespace Universe
     {
         private static readonly object _TestCaseStateSync = new object();
 
-        class MutableValue
+        internal class MutableValue
         {
             public object Value { get; set; }
         }

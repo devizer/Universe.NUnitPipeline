@@ -19,8 +19,6 @@ namespace Universe.NUnitPipeline
         public string TestName { get; set; }
         public MethodInfo Method { get; set; }
 
-        public ITest ITest { get; set; }
-
         public string FormattedIndex =>
             FixtureIndex.HasValue ? TestIndex.HasValue ? $"{FixtureIndex.Value}.{TestIndex.Value}" : $"{FixtureIndex.Value}" : "";
     }
