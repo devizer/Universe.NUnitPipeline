@@ -19,7 +19,7 @@ namespace Universe.NUnitPipeline.Shared
 			return;
 		}
 	}
-		internal class DebugConsole
+	internal class DebugConsole
     {
         public static void WriteLine(string message)
         {
@@ -34,7 +34,7 @@ namespace Universe.NUnitPipeline.Shared
                 Console.WriteLine(message);
                 Console.ForegroundColor = fc.Value;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Console.WriteLine(message);
             }

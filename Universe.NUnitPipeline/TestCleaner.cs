@@ -72,7 +72,6 @@ namespace Universe.NUnitPipeline
                 prefix = $"Dispose for Class {testIndexFullName}{testFullName}{isAsyncHumanized}";
             }
 
-            var letsDebug = "ok";
             Action actionWithLog = () =>
             {
 
