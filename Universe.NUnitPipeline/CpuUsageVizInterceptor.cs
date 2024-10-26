@@ -54,8 +54,15 @@ namespace Universe.NUnitPipeline
                 outcomeStatus = $"{esc}{color}{outcomeStatus}{esc}[0m";
             }
 
-            Console.WriteLine($"← {stage.FormattedIndex} {stage.FixtureFullName}::{stage.TestName} >{outcomeStatus}< in {elapsedFormatted}{cpuUsageHumanized}");
+            Console.WriteLine($"← {stage.FormattedIndex} {stage.FixtureFullName}::{AsUnderline(stage.TestName)} >{outcomeStatus}< in {elapsedFormatted}{cpuUsageHumanized}");
+        }
 
+        static string AsUnderline(string arg)
+        {
+            char esc = (char)27;
+            return AnsiSupportInfo.IsAnsiSupported
+                ? $"{esc}[4m{arg}{esc}[0m"
+                : arg;
         }
 
     }
