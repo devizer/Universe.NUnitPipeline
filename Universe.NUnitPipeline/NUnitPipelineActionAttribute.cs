@@ -49,19 +49,19 @@ namespace Universe {
             }
         }
 
-        class SelfCounter
+        class PrivateCounter
         {
             public int Count = 0;
 
             public override string ToString()
             {
-                return $"{nameof(Count)}: {Count}";
+                return $"{Count:0}";
             }
         }
 
         void BuildNUnitStage(ITest test, NUnitActionSide actionSide, out NUnitStage stage, out int counter)
         {
-            var selfCounter = test.GetPropertyOrAdd<SelfCounter>($"Is First on {actionSide}", t => new SelfCounter() { Count = 0 });
+            var selfCounter = test.GetPropertyOrAdd<PrivateCounter>($"Is First on {actionSide}", t => new PrivateCounter() { Count = 0 });
             selfCounter.Count++;
             counter = selfCounter.Count;
             if (counter == 1 && actionSide == NUnitActionSide.Start) Console.WriteLine(EmptyLineBetweenTests());
