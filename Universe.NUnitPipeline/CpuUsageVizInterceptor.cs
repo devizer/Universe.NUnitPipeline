@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
+using Universe.NUnitPipeline.Shared;
 
 namespace Universe.NUnitPipeline
 {
@@ -45,6 +46,13 @@ namespace Universe.NUnitPipeline
                     : null;
 
             var outcomeStatus = TestContext.CurrentContext.Result.Outcome.Status.ToString().ToUpper();
+            if (AnsiSupportInfo.IsAnsiSupported)
+            {
+                char esc = (char)27;
+                bool isOk = "PASSED".Equals(outcomeStatus, StringComparison.OrdinalIgnoreCase);
+                string color = isOk ? "[42m" : "[41m";
+                outcomeStatus = $"{esc}{color}{outcomeStatus}{esc}[%m";
+            }
 
             Console.WriteLine($"← {stage.FormattedIndex} {stage.FixtureFullName}::{stage.TestName} >{outcomeStatus}< in {elapsedFormatted}{cpuUsageHumanized}");
 
