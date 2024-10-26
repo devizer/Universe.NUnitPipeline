@@ -21,5 +21,7 @@ namespace Universe.NUnitPipeline
 
         public string FormattedIndex =>
             FixtureIndex.HasValue ? TestIndex.HasValue ? $"{FixtureIndex.Value}.{TestIndex.Value}" : $"{FixtureIndex.Value}" : "";
+
+        public string InternalKey { get; set; }
     }
 }

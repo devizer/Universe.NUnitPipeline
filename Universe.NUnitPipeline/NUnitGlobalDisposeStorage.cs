@@ -21,15 +21,18 @@ namespace Universe.NUnitPipeline
             }
         }
 
-        public static List<Action> GetDisposeActions(string collectionKey)
+        public static List<Action> FetchDisposeActions(string collectionKey)
         {
             lock (OnDisposeListSync)
             {
                 if (OnDisposeList.TryGetValue(collectionKey, out var list))
+                {
+                    OnDisposeList[collectionKey] = new List<Action>();
                     return new List<Action>(list);
+                }
             }
 
-            return new List<Action>(0);
+            return null;
         }
 
     }

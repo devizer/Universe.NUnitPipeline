@@ -1,12 +1,12 @@
 using System;
 
-namespace Universe.NUnitPipeline
+namespace Universe.NUnitPipeline.Shared
 {
     internal class DebugConsole
     {
         public static void WriteLine(string message)
         {
-            return;
+            // return;
             ConsoleColor? fc = null;
             try
             {

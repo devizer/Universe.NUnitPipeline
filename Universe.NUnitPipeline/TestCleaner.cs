@@ -29,40 +29,40 @@ namespace Universe.NUnitPipeline
             else if (title.IndexOf("\"") < 0)
                 title = $"\"{title}\"";
 
+            // argument
             if (modeWhen == TestDisposeOptions.Async) modeWhen = TestDisposeOptions.AsyncGlobal;
-
             bool isIgnoringError = (modeWhen & TestDisposeOptions.IgnoreError) != 0;
-            bool isGlobal = (modeWhen & TestDisposeOptions.Global) != 0;
-            bool isClass = (modeWhen & TestDisposeOptions.Class) != 0;
-            bool isTestCase = !isGlobal && !isClass;
-            var isAsync = (modeWhen & TestDisposeOptions.Async) != 0;
+            bool needGlobal = (modeWhen & TestDisposeOptions.Global) != 0;
+            bool needClass = (modeWhen & TestDisposeOptions.Class) != 0;
+            bool needTestCase = !needGlobal && !needClass;
+            var needAsync = (modeWhen & TestDisposeOptions.Async) != 0;
 
             var testAdapter = TestContext.CurrentContext.Test;
             var testName = testAdapter.Name;
             bool isActualTest = !string.IsNullOrEmpty(testAdapter.MethodName); // false for onetimesetup/onetimeteardown
-            if (!isActualTest && isTestCase)
+            if (!isActualTest && needTestCase)
             {
-                isTestCase = false;
-                isGlobal = true;
+                needTestCase = false;
+                needGlobal = true;
             }
 
-            string collectionKey = isGlobal ? "Global" : $"Test Case {testAdapter.ClassName}::{testAdapter.Name}";
-            if (isTestCase) collectionKey = $"Class {testAdapter.ClassName}";
+            string collectionKey = needGlobal ? "Global" : $"Test {testAdapter.ClassName}::{testAdapter.Name}";
+            if (needClass) collectionKey = $"Class {testAdapter.ClassName}";
 
             // testIndex is only for log
             // var tIndex = TestContext.CurrentContext.Test.GetProperty<TestCaseIndex>(NUnitTestCaseCounter.COUNTER_PROPERTY_NAME);
             // var testIndexFullName = tIndex == null ? "" : $"{tIndex.ClassIndex}.{tIndex.TestIndex} ";
             var testIndexFullName = "";
-            string isAsyncHumanized = $"{(isAsync ? " asynchronously" : "")}";
+            string isAsyncHumanized = $"{(needAsync ? " asynchronously" : "")}";
             string testFullName = $"{testAdapter.ClassName}::{testAdapter.Name}";
             if (!isActualTest) testFullName = $"{testAdapter.ClassName}";
 
             string prefix = $"Dispose {testIndexFullName}{testFullName}{isAsyncHumanized}";
-            if (isGlobal)
+            if (needGlobal)
             {
                 prefix = $"Dispose Global {testIndexFullName}{testFullName}{isAsyncHumanized}";
             }
-            else if (isClass)
+            else if (needClass)
             {
                 prefix = $"Dispose Class {testIndexFullName}{testFullName}{isAsyncHumanized}";
             }
@@ -87,9 +87,9 @@ namespace Universe.NUnitPipeline
             };
 
             var actionWrapped = actionWithLog;
-            if (isAsync)
+            if (needAsync)
             {
-                Console.WriteLine($"Postpone {title} for {prefix}");
+                Console.WriteLine($"[Test Cleaner] Postpone asynchronously {title} for KEY='{collectionKey}'");
                 ManualResetEventSlim manualWait = new ManualResetEventSlim(false);
                 AsyncDisposeWaiter.AddWaiter(manualWait.WaitHandle);
                 actionWrapped = () =>
@@ -107,6 +107,11 @@ namespace Universe.NUnitPipeline
                     });
                 };
             }
+            else
+            {
+                Console.WriteLine($"[Test Cleaner] Enlisted dispose {title} for KEY='{collectionKey}'");
+            }
+
 
             NUnitGlobalDisposeStorage.AddDisposeAction(collectionKey, actionWrapped);
         }

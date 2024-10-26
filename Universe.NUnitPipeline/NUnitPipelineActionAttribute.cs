@@ -8,11 +8,13 @@ using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using Universe.CpuUsage;
 using Universe.NUnitPipeline;
+using Universe.NUnitPipeline.Shared;
 
 /*
  * Supported NUnit (and Console Runner): 3.12 ... 3.18.3 and 4x
  */
-namespace Universe {
+namespace Universe
+{
 
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Assembly, AllowMultiple = false)]
     public class NUnitPipelineActionAttribute : Attribute, ITestAction
@@ -28,7 +30,7 @@ namespace Universe {
             if (actions == null) return;
             foreach (var a in actions)
             {
-                DebugConsole.WriteLine($"[DEBUG Pipeline.Action:OnStart] Invoke Action '{a.Title}'");
+                DebugConsole.WriteLine($"[DEBUG Pipeline.Action:OnStart] Invoke START Action '{a.Title}' for `{stage.InternalKey}` ({stage.NUnitActionAppliedTo})");
                 a.Action(stage, test);
             }
         }
@@ -44,7 +46,7 @@ namespace Universe {
             if (actions == null) return;
             foreach (var a in actions)
             {
-                DebugConsole.WriteLine($"[DEBUG Pipeline.Action:OnFinish] Invoke Action '{a.Title}'");
+                DebugConsole.WriteLine($"[DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action '{a.Title}' for `{stage.InternalKey}` ({stage.NUnitActionAppliedTo})");
                 a.Action(stage, test);
             }
         }
@@ -72,6 +74,7 @@ namespace Universe {
                 stage.NUnitActionAppliedTo = NUnitActionAppliedTo.Assembly;
                 var assemblyFileName = string.IsNullOrEmpty(test.FullName) ? null : Path.GetFileName(test.FullName);
                 stage.StructuredFullName = new[] { assemblyFileName ?? "A Test Assembly" };
+                stage.InternalKey = "Global";
             }
             else
             {
@@ -80,9 +83,11 @@ namespace Universe {
                 if (test.Method == null)
                 {
                     stage.NUnitActionAppliedTo = NUnitActionAppliedTo.Fixture;
+                    stage.InternalKey = $"Class {test.Fixture.GetType().FullName}";
                 }
                 else
                 {
+                    stage.InternalKey = $"Test {test.Fixture.GetType().FullName}::{test.Name}";
                     stage.NUnitActionAppliedTo = NUnitActionAppliedTo.Test;
                     stage.TestName = test.Name;
                     var pBracket = stage.TestName?.IndexOf("(");

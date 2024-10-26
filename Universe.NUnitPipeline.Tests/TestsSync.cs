@@ -16,30 +16,35 @@ namespace Universe.NUnitPipeline.Tests
         [OneTimeSetUp]
         public void OneTimeSetup()
         {
-            TestCleaner.OnDispose("Delete File Temporary.Temp (from test's *OneTimeSetUp*)", () => File.Delete("Temporary.Temp"), TestDisposeOptions.Global);
-            // Test --> Class, Does Not work, Only Global for onetime startup/teardown
+            TestCleaner.OnDispose("Delete GLOBAL.Temp (from test's *OneTimeSetUp*)", () => { }, TestDisposeOptions.Global);
+			// Test ➛ Class for onetimesetup/onetimeteardown
+			TestCleaner.OnDispose("Delete TEST➛CLASS.Temp (from test's *OneTimeSetUp*)", () => { }, TestDisposeOptions.TestCase);
         }
 
         [SetUp]
         public void Setup()
         {
-            TestCleaner.OnDispose("Delete File Temporary.Temp (from test's *SetUp*)", () => File.Delete("Temporary.Temp"), TestDisposeOptions.Global);
+            TestCleaner.OnDispose("Delete CLASS.Temp (from test's *SetUp*)", () => File.Delete("Temporary.Temp"), TestDisposeOptions.Class);
         }
 
         [TearDown]
         public void TearDown()
         {
-            TestCleaner.OnDispose("Delete File Temporary.Temp (from test's *TearDown*)", () => File.Delete("Temporary.Temp"), TestDisposeOptions.Global);
+	        TestCleaner.OnDispose("Delete File GLOBAL.Temp (from test's *TearDown*)", () => { }, TestDisposeOptions.Global);
+	        TestCleaner.OnDispose("Delete File CLASS.Temp (from test's *TearDown*)", () => { }, TestDisposeOptions.Class);
+			TestCleaner.OnDispose("Delete File TEST2CLASS.Temp (from test's *TearDown*)", () => { }, TestDisposeOptions.TestCase);
         }
 
-        [OneTimeTearDown]
+		[OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            TestCleaner.OnDispose("Delete File Temporary.Temp (from test's *OneTimeTearDown*)", () => File.Delete("Temporary.Temp"), TestDisposeOptions.Global);
+	        TestCleaner.OnDispose("Delete File GLOBAL.Temp (from test's *OneTimeTearDown*)", () => { }, TestDisposeOptions.Global);
+			TestCleaner.OnDispose("Delete File CLASS.Temp (from test's *OneTimeTearDown*)", () => { }, TestDisposeOptions.Class);
+			TestCleaner.OnDispose("Delete File TEST2CLASS.Temp (from test's *OneTimeTearDown*)", () => { }, TestDisposeOptions.TestCase);
         }
 
 
-        [Test]
+		[Test]
         public void FormatElapsedTest()
         {
             Console.WriteLine(PropertyBagVisualizer.ShowHumanString("SYNCHRONOUS"));

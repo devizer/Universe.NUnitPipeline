@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
@@ -13,6 +14,8 @@ namespace Universe.NUnitPipeline.Tests
             {
                 RunImplementation(milliseconds);
                 Console.WriteLine(PropertyBagVisualizer.ShowHumanString("A-SYNCHRONOUS"));
+                TestCleaner.OnDispose("Delete CLASS.TMP (from test body)", () => { }, TestDisposeOptions.Class);
+                TestCleaner.OnDispose("Delete CLASS.ASYNC.TMP (from test body)", () => {}, TestDisposeOptions.AsyncClass);
             });
         }
 

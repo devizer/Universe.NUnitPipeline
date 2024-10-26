@@ -18,9 +18,9 @@ namespace Universe.NUnitPipeline.Tests
         /*[TestCase("Next")]*/
         public async Task Test1Async_111_Milliseconds(string title)
         {
-            TestCleaner.OnDispose("Delete File Temporary.Temp (from test body)", () => File.Delete("Temporary.Temp"), TestDisposeOptions.Global);
             Console.WriteLine(PropertyBagVisualizer.ShowHumanString("SYNCHRONOUS"));
             await CpuLoad.RunAsync(111);
+            TestCleaner.OnDispose("Delete GLOBAL.TMP (from test body)", () => File.Delete("Global.Temp"), TestDisposeOptions.Global);
         }
 
         /*[Test]*/

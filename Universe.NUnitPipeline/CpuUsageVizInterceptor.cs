@@ -19,6 +19,7 @@ namespace Universe.NUnitPipeline
         {
             if (stage.NUnitActionAppliedTo != NUnitActionAppliedTo.Test) return;
 
+            Console.WriteLine("");
             Console.WriteLine($"→ {stage.FormattedIndex} {stage.FixtureFullName}::{stage.TestName} is starting");
         }
         public static void OnFinish(NUnitStage stage, ITest test)
@@ -28,10 +29,10 @@ namespace Universe.NUnitPipeline
             var cpuUsageResult = test.GetPropertyOrAdd<CpuUsageResult>(nameof(CpuUsageResult), null);
             if (cpuUsageResult == null) return;
 
+            // Visualize
             var finalCpuUsage = cpuUsageResult.CpuUsage.GetValueOrDefault();
             var hasCpuUsage = cpuUsageResult.CpuUsage.HasValue;
             var elapsed = cpuUsageResult.Elapsed;
-
 
             double user = finalCpuUsage.UserUsage.TotalMicroSeconds / 1000d;
             double kernel = finalCpuUsage.KernelUsage.TotalMicroSeconds / 1000d;
@@ -46,6 +47,21 @@ namespace Universe.NUnitPipeline
                     : null;
 
             var outcomeStatus = TestContext.CurrentContext.Result.Outcome.Status.ToString().ToUpper();
+            outcomeStatus = HighlightedOutcomeStatus(outcomeStatus);
+
+            Console.WriteLine($"← {stage.FormattedIndex} {stage.FixtureFullName}::{AsYellow(stage.TestName)} >{outcomeStatus}< in {elapsedFormatted}{cpuUsageHumanized}");
+        }
+
+        static string AsYellow(string arg)
+        {
+            char esc = (char)27;
+            return AnsiSupportInfo.IsAnsiSupported
+                ? $"{esc}[33m{arg}{esc}[0m"
+                : arg;
+        }
+
+        static string HighlightedOutcomeStatus(string outcomeStatus)
+        {
             if (AnsiSupportInfo.IsAnsiSupported)
             {
                 char esc = (char)27;
@@ -54,15 +70,7 @@ namespace Universe.NUnitPipeline
                 outcomeStatus = $"{esc}{color}{outcomeStatus}{esc}[0m";
             }
 
-            Console.WriteLine($"← {stage.FormattedIndex} {stage.FixtureFullName}::{AsUnderline(stage.TestName)} >{outcomeStatus}< in {elapsedFormatted}{cpuUsageHumanized}");
-        }
-
-        static string AsUnderline(string arg)
-        {
-            char esc = (char)27;
-            return AnsiSupportInfo.IsAnsiSupported
-                ? $"{esc}[33m{arg}{esc}[0m"
-                : arg;
+            return outcomeStatus;
         }
 
     }

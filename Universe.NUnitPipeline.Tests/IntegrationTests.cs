@@ -1,6 +1,6 @@
 using Universe;
 
-[assembly: NUnitPipelineAction]
+/*[assembly: NUnitPipelineAction]*/
 
 namespace Universe.NUnitPipeline.Tests
 {
