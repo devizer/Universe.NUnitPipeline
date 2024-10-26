@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading;
+using System.Text;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
-using Universe.CpuUsage;
-using Universe.NUnitPipeline;
 using Universe.NUnitPipeline.Shared;
 
 /*
  * Supported NUnit (and Console Runner): 3.12 ... 3.18.3 and 4x
  */
-namespace Universe
+namespace Universe.NUnitPipeline
 {
 
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Assembly, AllowMultiple = false)]
@@ -48,6 +46,27 @@ namespace Universe
             {
                 DebugConsole.WriteLine($"[DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action '{a.Title}' for `{stage.InternalKey}` ({stage.NUnitActionAppliedTo})");
                 a.Action(stage, test);
+            }
+
+            if (stage.NUnitActionAppliedTo == NUnitActionAppliedTo.Assembly)
+            {
+	            var files = new[] 
+	            {
+		            new { Content = InternalLog.InternalBuffer.ToString(), Path = NUnitPipelineChain.InternalReportFile + ".Internal.Log" },
+		            new { Content = InternalLog.Buffer.ToString(), Path = NUnitPipelineChain.InternalReportFile + ".Log" }
+	            };
+
+	            foreach (var file in files)
+	            {
+		            var name = Path.GetFullPath(file.Path);
+		            TryAndForget.Execute(() => Directory.CreateDirectory(Path.GetDirectoryName(name)));
+					Debug.WriteLine($"Internal Log: {name}");
+					using(FileStream fs = new FileStream(name, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
+					using (StreamWriter wr = new StreamWriter(fs, new UTF8Encoding(false)))
+					{
+						wr.Write(file.Content);
+					}
+	            }
             }
         }
 

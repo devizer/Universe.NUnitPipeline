@@ -7,7 +7,10 @@ namespace Universe.NUnitPipeline
         static List<NUnitPipelineChainAction> _OnStart;
         static List<NUnitPipelineChainAction> _OnEnd;
 
-        private static readonly object SyncStart = new object(), SyncEnd = new object();
+        public static string InternalReportFile { get; set; }
+
+
+		private static readonly object SyncStart = new object(), SyncEnd = new object();
 
         public static List<NUnitPipelineChainAction> OnStart
         {

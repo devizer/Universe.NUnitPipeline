@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
+using Universe.NUnitPipeline.Shared;
 
 namespace Universe.NUnitPipeline
 {
@@ -80,20 +81,20 @@ namespace Universe.NUnitPipeline
                 {
                     action();
                     var msec = sw.ElapsedTicks * 1000d / Stopwatch.Frequency;
-                    Console.WriteLine($"[{prefix}] {title} success (took {msec:n1} milliseconds)");
+                    OutputConsole.WriteLine($"[{prefix}] {title} success (took {msec:n1} milliseconds)");
                 }
                 catch (Exception ex)
                 {
                     var msec = sw.ElapsedTicks * 1000d / Stopwatch.Frequency;
                     var err = isIgnoringError ? $". [{ex.GetType()}] {ex.Message}" : Environment.NewLine + ex;
-                    Console.WriteLine($"[{prefix}] {title} failed (took {msec:n1} milliseconds){err}");
+                    OutputConsole.WriteLine($"[{prefix}] {title} failed (took {msec:n1} milliseconds){err}");
                 }
             };
 
             var actionWrapped = actionWithLog;
             if (needAsync)
             {
-                Console.WriteLine($"[Test Cleaner] Postpone asynchronously {title} for KEY='{collectionKey}'");
+	            OutputConsole.WriteLine($"[Test Cleaner] Postpone asynchronously {title} for KEY='{collectionKey}'");
                 ManualResetEventSlim manualWait = new ManualResetEventSlim(false);
                 AsyncDisposeWaiter.AddWaiter(manualWait.WaitHandle);
                 actionWrapped = () =>
@@ -113,7 +114,7 @@ namespace Universe.NUnitPipeline
             }
             else
             {
-                Console.WriteLine($"[Test Cleaner] Enlisted dispose {title} for KEY='{collectionKey}'");
+	            OutputConsole.WriteLine($"[Test Cleaner] Enlisted dispose {title} for KEY='{collectionKey}'");
             }
 
 

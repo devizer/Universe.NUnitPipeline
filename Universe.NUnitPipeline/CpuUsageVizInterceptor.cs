@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using Universe.NUnitPipeline.Shared;
@@ -19,8 +19,8 @@ namespace Universe.NUnitPipeline
         {
             if (stage.NUnitActionAppliedTo != NUnitActionAppliedTo.Test) return;
 
-            Console.WriteLine("");
-            Console.WriteLine($"→ {stage.FormattedIndex} {stage.FixtureFullName}::{stage.TestName} is starting");
+            OutputConsole.WriteLine("");
+            OutputConsole.WriteLine($"→ {stage.FormattedIndex} {stage.FixtureFullName}::{stage.TestName} is starting");
         }
         public static void OnFinish(NUnitStage stage, ITest test)
         {
@@ -49,7 +49,7 @@ namespace Universe.NUnitPipeline
             var outcomeStatus = TestContext.CurrentContext.Result.Outcome.Status.ToString().ToUpper();
             outcomeStatus = HighlightedOutcomeStatus(outcomeStatus);
 
-            Console.WriteLine($"← {stage.FormattedIndex} {stage.FixtureFullName}::{AsYellow(stage.TestName)} >{outcomeStatus}< in {elapsedFormatted}{cpuUsageHumanized}");
+            OutputConsole.WriteLine($"← {stage.FormattedIndex} {stage.FixtureFullName}::{AsYellow(stage.TestName)} >{outcomeStatus}< in {elapsedFormatted}{cpuUsageHumanized}");
         }
 
         static string AsYellow(string arg)

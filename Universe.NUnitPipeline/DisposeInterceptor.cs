@@ -35,7 +35,7 @@ namespace Universe.NUnitPipeline
 
             if (collectionKey == null)
             {
-                Console.WriteLine("[Dispose] Unknown pipeline");
+                Console.WriteLine("[Dispose] Warning! Unknown context. Please Report");
                 return;
             }
 
@@ -44,12 +44,12 @@ namespace Universe.NUnitPipeline
 
             if (actionList != null && actionList.Count > 0)
             {
-                if (isGlobalDispose) Console.WriteLine($"{Environment.NewLine}[Dispose] Starting Global Dispose");
+                if (isGlobalDispose) OutputConsole.WriteLine($"{Environment.NewLine}[Dispose] Starting Global Dispose");
                 Stopwatch sw = Stopwatch.StartNew();
                 foreach (var action in actionList) action();
                 var msec = sw.ElapsedTicks * 1000d / Stopwatch.Frequency;
                 if (isGlobalDispose)
-                    Console.WriteLine($"[Dispose {collectionKey}] Completed in {msec:n1} milliseconds");
+	                OutputConsole.WriteLine($"[Dispose {collectionKey}] Completed in {msec:n1} milliseconds");
             }
 
             if (isGlobalDispose)
@@ -59,19 +59,13 @@ namespace Universe.NUnitPipeline
                 {
                     if (countAsyncWaiters.Incomplete > 0)
                     {
-                        Console.WriteLine($"[Global Dispose] Waiting for {countAsyncWaiters.Incomplete} incomplete async cleaner(s). Already completed: {countAsyncWaiters.Completed}");
+	                    OutputConsole.WriteLine($"[Global Dispose] Waiting for {countAsyncWaiters.Incomplete} incomplete async cleaner(s). Already completed: {countAsyncWaiters.Completed}");
                         AsyncDisposeWaiter.WaitAll();
                     }
 
-                    Console.WriteLine($"[Global Dispose] All the {countAsyncWaiters.Total} async cleaner(s) is (are) finished");
+                    OutputConsole.WriteLine($"[Global Dispose] All the {countAsyncWaiters.Total} async cleaner(s) is (are) finished");
                 }
             }
-
-
-
-
-
-
 
         }
     }

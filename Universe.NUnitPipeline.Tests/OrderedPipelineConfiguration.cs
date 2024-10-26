@@ -1,16 +1,10 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
-using Universe;
 using Universe.NUnitPipeline;
-using Universe.NUnitPipeline.Tests;
 
 [assembly: NUnitPipelineAction]
 
-namespace Universe
+namespace Universe.NUnitPipeline.Tests
 {
     [SetUpFixture]
     public class OrderedPipelineConfiguration 
@@ -18,7 +12,9 @@ namespace Universe
         [OneTimeSetUp]
         public void Configure()
         {
-            NUnitPipelineChain.OnStart = new List<NUnitPipelineChainAction>()
+	        NUnitPipelineChain.InternalReportFile = "TestResults";
+
+			NUnitPipelineChain.OnStart = new List<NUnitPipelineChainAction>()
             {
                 new NUnitPipelineChainAction() { Title = CpuUsageInterceptor.Title, Action = CpuUsageInterceptor.OnStart },
                 new NUnitPipelineChainAction() { Title = CpuUsageVizInterceptor.Title, Action = CpuUsageVizInterceptor.OnStart },
