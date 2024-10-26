@@ -25,11 +25,12 @@ namespace Universe.NUnitPipeline.Shared
                 if (isBuildServer)
                 {
                     var process = TryAndForget.Evaluate(() => Process.GetCurrentProcess().ProcessName);
-                    if (process != null && process.IndexOf("nunit", StringComparison.OrdinalIgnoreCase) >= 0)
-                        return false;
+                    bool isNunit = process != null && process.IndexOf("nunit", StringComparison.OrdinalIgnoreCase) >= 0;
+                    bool isDotnet = process != null && process.Equals("dotnet", StringComparison.OrdinalIgnoreCase);
+                    if (isNunit || isDotnet) return false;
                 }
 
-                return true;
+                return isBuildServer;
             }
         }
     }

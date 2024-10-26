@@ -16,7 +16,7 @@ namespace Universe.NUnitPipeline.Tests
         {
             // dotnet test console, and VS Test Explorer: "testhost|testhost.net48"
             // ReSharper: ReSharperTestRunner
-            // nunit-runner 3.18: nunit-agent
+            // nunit-runner 3.18: nunit-agent|dotnet
             Console.WriteLine($"PROCESS: {Process.GetCurrentProcess().ProcessName}");
         }
     }
