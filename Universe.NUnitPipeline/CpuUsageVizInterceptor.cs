@@ -61,7 +61,7 @@ namespace Universe.NUnitPipeline
         {
             char esc = (char)27;
             return AnsiSupportInfo.IsAnsiSupported
-                ? $"{esc}[4m{arg}{esc}[0m"
+                ? $"{esc}[33m{arg}{esc}[0m"
                 : arg;
         }
 
