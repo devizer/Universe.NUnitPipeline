@@ -2,9 +2,6 @@
 
   <PropertyGroup>
     <TargetFrameworks>net8.0;net48</TargetFrameworks>
-    <!--<ImplicitUsings>enable</ImplicitUsings>-->
-    <!--<Nullable>enable</Nullable>-->
-
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
@@ -19,10 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Universe.NUnitPipeline\Universe.NUnitPipeline.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <!--<Using Include="NUnit.Framework" />-->
   </ItemGroup>
 
 </Project>

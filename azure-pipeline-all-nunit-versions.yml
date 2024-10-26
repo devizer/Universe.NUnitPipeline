@@ -306,10 +306,14 @@ jobs:
       fi
       for folder in Universe.NUnitPipeline.Tests Universe.NUnitPipeline; do
         pushd $folder
-        echo; echo "REMOVE"
+        echo; echo "REMOVE NUnit"
         dotnet remove package NUnit
-        echo; echo "ADD"
+        echo; echo "ADD NUnit"
         dotnet add package NUnit -v $NUNIT_VERSION
+        popd
+      done
+      for folder in Universe.NUnitPipeline.Tests Universe.NUnitPipeline; do
+        pushd $folder
         Say "Project: $(ls *.csproj)"
         cat *.csproj
         popd
