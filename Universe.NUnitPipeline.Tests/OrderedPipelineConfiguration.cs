@@ -16,12 +16,14 @@ namespace Universe.NUnitPipeline.Tests
         {
             NUnitPipelineChain.OnStart = new List<NUnitPipelineChainAction>()
             {
-                new NUnitPipelineChainAction() { Title = CpuUsageInterceptor.Title, Action = CpuUsageInterceptor.OnStart }
+                new NUnitPipelineChainAction() { Title = CpuUsageInterceptor.Title, Action = CpuUsageInterceptor.OnStart },
+                new NUnitPipelineChainAction() { Title = CpuUsageVizInterceptor.Title, Action = CpuUsageVizInterceptor.OnStart },
             };
 
             NUnitPipelineChain.OnEnd = new List<NUnitPipelineChainAction>()
             {
-                new NUnitPipelineChainAction() { Title = CpuUsageInterceptor.Title, Action = CpuUsageInterceptor.OnFinish }
+                new NUnitPipelineChainAction() { Title = CpuUsageInterceptor.Title, Action = CpuUsageInterceptor.OnFinish },
+                new NUnitPipelineChainAction() { Title = CpuUsageVizInterceptor.Title, Action = CpuUsageVizInterceptor.OnFinish },
             };
         }
 

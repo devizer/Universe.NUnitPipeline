@@ -16,7 +16,7 @@ namespace Universe.NUnitPipeline
         public static readonly string Title = "Cpu Usage";
         private static readonly object Sync = new object();
 
-        class CpuUsageTestState
+        class CpuUsageState
         {
             public Stopwatch Stopwatch { get; set; }
             public CpuUsageAsyncWatcher CpuUsageAsyncWatcher { get; set; }
@@ -38,16 +38,16 @@ namespace Universe.NUnitPipeline
 
             lock (Sync)
             {
-                if (null == test.GetPropertyOrAdd<CpuUsageTestState>(nameof(CpuUsageTestState), null))
+                if (null == test.GetPropertyOrAdd<CpuUsageState>(nameof(CpuUsageState), null))
                 {
-                    var cpuUsageTestState = new CpuUsageTestState()
+                    var cpuUsageTestState = new CpuUsageState()
                     {
                         Stopwatch = Stopwatch.StartNew(),
                         ThreadIdOnStart = Thread.CurrentThread.ManagedThreadId,
                         CpuUsageOnStart = CpuUsage.CpuUsage.GetByThread(),
                         CpuUsageAsyncWatcher = new CpuUsageAsyncWatcher(),
                     };
-                    var _ = test.GetPropertyOrAdd<CpuUsageTestState>(nameof(CpuUsageTestState), t => cpuUsageTestState);
+                    var _ = test.GetPropertyOrAdd<CpuUsageState>(nameof(CpuUsageState), t => cpuUsageTestState);
                 }
             }
         }
@@ -56,47 +56,34 @@ namespace Universe.NUnitPipeline
         {
             if (stage.NUnitActionAppliedTo != NUnitActionAppliedTo.Test) return;
 
-            CpuUsageTestState cpuUsageTestState;
+            CpuUsageState cpuUsageState;
 
             lock (Sync)
             {
-                cpuUsageTestState = test.GetPropertyOrAdd<CpuUsageTestState>(nameof(CpuUsageTestState), null);
+                cpuUsageState = test.GetPropertyOrAdd<CpuUsageState>(nameof(CpuUsageState), null);
             }
-            if (cpuUsageTestState == null || cpuUsageTestState.Finished) return;
+            if (cpuUsageState == null || cpuUsageState.Finished) return;
             
-            var elapsed = cpuUsageTestState.Stopwatch.Elapsed;
-            cpuUsageTestState.CpuUsageAsyncWatcher.Stop();
-            cpuUsageTestState.Finished = true;
+            var elapsed = cpuUsageState.Stopwatch.Elapsed;
+            cpuUsageState.CpuUsageAsyncWatcher.Stop();
+            cpuUsageState.Finished = true;
 
-            var asyncTotals = cpuUsageTestState.CpuUsageAsyncWatcher.Totals;
+            var asyncTotals = cpuUsageState.CpuUsageAsyncWatcher.Totals;
             CpuUsage.CpuUsage? syncCpuUsage = null;
-            if (cpuUsageTestState.CpuUsageOnStart.HasValue && Thread.CurrentThread.ManagedThreadId == cpuUsageTestState.ThreadIdOnStart)
+            if (cpuUsageState.CpuUsageOnStart.HasValue && Thread.CurrentThread.ManagedThreadId == cpuUsageState.ThreadIdOnStart)
             {
                 var cpuUsageAtEnd = CpuUsage.CpuUsage.GetByThread();
                 if (cpuUsageAtEnd.HasValue)
                 {
-                    syncCpuUsage = cpuUsageAtEnd.Value - cpuUsageTestState.CpuUsageOnStart.Value;
+                    syncCpuUsage = cpuUsageAtEnd.Value - cpuUsageState.CpuUsageOnStart.Value;
                 }
             }
 
             bool hasCpuUsage = syncCpuUsage.HasValue || asyncTotals.Count > 0;
             var finalCpuUsage = asyncTotals.GetSummaryCpuUsage() + syncCpuUsage.GetValueOrDefault();
-            double user = finalCpuUsage.UserUsage.TotalMicroSeconds / 1000d;
-            double kernel = finalCpuUsage.KernelUsage.TotalMicroSeconds / 1000d;
-            double perCents = elapsed.TotalSeconds == 0d ? 0 : (user + kernel) / 1000d / elapsed.TotalSeconds;
-
-            var elapsedFormatted = ElapsedFormatter.FormatElapsed(elapsed);
-
-            var alreadyHasMilliseconds = elapsedFormatted.IndexOf("millisecond", StringComparison.OrdinalIgnoreCase) >= 0;
-            var cpuUsageHumanized =
-                hasCpuUsage
-                    ? $" (cpu: {perCents * 100:f0}%, {user + kernel:n3} = {user:n3} [user] + {kernel:n3} [kernel]{(!alreadyHasMilliseconds ? " milliseconds" : "")})"
-                    : null;
-
-            var outcomeStatus = TestContext.CurrentContext.Result.Outcome.Status.ToString().ToUpper();
-
-            Console.WriteLine($"← {stage.FormattedIndex} {stage.FixtureFullName}::{stage.TestName} >{outcomeStatus}< in {elapsedFormatted}{cpuUsageHumanized}");
-
+            
+            var cpuUsageResult = new CpuUsageResult() { Elapsed = elapsed, CpuUsage = hasCpuUsage ? finalCpuUsage : (CpuUsage.CpuUsage?)null };
+            test.GetPropertyOrAdd(nameof(CpuUsageResult), t => cpuUsageResult );
         }
     }
 }
