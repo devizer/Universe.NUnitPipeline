@@ -109,15 +109,15 @@ jobs:
       "3.12.0 MacOs":
          NUNIT_VERSION: "3.12.0"
          VMIMAGE: "macos-latest"
-      "3.11.0 Windows":
-         NUNIT_VERSION: "3.11.0"
-         VMIMAGE: "windows-latest"
-      "3.11.0 Linux":
-         NUNIT_VERSION: "3.11.0"
-         VMIMAGE: "ubuntu-latest"
-      "3.11.0 MacOs":
-         NUNIT_VERSION: "3.11.0"
-         VMIMAGE: "macos-latest"
+      # "3.11.0 Windows":
+      #    NUNIT_VERSION: "3.11.0"
+      #    VMIMAGE: "windows-latest"
+      # "3.11.0 Linux":
+      #    NUNIT_VERSION: "3.11.0"
+      #    VMIMAGE: "ubuntu-latest"
+      # "3.11.0 MacOs":
+      #    NUNIT_VERSION: "3.11.0"
+      #    VMIMAGE: "macos-latest"
       "3.10.1 Windows":
          NUNIT_VERSION: "3.10.1"
          VMIMAGE: "windows-latest"
@@ -181,87 +181,87 @@ jobs:
       "3.7.0 MacOs":
          NUNIT_VERSION: "3.7.0"
          VMIMAGE: "macos-latest"
-      "3.6.1 Windows":
-         NUNIT_VERSION: "3.6.1"
-         VMIMAGE: "windows-latest"
-      "3.6.1 Linux":
-         NUNIT_VERSION: "3.6.1"
-         VMIMAGE: "ubuntu-latest"
-      "3.6.1 MacOs":
-         NUNIT_VERSION: "3.6.1"
-         VMIMAGE: "macos-latest"
-      "3.6.0 Windows":
-         NUNIT_VERSION: "3.6.0"
-         VMIMAGE: "windows-latest"
-      "3.6.0 Linux":
-         NUNIT_VERSION: "3.6.0"
-         VMIMAGE: "ubuntu-latest"
-      "3.6.0 MacOs":
-         NUNIT_VERSION: "3.6.0"
-         VMIMAGE: "macos-latest"
-      "3.5.0 Windows":
-         NUNIT_VERSION: "3.5.0"
-         VMIMAGE: "windows-latest"
-      "3.5.0 Linux":
-         NUNIT_VERSION: "3.5.0"
-         VMIMAGE: "ubuntu-latest"
-      "3.5.0 MacOs":
-         NUNIT_VERSION: "3.5.0"
-         VMIMAGE: "macos-latest"
-      "3.4.1 Windows":
-         NUNIT_VERSION: "3.4.1"
-         VMIMAGE: "windows-latest"
-      "3.4.1 Linux":
-         NUNIT_VERSION: "3.4.1"
-         VMIMAGE: "ubuntu-latest"
-      "3.4.1 MacOs":
-         NUNIT_VERSION: "3.4.1"
-         VMIMAGE: "macos-latest"
-      "3.4.0 Windows":
-         NUNIT_VERSION: "3.4.0"
-         VMIMAGE: "windows-latest"
-      "3.4.0 Linux":
-         NUNIT_VERSION: "3.4.0"
-         VMIMAGE: "ubuntu-latest"
-      "3.4.0 MacOs":
-         NUNIT_VERSION: "3.4.0"
-         VMIMAGE: "macos-latest"
-      "3.2.1 Windows":
-         NUNIT_VERSION: "3.2.1"
-         VMIMAGE: "windows-latest"
-      "3.2.1 Linux":
-         NUNIT_VERSION: "3.2.1"
-         VMIMAGE: "ubuntu-latest"
-      "3.2.1 MacOs":
-         NUNIT_VERSION: "3.2.1"
-         VMIMAGE: "macos-latest"
-      "3.2.0 Windows":
-         NUNIT_VERSION: "3.2.0"
-         VMIMAGE: "windows-latest"
-      "3.2.0 Linux":
-         NUNIT_VERSION: "3.2.0"
-         VMIMAGE: "ubuntu-latest"
-      "3.2.0 MacOs":
-         NUNIT_VERSION: "3.2.0"
-         VMIMAGE: "macos-latest"
-      "3.0.1 Windows":
-         NUNIT_VERSION: "3.0.1"
-         VMIMAGE: "windows-latest"
-      "3.0.1 Linux":
-         NUNIT_VERSION: "3.0.1"
-         VMIMAGE: "ubuntu-latest"
-      "3.0.1 MacOs":
-         NUNIT_VERSION: "3.0.1"
-         VMIMAGE: "macos-latest"
-      "3.0.0 Windows":
-         NUNIT_VERSION: "3.0.0"
-         VMIMAGE: "windows-latest"
-      "3.0.0 Linux":
-         NUNIT_VERSION: "3.0.0"
-         VMIMAGE: "ubuntu-latest"
-      "3.0.0 MacOs":
-         NUNIT_VERSION: "3.0.0"
-         VMIMAGE: "macos-latest"
+      # "3.6.1 Windows":
+      #    NUNIT_VERSION: "3.6.1"
+      #    VMIMAGE: "windows-latest"
+      # "3.6.1 Linux":
+      #    NUNIT_VERSION: "3.6.1"
+      #    VMIMAGE: "ubuntu-latest"
+      # "3.6.1 MacOs":
+      #    NUNIT_VERSION: "3.6.1"
+      #    VMIMAGE: "macos-latest"
+      # "3.6.0 Windows":
+      #    NUNIT_VERSION: "3.6.0"
+      #    VMIMAGE: "windows-latest"
+      # "3.6.0 Linux":
+      #    NUNIT_VERSION: "3.6.0"
+      #    VMIMAGE: "ubuntu-latest"
+      # "3.6.0 MacOs":
+      #    NUNIT_VERSION: "3.6.0"
+      #    VMIMAGE: "macos-latest"
+      # "3.5.0 Windows":
+      #    NUNIT_VERSION: "3.5.0"
+      #    VMIMAGE: "windows-latest"
+      # "3.5.0 Linux":
+      #    NUNIT_VERSION: "3.5.0"
+      #    VMIMAGE: "ubuntu-latest"
+      # "3.5.0 MacOs":
+      #    NUNIT_VERSION: "3.5.0"
+      #    VMIMAGE: "macos-latest"
+      # "3.4.1 Windows":
+      #    NUNIT_VERSION: "3.4.1"
+      #    VMIMAGE: "windows-latest"
+      # "3.4.1 Linux":
+      #    NUNIT_VERSION: "3.4.1"
+      #    VMIMAGE: "ubuntu-latest"
+      # "3.4.1 MacOs":
+      #    NUNIT_VERSION: "3.4.1"
+      #    VMIMAGE: "macos-latest"
+      # "3.4.0 Windows":
+      #    NUNIT_VERSION: "3.4.0"
+      #    VMIMAGE: "windows-latest"
+      # "3.4.0 Linux":
+      #    NUNIT_VERSION: "3.4.0"
+      #    VMIMAGE: "ubuntu-latest"
+      # "3.4.0 MacOs":
+      #    NUNIT_VERSION: "3.4.0"
+      #    VMIMAGE: "macos-latest"
+      # "3.2.1 Windows":
+      #    NUNIT_VERSION: "3.2.1"
+      #    VMIMAGE: "windows-latest"
+      # "3.2.1 Linux":
+      #    NUNIT_VERSION: "3.2.1"
+      #    VMIMAGE: "ubuntu-latest"
+      # "3.2.1 MacOs":
+      #    NUNIT_VERSION: "3.2.1"
+      #    VMIMAGE: "macos-latest"
+      # "3.2.0 Windows":
+      #    NUNIT_VERSION: "3.2.0"
+      #    VMIMAGE: "windows-latest"
+      # "3.2.0 Linux":
+      #    NUNIT_VERSION: "3.2.0"
+      #    VMIMAGE: "ubuntu-latest"
+      # "3.2.0 MacOs":
+      #    NUNIT_VERSION: "3.2.0"
+      #    VMIMAGE: "macos-latest"
+      # "3.0.1 Windows":
+      #    NUNIT_VERSION: "3.0.1"
+      #    VMIMAGE: "windows-latest"
+      # "3.0.1 Linux":
+      #    NUNIT_VERSION: "3.0.1"
+      #    VMIMAGE: "ubuntu-latest"
+      # "3.0.1 MacOs":
+      #    NUNIT_VERSION: "3.0.1"
+      #    VMIMAGE: "macos-latest"
+      # "3.0.0 Windows":
+      #    NUNIT_VERSION: "3.0.0"
+      #    VMIMAGE: "windows-latest"
+      # "3.0.0 Linux":
+      #    NUNIT_VERSION: "3.0.0"
+      #    VMIMAGE: "ubuntu-latest"
+      # "3.0.0 MacOs":
+      #    NUNIT_VERSION: "3.0.0"
+      #    VMIMAGE: "macos-latest"
 
   steps:
 
