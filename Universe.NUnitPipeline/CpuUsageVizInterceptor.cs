@@ -50,8 +50,8 @@ namespace Universe.NUnitPipeline
             {
                 char esc = (char)27;
                 bool isOk = "PASSED".Equals(outcomeStatus, StringComparison.OrdinalIgnoreCase);
-                string color = isOk ? "[42m" : "[41m";
-                outcomeStatus = $"{esc}{color}{outcomeStatus}{esc}[%m";
+                string color = isOk ? "[92m" : "[31m";
+                outcomeStatus = $"{esc}{color}{outcomeStatus}{esc}[0m";
             }
 
             Console.WriteLine($"← {stage.FormattedIndex} {stage.FixtureFullName}::{stage.TestName} >{outcomeStatus}< in {elapsedFormatted}{cpuUsageHumanized}");
