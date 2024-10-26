@@ -64,7 +64,7 @@ namespace Universe {
             var selfCounter = test.GetPropertyOrAdd<PrivateCounter>($"Is First on {actionSide}", t => new PrivateCounter() { Count = 0 });
             selfCounter.Count++;
             counter = selfCounter.Count;
-            if (counter == 1 && actionSide == NUnitActionSide.Start) Console.WriteLine(EmptyLineBetweenTests());
+            // if (counter == 1 && actionSide == NUnitActionSide.Start) Console.WriteLine(EmptyLineBetweenTests());
 
             stage = new NUnitStage() { Side = actionSide };
             if (test.Fixture == null)
