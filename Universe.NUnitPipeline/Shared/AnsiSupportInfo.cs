@@ -13,6 +13,8 @@ namespace Universe.NUnitPipeline.Shared
         {
             get
             {
+                if ("True".Equals(Environment.GetEnvironmentVariable("DISABLE_ANSI_COLORS"))) return false;
+
                 var names = new[] { "GITHUB_ACTIONS", "TF_BUILD" };
                 bool isBuildServer = false;
                 foreach(var name in names)
@@ -27,7 +29,7 @@ namespace Universe.NUnitPipeline.Shared
                     var process = TryAndForget.Evaluate(() => Process.GetCurrentProcess().ProcessName);
                     bool isNunit = process != null && process.IndexOf("nunit", StringComparison.OrdinalIgnoreCase) >= 0;
                     bool isDotnet = process != null && process.Equals("dotnet", StringComparison.OrdinalIgnoreCase);
-                    if (isNunit || isDotnet) return false;
+                    if (isNunit /*|| isDotnet*/) return false;
                 }
 
                 return isBuildServer;
