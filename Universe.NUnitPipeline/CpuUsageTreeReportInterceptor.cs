@@ -43,7 +43,7 @@ namespace Universe.NUnitPipeline
 				{
 					var rawList = DetailsReportStorage.Instance.GetRawRows();
 					ConsoleTable ct = new ConsoleTable("Test", "Status",
-						"-Duration", "-CPU (%)", "-CPU (\x3bcs)", "-User", "-Kernel",
+						"-Duration", "-CPU (%)", "-CPU (ms)", "-User", "-Kernel",
 						"Message"
 					);
 
