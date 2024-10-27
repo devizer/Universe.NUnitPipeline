@@ -68,14 +68,8 @@ namespace Universe.NUnitPipeline
 
 	            foreach (var file in files)
 	            {
-		            var name = Path.GetFullPath(file.Path);
-		            TryAndForget.Execute(() => Directory.CreateDirectory(Path.GetDirectoryName(name)));
-					Debug.WriteLine($"Internal Log: {name}");
-					using(FileStream fs = new FileStream(name, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
-					using (StreamWriter wr = new StreamWriter(fs, new UTF8Encoding(false)))
-					{
-						wr.Write(file.Content);
-					}
+					Debug.WriteLine($"Internal Log: {Path.GetFullPath(file.Path)}");
+					FileEx.WriteAll(file.Path, file.Content);
 	            }
             }
         }
