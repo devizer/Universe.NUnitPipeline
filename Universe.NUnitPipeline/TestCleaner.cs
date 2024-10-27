@@ -19,12 +19,12 @@ namespace Universe.NUnitPipeline
         AsyncClass = Async | Class,
         AsyncTestCase = Async | TestCase,
         IgnoreError = 16,
-        // Async+Global Has No Sense?
     }
 
     public class TestCleaner
     {
-        public static void OnDispose(string title, Action action, TestDisposeOptions modeWhen)
+        // title is for meaningful exception details in case of fail
+	    public static void OnDispose(string title, Action action, TestDisposeOptions modeWhen)
         {
             if (title.IndexOf('\'') < 0)
                 title = $"'{title}'";

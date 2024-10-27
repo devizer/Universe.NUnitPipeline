@@ -157,7 +157,8 @@ namespace Universe.NUnitPipeline
                 stage.TestIndex = indexState.TestIndex;
             }
 
-            DebugConsole.WriteLine($"[DEBUG Action:On{actionSide}] STAGE {stage.Side} '{stage.NUnitActionAppliedTo} Counter={counter}': {stage.FormattedIndex} [{string.Join(", ", stage.StructuredFullName)}]");
+            var scopeAsString = string.IsNullOrEmpty(test.TestType) ? "" : $" {test.TestType}-scoped";
+			DebugConsole.WriteLine($"[DEBUG Action:On{actionSide}] STAGE {stage.Side} '{stage.NUnitActionAppliedTo} Counter={counter}': {stage.FormattedIndex} [{string.Join(", ", stage.StructuredFullName)}] {scopeAsString}");
         }
 
         internal class IndexState

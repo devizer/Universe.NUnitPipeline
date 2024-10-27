@@ -334,7 +334,7 @@ jobs:
   - bash: |
       set -eu; set -o pipefail
       cd Universe.NUnitPipeline.Tests
-      dotnet test -c Release -f $FWVERSION --logger "console;verbosity=normal;consoleLoggerParameters=ErrorsOnly" -verbosity:minimal
+      dotnet test -c Release -f $FWVERSION --filter "TestCategory !~ Fail" --logger "console;verbosity=normal;consoleLoggerParameters=ErrorsOnly" -verbosity:minimal 
     # condition: eq(variables['Agent.OS'], 'Linux')
     displayName: 'Test by dotnet test'
 
@@ -358,10 +358,10 @@ jobs:
         invoke="mono $nunitexe"
       fi
       Say "$invoke Universe.NUnitPipeline.Tests.dll, except fail"
-      eval $invoke Universe.NUnitPipeline.Tests.dll
+      $invoke --where "cat != Fail" Universe.NUnitPipeline.Tests.dll
 
       Say "$invoke Universe.NUnitPipeline.Tests.dll, include fail, ignoring exitcode"
-      $invoke --where "test =~ NUnit" Universe.NUnitPipeline.Tests.dll || true
+      $invoke Universe.NUnitPipeline.Tests.dll || true
     condition: succeededOrFailed()
     displayName: 'Test by Console Runner'
 

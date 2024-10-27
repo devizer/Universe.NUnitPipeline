@@ -33,7 +33,7 @@ namespace Universe.NUnitPipeline.Tests
         }
 
         [Test]
-        [Explicit, Category("Fail")]
+        [Category("Fail")]
         public async Task AsyncFail()
         {
             await Task.Run(function: async () =>
@@ -45,7 +45,7 @@ namespace Universe.NUnitPipeline.Tests
         }
 
         [Test]
-        [Explicit, Category("Fail")]
+        [Category("Fail")]
         public async Task AsyncException()
         {
             await Task.Run(function: async () =>

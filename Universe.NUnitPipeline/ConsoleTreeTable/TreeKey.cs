@@ -134,5 +134,3 @@ namespace Universe.NUnitPipeline.ConsoleTreeTable
 		}
 	}
 }
-
-	

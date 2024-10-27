@@ -81,14 +81,14 @@ namespace Universe.NUnitPipeline.Tests
         }
 
         [Test]
-        [Explicit, Category("Fail")]
+        [Category("Fail")]
         public void SimpleFail()
         {
             Assert.Fail("Fail on purpose");
         }
 
         [Test]
-        [Explicit, Category("Fail")]
+        [Category("Fail")]
         public void SimpleException()
         {
             throw new InvalidOperationException("Exception on purpose");
