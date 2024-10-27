@@ -13,8 +13,13 @@ using Universe.NUnitPipeline.Shared;
  */
 namespace Universe.NUnitPipeline
 {
+	internal class TestResult
+	{
+		public string ResultOutcome { get; set; }
+		public string ResultMessage { get; set; }
+	}
 
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Assembly, AllowMultiple = false)]
+	[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Assembly, AllowMultiple = false)]
     public class NUnitPipelineActionAttribute : Attribute, ITestAction
     {
         public ActionTargets Targets => ActionTargets.Test | ActionTargets.Suite;
@@ -40,7 +45,12 @@ namespace Universe.NUnitPipeline
             bool isFirst = counter == 1;
             if (counter != 1) return;
 
-            var actions = NUnitPipelineChain.OnEnd;
+
+            var resultMessage = TestContext.CurrentContext.Result.Message;
+			var resultOutcome = TestContext.CurrentContext.Result.Outcome.ToString();
+			test.GetPropertyOrAdd<TestResult>("Test Result", t => new TestResult() { ResultMessage = resultMessage, ResultOutcome = resultOutcome });
+
+			var actions = NUnitPipelineChain.OnEnd;
             if (actions == null) return;
             foreach (var a in actions)
             {

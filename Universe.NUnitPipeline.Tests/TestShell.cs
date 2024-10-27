@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -13,7 +13,7 @@ namespace Universe.NUnitPipeline.Tests
     public class TestShell
     {
         [Test]
-        public void ShowInfo()
+        public void ShowProcessInfo()
         {
             // dotnet test console, and VS Test Explorer: "testhost|testhost.net48"
             // ReSharper: ReSharperTestRunner
