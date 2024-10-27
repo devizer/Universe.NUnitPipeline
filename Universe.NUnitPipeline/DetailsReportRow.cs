@@ -8,7 +8,7 @@ using Universe.NUnitPipeline.ConsoleTreeTable;
 namespace Universe.NUnitPipeline
 {
 	// Internal?
-	public class DetailsReport
+	public class DetailsReportRow
 	{
 		public TreeKey Key { get; set; }
 		public string OutcomeStatus { get; set; }
@@ -22,17 +22,17 @@ namespace Universe.NUnitPipeline
 	public class DetailsReportStorage
 	{
 		public static readonly DetailsReportStorage Instance = new DetailsReportStorage();
-		private List<DetailsReport> PlainList = new List<DetailsReport>();
+		private List<DetailsReportRow> PlainList = new List<DetailsReportRow>();
 		private readonly object Sync = new object();
 
-		public void EnlistRow(DetailsReport row)
+		public void EnlistRow(DetailsReportRow row)
 		{
 			lock(Sync) PlainList.Add(row);
 		}
 
-		public List<DetailsReport> GetRawRows()
+		public List<DetailsReportRow> GetRawRows()
 		{
-			lock (Sync) return new List<DetailsReport>(PlainList);
+			lock (Sync) return new List<DetailsReportRow>(PlainList);
 		}
 	}
 }
