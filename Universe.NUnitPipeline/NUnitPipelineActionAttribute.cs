@@ -70,7 +70,7 @@ namespace Universe.NUnitPipeline
             }
         }
 
-        class PrivateCounter
+        internal class PrivateCounter
         {
             public int Count = 0;
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using Universe.CpuUsage;
+using Universe.NUnitPipeline.ConsoleTreeTable;
 
 namespace Universe.NUnitPipeline
 {
@@ -82,8 +83,9 @@ namespace Universe.NUnitPipeline
             bool hasCpuUsage = syncCpuUsage.HasValue || asyncTotals.Count > 0;
             var finalCpuUsage = asyncTotals.GetSummaryCpuUsage() + syncCpuUsage.GetValueOrDefault();
             
-            var cpuUsageResult = new CpuUsageResult() { Elapsed = elapsed, CpuUsage = hasCpuUsage ? finalCpuUsage : (CpuUsage.CpuUsage?)null };
+            CpuUsageResult cpuUsageResult = new CpuUsageResult() { Elapsed = elapsed, CpuUsage = hasCpuUsage ? finalCpuUsage : (CpuUsage.CpuUsage?)null };
             test.GetPropertyOrAdd(nameof(CpuUsageResult), t => cpuUsageResult );
+
         }
     }
 }

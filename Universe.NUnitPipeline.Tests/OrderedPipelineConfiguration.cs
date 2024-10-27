@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using NUnit.Framework;
 using Universe.NUnitPipeline;
 
@@ -12,7 +13,7 @@ namespace Universe.NUnitPipeline.Tests
         [OneTimeSetUp]
         public void Configure()
         {
-	        NUnitPipelineChain.InternalReportFile = "TestResults";
+	        NUnitPipelineChain.InternalReportFile = Path.Combine("TestsOutput", "Flow");
 
 			NUnitPipelineChain.OnStart = new List<NUnitPipelineChainAction>()
             {
@@ -25,7 +26,8 @@ namespace Universe.NUnitPipeline.Tests
                 new NUnitPipelineChainAction() { Title = CpuUsageInterceptor.Title, Action = CpuUsageInterceptor.OnFinish },
                 new NUnitPipelineChainAction() { Title = CpuUsageVizInterceptor.Title, Action = CpuUsageVizInterceptor.OnFinish },
                 new NUnitPipelineChainAction() { Title = DisposeInterceptor.Title, Action = DisposeInterceptor.OnFinish },
-            };
+                new NUnitPipelineChainAction() { Title = CpuUsageTreeReportInterceptor.Title, Action = CpuUsageTreeReportInterceptor.OnFinish },
+			};
         }
 
     }

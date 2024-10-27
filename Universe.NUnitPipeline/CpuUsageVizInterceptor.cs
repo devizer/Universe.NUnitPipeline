@@ -11,16 +11,23 @@ namespace Universe.NUnitPipeline
         public CpuUsage.CpuUsage? CpuUsage { get; set; }
     }
 
+
     public static class CpuUsageVizInterceptor {
         
         public static readonly string Title = "Cpu Usage Visualizer";
+        static bool IsFirstEmptyLine = true;
 
-        public static void OnStart(NUnitStage stage, ITest test)
+		public static void OnStart(NUnitStage stage, ITest test)
         {
             if (stage.NUnitActionAppliedTo != NUnitActionAppliedTo.Test) return;
 
-            OutputConsole.WriteLine("");
-            OutputConsole.WriteLine($"→ {stage.FormattedIndex} {stage.FixtureFullName}::{stage.TestName} is starting");
+            string emptyLine = null;
+            if (IsFirstEmptyLine)
+	            IsFirstEmptyLine = false;
+			else
+	            emptyLine = Environment.NewLine;
+
+            OutputConsole.WriteLine($"{emptyLine}→ {stage.FormattedIndex} {stage.FixtureFullName}::{stage.TestName} is starting");
         }
         public static void OnFinish(NUnitStage stage, ITest test)
         {

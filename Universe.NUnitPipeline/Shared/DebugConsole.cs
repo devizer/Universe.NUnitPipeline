@@ -14,9 +14,12 @@ namespace Universe.NUnitPipeline.Shared
 	{
 		public static void WriteLine(string message)
 		{
-			lock (InternalLog.Sync) InternalLog.Buffer.AppendLine(message);
+			lock (InternalLog.Sync)
+			{
+				InternalLog.InternalBuffer.AppendLine(message);
+				InternalLog.Buffer.AppendLine(message);
+			}
 			Console.WriteLine(message);
-			return;
 		}
 	}
 	internal class DebugConsole
@@ -24,24 +27,26 @@ namespace Universe.NUnitPipeline.Shared
         public static void WriteLine(string message)
         {
 	        lock (InternalLog.Sync) InternalLog.InternalBuffer.AppendLine(message);
-	        Console.WriteLine(message);
-            return;
-			ConsoleColor? fc = null;
-            try
-            {
-                fc = Console.ForegroundColor;
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine(message);
-                Console.ForegroundColor = fc.Value;
-            }
-            catch (Exception)
-            {
-                Console.WriteLine(message);
-            }
-            finally
-            {
-                if (fc.HasValue) Console.ForegroundColor = fc.Value;
-            }
+        }
+
+        private static void ColorfulWriteLine(string message)
+        {
+	        ConsoleColor? fc = null;
+	        try
+	        {
+		        fc = Console.ForegroundColor;
+		        Console.ForegroundColor = ConsoleColor.DarkYellow;
+		        Console.WriteLine((string)message);
+		        Console.ForegroundColor = fc.Value;
+	        }
+	        catch (Exception)
+	        {
+		        Console.WriteLine((string)message);
+	        }
+	        finally
+	        {
+		        if (fc.HasValue) Console.ForegroundColor = fc.Value;
+	        }
         }
     }
 }

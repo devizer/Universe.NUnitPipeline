@@ -26,6 +26,7 @@ bld/
 [Oo]bj/
 BenchmarkDotNet.Artifacts
 *.[Tt]mp
+TestsOutput
 
 # Mono auto generated files
 mono_crash.*
