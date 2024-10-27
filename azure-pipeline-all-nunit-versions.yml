@@ -357,9 +357,10 @@ jobs:
       else
         invoke="mono $nunitexe"
       fi
-      Say "$cmd Universe.NUnitPipeline.Tests.dll, except fail"
+      Say "$invoke Universe.NUnitPipeline.Tests.dll, except fail"
       eval $invoke Universe.NUnitPipeline.Tests.dll
-      Say "$cmd Universe.NUnitPipeline.Tests.dll, include fail"
+
+      Say "$invoke Universe.NUnitPipeline.Tests.dll, include fail, ignoring exitcode"
       eval $invoke --where "test =~ NUnit" Universe.NUnitPipeline.Tests.dll || true
     condition: succeededOrFailed()
     displayName: 'Test by Console Runner'
