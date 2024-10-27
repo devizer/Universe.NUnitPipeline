@@ -361,7 +361,7 @@ jobs:
       eval $invoke Universe.NUnitPipeline.Tests.dll
 
       Say "$invoke Universe.NUnitPipeline.Tests.dll, include fail, ignoring exitcode"
-      eval $invoke --where "test =~ NUnit" Universe.NUnitPipeline.Tests.dll || true
+      eval $invoke --where 'test =~ NUnit' Universe.NUnitPipeline.Tests.dll || true
     condition: succeededOrFailed()
     displayName: 'Test by Console Runner'
 
