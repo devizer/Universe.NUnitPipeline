@@ -114,8 +114,7 @@ namespace Universe.NUnitPipeline
 	                stage.InternalKey = $"Test {test.Fixture.GetType().FullName}::{test.Name}";
                     stage.NUnitActionAppliedTo = NUnitActionAppliedTo.Test;
                     stage.TestName = test.Name;
-                    var beautyName = GetBeautyTestCaseName(test);
-                    stage.TestName = beautyName;
+                    stage.TestName = test.GetBeautyTestCaseName();
 					var pBracket = stage.TestName?.IndexOf("(");
                     if (pBracket.HasValue && pBracket > 0 && pBracket.Value < stage.TestName.Length - 1)
                         testParts = new[] { stage.TestName.Substring(0, pBracket.Value), stage.TestName };
@@ -164,38 +163,6 @@ namespace Universe.NUnitPipeline
 			DebugConsole.WriteLine($"[DEBUG Action:On{actionSide}] STAGE {stage.Side} '{stage.NUnitActionAppliedTo} Counter={counter}': {stage.FormattedIndex} [{string.Join(", ", stage.StructuredFullName)}] {scopeAsString}");
         }
 
-        static string GetBeautyTestCaseName(ITest test)
-        {
-	        object[] testArguments = test.Arguments;
-	        MethodInfo methodInfo = test.Method?.MethodInfo;
-	        ParameterInfo[] methodParameters = methodInfo?.GetParameters();
-	        if (testArguments.Length == 0) return test.Name;
-	        if (methodParameters?.Length != testArguments.Length) return test.Name;
-
-			var letsDebug = "ok";
-			StringBuilder argumentsBuilder = new StringBuilder();
-			for (int i = 0; i < testArguments.Length; i++)
-			{
-				var methodParameter = methodParameters[i];
-				BeautyParameterAttribute beautyAttribute = methodParameter?.GetCustomAttributes(typeof(BeautyParameterAttribute), true).OfType<BeautyParameterAttribute>().FirstOrDefault();
-				bool isNameVisible = beautyAttribute?.Visible ?? false;
-				if (argumentsBuilder.Length > 0) argumentsBuilder.Append(",");
-				var argumentValueAsString = testArguments[i] == null ? "null" : Convert.ToString(testArguments[i]);
-				bool needQuotes = !(testArguments[i] != null && testArguments[i] is ValueType);
-				if (needQuotes) argumentValueAsString = $"\"{argumentValueAsString}\"";
-				if (isNameVisible)
-				{
-					string title = beautyAttribute.Title ?? methodParameter.Name;
-					argumentsBuilder.Append($"{title}={argumentValueAsString}");
-				}
-				else
-				{
-					argumentsBuilder.Append(argumentValueAsString);
-				}
-			}
-
-			return $"{methodInfo.Name}({argumentsBuilder})";
-        }
 
         internal class IndexState
         {
