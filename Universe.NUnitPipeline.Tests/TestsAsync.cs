@@ -22,9 +22,9 @@ namespace Tests
         }
 
         [Test]
+        [Category("Fail")]
         [TestCase("First", 7)]
         [TestCase("Next", 200)]
-        [Category("Fail")]
         public async Task AsyncFail(string title, int milliseconds)
         {
             await Task.Run(function: async () =>
@@ -36,9 +36,9 @@ namespace Tests
         }
 
         [Test]
+        [Category("Fail")]
         [TestCase("First", 7)]
         [TestCase("Next", 200)]
-        [Category("Fail")]
         public async Task AsyncException(string title, int milliseconds)
         {
             await Task.Run(function: async () =>

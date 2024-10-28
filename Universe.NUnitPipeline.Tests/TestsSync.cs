@@ -80,6 +80,7 @@ namespace Tests
         }
 
         [Test]
+        [Category("Fail")]
         [TestCase("First", 7)]
         [TestCase("Next", 200)]
         public void FailSynchronously(string title, int milliseconds)
@@ -89,6 +90,7 @@ namespace Tests
         }
 
         [Test]
+        [Category("Fail")]
         [TestCase("First", 7)]
         [TestCase("Next", 200)]
         public void ExceptionSynchronously(string title, int milliseconds)

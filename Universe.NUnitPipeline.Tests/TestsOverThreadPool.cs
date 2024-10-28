@@ -13,6 +13,7 @@ namespace Tests
 	public class TestsOverThreadPool
 	{
 		[Test]
+		[Category("Fail")]
 		[TestCase("First", 7)]
 		[TestCase("Next", 200)]
 		public void SuccessOverThreadPool(string title, int milliseconds)
@@ -30,6 +31,7 @@ namespace Tests
 		}
 
 		[Test]
+		[Category("Fail")]
 		[TestCase("First", 7)]
 		[TestCase("Next", 200)]
 		public void FailOverThreadPoolFail(string title, int milliseconds)
@@ -54,6 +56,7 @@ namespace Tests
 		}
 
 		[Test]
+		[Category("Fail")]
 		[TestCase("First", 7)]
 		[TestCase("Next", 200)]
 		public void ExceptionOverThreadPool(string title, int milliseconds)
