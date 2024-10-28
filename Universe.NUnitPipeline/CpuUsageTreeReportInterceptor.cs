@@ -56,7 +56,7 @@ namespace Universe.NUnitPipeline
 			{
 				List<DetailsReportRow> reportCopyRaw = DetailsReportStorage.Instance.GetRawRows();
 				reportCopyRaw = reportCopyRaw.OrderBy(x => x.Key.ToString()).ToList();
-				var reportCopy = reportCopyRaw.ToDictionary(x => x.Key, x => x);
+				var reportCopy = reportCopyRaw.ToSafeDictionary(x => x.Key, x => x);
 
 				List<Node<TreeKey>> rootKeys = TreeKey.AsTree(reportCopyRaw.Select(x => x.Key));
 				List<KeyValuePair<TreeKey, string>> orderedKeys = new List<KeyValuePair<TreeKey, string>>();
