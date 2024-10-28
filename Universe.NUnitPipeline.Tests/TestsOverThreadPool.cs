@@ -36,6 +36,7 @@ namespace Tests
 		[TestCase("Next", 200)]
 		public void FailOverThreadPoolFail(string title, int milliseconds)
 		{
+			Exception caught = null;
 			Console.WriteLine(PropertyBagVisualizer.ShowHumanString("SYNCHRONOUS"));
 			ManualResetEventSlim waiter = new ManualResetEventSlim(false);
 			ThreadPool.QueueUserWorkItem(_ =>
@@ -47,12 +48,18 @@ namespace Tests
 					TestCleaner.OnDispose("Delete GLOBAL.TMP (from test body)", () => File.Delete("Global.Temp"), TestDisposeOptions.Global);
 					Assert.Fail("Fail on purpose");
 				}
+				// Without catch nunit3-console works properly, but dotnet test and vs runner fail
+				catch (Exception ex)
+				{
+					caught = ex;
+				}
 				finally
 				{
 					waiter.Set();
 				}
 			});
 			waiter.Wait();
+			if (caught != null) throw caught;
 		}
 
 		[Test]
