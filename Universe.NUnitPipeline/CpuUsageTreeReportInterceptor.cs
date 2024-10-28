@@ -95,9 +95,10 @@ namespace Universe.NUnitPipeline
 						bool hasCpuUsage = detail.UserTime.HasValue || detail.KernelTime.HasValue;
 						double totalCpuUsage = detail.UserTime.GetValueOrDefault() + detail.KernelTime.GetValueOrDefault();
 						double? percents = detail.Duration > 0 ? totalCpuUsage / detail.Duration : (double?)null;
+						var outcomeStatus = "Passed".Equals(detail.OutcomeStatus, StringComparison.InvariantCultureIgnoreCase) ? "PASSED" : detail.OutcomeStatus;
 						ct.AddRow(
 							pathAsString,
-							detail.OutcomeStatus,
+							outcomeStatus,
 							Math.Round(1000 * detail.Duration, 1),
 							percents * 100,
 							1000 * totalCpuUsage,

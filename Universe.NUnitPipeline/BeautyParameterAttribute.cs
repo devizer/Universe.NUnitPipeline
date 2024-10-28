@@ -26,6 +26,7 @@ namespace Universe.NUnitPipeline
 
 			var letsDebug = "ok";
 			StringBuilder argumentsBuilder = new StringBuilder();
+			// TODO: cache "{title,needQuotes}[] parameterNames" by methodInfo. null means do not show parameterName
 			for (int i = 0; i < testArguments.Length; i++)
 			{
 				var methodParameter = methodParameters[i];
