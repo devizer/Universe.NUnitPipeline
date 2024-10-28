@@ -7,6 +7,7 @@ using Universe.NUnitPipeline.Tests;
 
 namespace Tests
 {
+#if !NET35 && !NET40 && !NET45
 	[NUnitPipelineAction]
     [TestFixture]
     public class TestsAsync
@@ -48,4 +49,5 @@ namespace Tests
             });
         }
     }
+#endif
 }

@@ -8,7 +8,9 @@ namespace Universe.NUnitPipeline.Tests
 {
     public class CpuLoad
     {
-        public static async Task RunAsync(int milliseconds)
+
+#if !NET35 && !NET40 && !NET45
+		public static async Task RunAsync(int milliseconds)
         {
             await Task.Factory.StartNew(() =>
             {
@@ -18,8 +20,9 @@ namespace Universe.NUnitPipeline.Tests
                 TestCleaner.OnDispose("Delete CLASS.ASYNC.TMP (from test body)", () => {}, TestDisposeOptions.AsyncClass);
             });
         }
+#endif
 
-        public static void RunSync(int milliseconds)
+		public static void RunSync(int milliseconds)
         {
             RunImplementation(milliseconds);
             Console.WriteLine(PropertyBagVisualizer.ShowHumanString("SYNCHRONOUS"));
