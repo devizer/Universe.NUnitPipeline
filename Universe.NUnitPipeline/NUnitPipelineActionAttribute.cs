@@ -126,7 +126,7 @@ namespace Universe.NUnitPipeline
                 var partsFixtureFullName = stage.FixtureFullName.Split('.');
                 if (partsFixtureFullName.Length > 0) partsFixtureFullName[partsFixtureFullName.Length - 1] = $"{partsFixtureFullName[partsFixtureFullName.Length - 1]} (fixture)";
 				stage.StructuredFullName = partsFixtureFullName
-                    .Union(testParts)
+                    .Concat(testParts)
                     .Where(x => !string.IsNullOrEmpty(x))
                     .ToArray();
             }
