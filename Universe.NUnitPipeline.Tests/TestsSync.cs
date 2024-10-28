@@ -72,7 +72,7 @@ namespace Tests
         [Test]
         [TestCase("First", 7)]
         [TestCase("Next", 200)]
-        public void SuccessSynchronously(string title, int milliseconds)
+        public void SuccessSynchronously(string title, [BeautyParameter] int milliseconds)
         {
             TestCleaner.OnDispose("Delete File '::Temporary.Temp' (from test body)", () => File.Delete("::Temporary.Temp"), TestDisposeOptions.Global);
             CpuLoad.RunSync(milliseconds);
@@ -83,7 +83,7 @@ namespace Tests
         [Category("Fail")]
         [TestCase("First", 7)]
         [TestCase("Next", 200)]
-        public void FailSynchronously(string title, int milliseconds)
+        public void FailSynchronously(string title, [BeautyParameter] int milliseconds)
         {
 	        CpuLoad.RunSync(milliseconds);
 			Assert.Fail("Fail on purpose");
@@ -93,7 +93,7 @@ namespace Tests
         [Category("Fail")]
         [TestCase("First", 7)]
         [TestCase("Next", 200)]
-        public void ExceptionSynchronously(string title, int milliseconds)
+        public void ExceptionSynchronously(string title, [BeautyParameter] int milliseconds)
         {
 	        CpuLoad.RunSync(milliseconds);
 			throw new InvalidOperationException("Exception on purpose");
