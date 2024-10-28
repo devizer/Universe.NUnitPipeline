@@ -2,7 +2,7 @@ work=$HOME/build/Universe.NUnitPipeline; test ! -d $work && git clone https://gi
 git reset --hard; git clean -xxffd; git pull
 cd Universe.NUnitPipeline.Tests 
 dotnet add package Microsoft.NETFramework.ReferenceAssemblies
-FW=net46
+FW=net40
 # NET40: error CS1061: 'Task' does not contain a definition for 'GetAwaiter' and no accessible extension method 
 # Theraot.Core NET40: error CS0117: 'Task' does not contain a definition for 'Run'
 Reset-Target-Framework -fw $FW -l latest

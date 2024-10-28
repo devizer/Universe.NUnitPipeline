@@ -23,7 +23,7 @@ namespace Tests
 			ThreadPool.QueueUserWorkItem(_ =>
 			{
 				Console.WriteLine(PropertyBagVisualizer.ShowHumanString("A-SYNCHRONOUS"));
-				CpuLoad.RunAsync(milliseconds).Wait();
+				CpuLoad.RunSync(milliseconds);
 				TestCleaner.OnDispose("Delete GLOBAL.TMP (from test body)", () => File.Delete("Global.Temp"), TestDisposeOptions.Global);
 				waiter.Set();
 			});
@@ -44,7 +44,7 @@ namespace Tests
 				try
 				{
 					Console.WriteLine(PropertyBagVisualizer.ShowHumanString("A-SYNCHRONOUS"));
-					CpuLoad.RunAsync(milliseconds).Wait();
+					CpuLoad.RunSync(milliseconds);
 					TestCleaner.OnDispose("Delete GLOBAL.TMP (from test body)", () => File.Delete("Global.Temp"), TestDisposeOptions.Global);
 					Assert.Fail("Fail on purpose");
 				}
@@ -76,7 +76,7 @@ namespace Tests
 				try
 				{
 					Console.WriteLine(PropertyBagVisualizer.ShowHumanString("A-SYNCHRONOUS"));
-					CpuLoad.RunAsync(milliseconds).Wait();
+					CpuLoad.RunSync(milliseconds);
 					TestCleaner.OnDispose("Delete GLOBAL.TMP (from test body)", () => File.Delete("Global.Temp"), TestDisposeOptions.Global);
 					throw new InvalidOperationException("Exception on purpose");
 				}
