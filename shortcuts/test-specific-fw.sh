@@ -6,6 +6,7 @@ cd Universe.NUnitPipeline.Tests
 dotnet add package Microsoft.NETFramework.ReferenceAssemblies
 FW=net40
 # NET40: error CS1061: 'Task' does not contain a definition for 'GetAwaiter' and no accessible extension method 
+# NET40: error CS0117: 'Task' does not contain a definition for 'Run'
 Reset-Target-Framework -fw $FW -l latest
 dotnet build -c Release -f $FW
 rm -rf TestsOutput
