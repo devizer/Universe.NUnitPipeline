@@ -364,6 +364,7 @@ jobs:
       $invoke Universe.NUnitPipeline.Tests.dll || true
 
       file="$(find . -name "*Tree.Summary.txt" | head -1)"
+      cp -v "$file" "$SYSTEM_ARTIFACTSDIRECTORY"
       Say "Tree Report: [$file]"
       cat "$file"
     condition: succeededOrFailed()
