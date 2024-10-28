@@ -1,12 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
+using Universe.NUnitPipeline;
 
-namespace Universe.NUnitPipeline.Tests
+namespace Tests
 {
     [NUnitPipelineAction]
     [TestFixture]

@@ -362,6 +362,10 @@ jobs:
 
       Say "$invoke Universe.NUnitPipeline.Tests.dll, include fail, ignoring exitcode"
       $invoke Universe.NUnitPipeline.Tests.dll || true
+
+      file="$(find . -name "*Tree.Summary.txt" | head -1)"
+      Say "Tree Report: [$file]"
+      cat "$file"
     condition: succeededOrFailed()
     displayName: 'Test by Console Runner'
 

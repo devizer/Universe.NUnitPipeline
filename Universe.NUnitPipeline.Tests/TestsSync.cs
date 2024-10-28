@@ -1,12 +1,11 @@
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+using NUnit.Framework;
+using Universe.NUnitPipeline;
+using Universe.NUnitPipeline.Tests;
 
-namespace Universe.NUnitPipeline.Tests
+namespace Tests
 {
 
     [NUnitPipelineAction]
@@ -71,27 +70,31 @@ namespace Universe.NUnitPipeline.Tests
         }
 
         [Test]
-        [TestCase("First 222 milliseconds")]
-        [TestCase("Next 222 milliseconds")]
-        public void Test1(string title)
+        [TestCase("First", 7)]
+        [TestCase("Next", 200)]
+        public void SuccessSynchronously(string title, int milliseconds)
         {
             TestCleaner.OnDispose("Delete File '::Temporary.Temp' (from test body)", () => File.Delete("::Temporary.Temp"), TestDisposeOptions.Global);
-            CpuLoad.RunSync(222);
+            CpuLoad.RunSync(milliseconds);
             TestCleaner.OnDispose("Delete File TestCase.Temp (from test body)", () => File.Delete("TestCase.Temp"), TestDisposeOptions.TestCase);
         }
 
         [Test]
-        [Category("Fail")]
-        public void SimpleFail()
+        [TestCase("First", 7)]
+        [TestCase("Next", 200)]
+        public void FailSynchronously(string title, int milliseconds)
         {
-            Assert.Fail("Fail on purpose");
+	        CpuLoad.RunSync(milliseconds);
+			Assert.Fail("Fail on purpose");
         }
 
         [Test]
-        [Category("Fail")]
-        public void SimpleException()
+        [TestCase("First", 7)]
+        [TestCase("Next", 200)]
+        public void ExceptionSynchronously(string title, int milliseconds)
         {
-            throw new InvalidOperationException("Exception on purpose");
+	        CpuLoad.RunSync(milliseconds);
+			throw new InvalidOperationException("Exception on purpose");
         }
     }
 }

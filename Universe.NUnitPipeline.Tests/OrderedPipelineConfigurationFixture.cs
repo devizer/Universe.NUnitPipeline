@@ -5,7 +5,7 @@ using Universe.NUnitPipeline;
 
 [assembly: NUnitPipelineAction]
 
-namespace Universe.NUnitPipeline.Tests
+namespace Tests
 {
 	// Single shared configuration for each test assemblies
 	public class OrderedPipelineConfiguration
@@ -41,6 +41,4 @@ namespace Universe.NUnitPipeline.Tests
 			OrderedPipelineConfiguration.Configure();
         }
     }
-
-
 }

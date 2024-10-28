@@ -1,59 +1,51 @@
-using NUnit.Framework;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
+using NUnit.Framework;
+using Universe.NUnitPipeline;
+using Universe.NUnitPipeline.Tests;
 
-namespace Universe.NUnitPipeline.Tests
+namespace Tests
 {
-
-    [NUnitPipelineAction]
+	[NUnitPipelineAction]
     [TestFixture]
     public class TestsAsync
     {
         [Test]
-        [TestCase("First")]
-        /*[TestCase("Next")]*/
-        public async Task Test1Async_111_Milliseconds(string title)
+        [TestCase("First", 7)]
+        [TestCase("Next", 200)]
+		public async Task AsyncSuccess(string title, int milliseconds)
         {
             Console.WriteLine(PropertyBagVisualizer.ShowHumanString("SYNCHRONOUS"));
-            await CpuLoad.RunAsync(111);
+            await CpuLoad.RunAsync(milliseconds);
             TestCleaner.OnDispose("Delete GLOBAL.TMP (from test body)", () => File.Delete("Global.Temp"), TestDisposeOptions.Global);
         }
 
-        /*[Test]*/
-        [TestCase("First")]
-        [TestCase("Next")]
-        public async Task Test2Async_777_Milliseconds(string title)
-        {
-            Console.WriteLine(PropertyBagVisualizer.ShowHumanString("SYNCHRONOUS"));
-            await CpuLoad.RunAsync(777);
-        }
-
         [Test]
+        [TestCase("First", 7)]
+        [TestCase("Next", 200)]
         [Category("Fail")]
-        public async Task AsyncFail()
+        public async Task AsyncFail(string title, int milliseconds)
         {
             await Task.Run(function: async () =>
             {
                 TestCleaner.OnDispose("Delete File TempAsync.Temp (from test's body)", () => File.Delete("TempAsync.Temp"), TestDisposeOptions.TestCase);
-                await CpuLoad.RunAsync(42);
+                await CpuLoad.RunAsync(milliseconds);
                 Assert.Fail("Fail on purpose");
             });
         }
 
         [Test]
+        [TestCase("First", 7)]
+        [TestCase("Next", 200)]
         [Category("Fail")]
-        public async Task AsyncException()
+        public async Task AsyncException(string title, int milliseconds)
         {
             await Task.Run(function: async () =>
             {
-                await CpuLoad.RunAsync(42);
+                await CpuLoad.RunAsync(milliseconds);
                 throw new InvalidOperationException("Exception on purpose");
             });
         }
-
     }
 }
