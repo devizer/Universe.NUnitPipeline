@@ -10,7 +10,7 @@ namespace Universe.NUnitPipeline.Tests
     {
         public static async Task RunAsync(int milliseconds)
         {
-            await Task.Run(() =>
+            await Task.Factory.StartNew(() =>
             {
                 RunImplementation(milliseconds);
                 Console.WriteLine(PropertyBagVisualizer.ShowHumanString("A-SYNCHRONOUS"));
