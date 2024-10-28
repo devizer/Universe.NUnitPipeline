@@ -1,2 +1,2 @@
 msbuild /t:Build /p:Configuration=Release /verbosity:quiet Universe.NUnitPipeline.Tests.csproj
-nunit3-console-v3.18.exe --noheader --workers=3 --where "test =~ Test" --work=bin\Release\net8.0 bin\Release\net8.0\Universe.NUnitPipeline.Tests.dll
+nunit3-console-v3.18.exe --noheader --workers=3 --work=bin\Release\net8.0 bin\Release\net8.0\Universe.NUnitPipeline.Tests.dll
