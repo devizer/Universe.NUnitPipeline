@@ -28,7 +28,7 @@ namespace Tests
 		public static string GetFullName()
 		{
 			return typeof(ITest).GetAssemblyOfType()
-				.GetCustomAttributes(typeof(TargetFrameworkAttribute), false)
+				.GetAttributesOfAssembly(typeof(TargetFrameworkAttribute))
 				.OfType<TargetFrameworkAttribute>()
 				.FirstOrDefault()
 				?.FrameworkName;
