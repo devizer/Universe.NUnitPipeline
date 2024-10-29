@@ -295,8 +295,8 @@ jobs:
           tfLib="netstandard2.0;net35;net40;net45"
           tfTest="net8.0;net6.0;netcoreapp3.1;net48;net462;net45;net40;net35"
         else
-          tfLib="net462;net6.0;netstandard2.0"
-          tfTest="net8.0;net6.0;netcoreapp3.1;net48;net462"
+          tfLib="net462;net6.0"
+          tfTest="net8.0;net6.0;net48;net462"
         fi
         pushd Universe.NUnitPipeline.Tests
         Reset-Target-Framework -fw "$tfTest" -l latest
