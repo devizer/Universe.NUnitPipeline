@@ -299,10 +299,10 @@ jobs:
           tfTest="net8.0;net6.0;netcoreapp3.1;net48;net462;net45;net40;net35"
         fi
         pushd Universe.NUnitPipeline.Tests
-        Reset-Target-Framwork -fw "$tfTest" -l latest
+        Reset-Target-Framework -fw "$tfTest" -l latest
         popd
         pushd Universe.NUnitPipeline
-        Reset-Target-Framwork -fw "$tfLib" -l latest
+        Reset-Target-Framework -fw "$tfLib" -l latest
         popd
       fi
       for folder in Universe.NUnitPipeline.Tests Universe.NUnitPipeline; do
