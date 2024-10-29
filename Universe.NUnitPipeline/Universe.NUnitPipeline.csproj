@@ -17,6 +17,7 @@
 	<ItemGroup>
 		<PackageReference Include="NUnit" Version="3.14.0" />
 		<PackageReference Include="Universe.CpuUsage" Version="2.2.497.598" />
+		<PackageReference Include="Universe.GenericTreeTable" Version="1.1.12" />
 		<None Include="Icon\NUnit.Pipeline.png" Pack="true" PackagePath="Icon" />
 	</ItemGroup>
 

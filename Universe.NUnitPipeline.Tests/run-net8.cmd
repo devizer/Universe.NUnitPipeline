@@ -1,1 +1,1 @@
-call run-net-specific-fw.cmd net8.0 v3.18
+call run-net-specific-fw.cmd net8.0 v3.18 Full

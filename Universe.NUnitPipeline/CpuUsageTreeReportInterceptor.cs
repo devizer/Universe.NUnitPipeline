@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using NUnit.Framework.Interfaces;
+using Universe.GenericTreeTable;
 using Universe.NUnitPipeline.ConsoleTreeTable;
 using Universe.NUnitPipeline.Shared;
 
@@ -55,61 +56,10 @@ namespace Universe.NUnitPipeline
 			try
 			{
 				List<DetailsReportRow> reportCopyRaw = DetailsReportStorage.Instance.GetRawRows();
+				var builder = new TreeTableBuilder<string, DetailsReportRow>(TestsTreeConfiguration.Instance);
 				reportCopyRaw = reportCopyRaw.OrderBy(x => x.Key.ToString()).ToList();
-				var reportCopy = reportCopyRaw.ToSafeDictionary(x => x.Key, x => x);
-
-				List<Node<TreeKey>> rootKeys = TreeKey.AsTree(reportCopyRaw.Select(x => x.Key));
-				List<KeyValuePair<TreeKey, string>> orderedKeys = new List<KeyValuePair<TreeKey, string>>();
-
-				void Enum1(List<Node<TreeKey>> nodes)
-				{
-					foreach (var node in nodes)
-					{
-						orderedKeys.Add(new KeyValuePair<TreeKey, string>(node.State, node.AscII));
-						Enum1(node.Children);
-					}
-				}
-				AscIITreeDiagram<TreeKey>.PopulateAscII(rootKeys);
-				Enum1(rootKeys);
-
-				var letsDebug = "ok";
-
-
-				ConsoleTable ct = new ConsoleTable("Test", "Status",
-					"-Duration", "-CPU (%)", "-CPU (ms)", "-User", "-Kernel",
-					"Message"
-				);
-
-				StringBuilder debugTree = new StringBuilder();
-				foreach (var pair in orderedKeys)
-				{
-					TreeKey path = pair.Key;
-					string pathAsString = pair.Value;
-					// var total = reportCopyRaw.FirstOrDefault(x => x.Key.Equals(path)).Value ?? zeroMetrics;
-					debugTree.AppendLine($"{path,-125} {pathAsString}");
-					reportCopy.TryGetValue(path, out DetailsReportRow total);
-					var detail = total;
-					if (total == null) ct.AddRow(pathAsString);
-					else
-					{
-						bool hasCpuUsage = detail.UserTime.HasValue || detail.KernelTime.HasValue;
-						double totalCpuUsage = detail.UserTime.GetValueOrDefault() + detail.KernelTime.GetValueOrDefault();
-						double? percents = detail.Duration > 0 ? totalCpuUsage / detail.Duration : (double?)null;
-						var outcomeStatus = "Passed".Equals(detail.OutcomeStatus, StringComparison.InvariantCultureIgnoreCase) ? "PASSED" : detail.OutcomeStatus;
-						ct.AddRow(
-							pathAsString,
-							outcomeStatus,
-							Math.Round(1000 * detail.Duration, 1),
-							percents * 100,
-							1000 * totalCpuUsage,
-							1000 * detail.UserTime,
-							1000 * detail.KernelTime,
-							detail.ErrorMessage
-						);
-					}
-				}
-
-				return ct.ToString();
+				var consoleTable = builder.Build(reportCopyRaw.Select(x => new KeyValuePair<IEnumerable<string>, DetailsReportRow>(x.Key.Path, x)));
+				return consoleTable.ToString();
 			}
 			catch (Exception ex)
 			{
