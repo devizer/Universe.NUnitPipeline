@@ -306,11 +306,13 @@ jobs:
         Say "TARGET_FRAMEWORKS_LIB: [$TARGET_FRAMEWORKS_LIB]"
         Say "TARGET_FRAMEWORKS_TEST: [$TARGET_FRAMEWORKS_TEST]"
 
-        chcp 65001 || true
+        # chcp 65001 || true
         pushd Universe.NUnitPipeline.Tests
         Reset-Target-Framework -fw "$TARGET_FRAMEWORKS_TEST" -l latest
+        sed -i -E 's|<TargetFrameworks>.*</TargetFrameworks>|<TargetFrameworks>'$TARGET_FRAMEWORKS_TEST'</TargetFrameworks>|' *.csproj
         popd
         pushd Universe.NUnitPipeline
+        sed -i -E 's|<TargetFrameworks>.*</TargetFrameworks>|<TargetFrameworks>'$TARGET_FRAMEWORKS_LIB'</TargetFrameworks>|' *.csproj 
         Reset-Target-Framework -fw "$TARGET_FRAMEWORKS_LIB" -l latest
         popd
       fi
