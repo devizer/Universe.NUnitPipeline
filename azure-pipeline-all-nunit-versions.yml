@@ -32,6 +32,8 @@ jobs:
 - job: TestAndPack
   dependsOn:
     - Boot
+  variables:
+      SELF_VERSION: $[ dependencies.Boot.outputs['Bootstrap.SELF_VERSION_SHARED'] ]  
   displayName: 'Pack'
   pool:
     vmImage: '$(VMIMAGE)'
@@ -292,13 +294,11 @@ jobs:
       script=https://raw.githubusercontent.com/devizer/test-and-build/master/install-build-tools-bundle.sh; (wget -q -nv --no-check-certificate -O - $script 2>/dev/null || curl -ksSL $script) | bash >/dev/null
       Say --Reset-Stopwatch
       Say "CPU: $(Get-CpuName)"
-      Say "SELF_VERSION_SHARED: [$SELF_VERSION_SHARED]"
-      echo "##vso[task.setvariable variable=SELF_VERSION;]$SELF_VERSION_SHARED"
+      Say "SELF_VERSION: [$SELF_VERSION]"
+      # echo "##vso[task.setvariable variable=SELF_VERSION;]$SELF_VERSION_SHARED"
       dotnet --info
     # condition: eq(variables['Agent.OS'], 'Linux')
     displayName: 'Bootstrap'
-    variables:
-      SELF_VERSION_SHARED: $[ dependencies.Boot.outputs['Bootstrap.SELF_VERSION_SHARED'] ]  
 
   - bash: |
       set -eu; set -o pipefail
