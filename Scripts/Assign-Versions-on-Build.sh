@@ -22,6 +22,7 @@ case $NUNIT_VERSION in
       TARGET_FRAMEWORKS_TEST="net8.0;net6.0;netcoreapp3.1;net48;net462;net45;net40;net35;net8.0"
       ;;
   *)
+      # v4.x
       TARGET_FRAMEWORKS_LIB="net462;net6.0";
       TARGET_FRAMEWORKS_TEST="net8.0;net6.0;net48;net462";
       ;;
