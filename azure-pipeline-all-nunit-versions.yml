@@ -20,7 +20,8 @@ jobs:
   
   - bash: |
       set -eu; set -o pipefail
-      origin=$(git config --get remote.origin.url)
+      script=https://raw.githubusercontent.com/devizer/test-and-build/master/install-build-tools-bundle.sh; (wget -q -nv --no-check-certificate -O - $script 2>/dev/null || curl -ksSL $script) | bash >/dev/null
+      origin="$(git config --get remote.origin.url)"
       # try-and-retry git clone https://github.com/devizer/Universe.NUnitPipeline ~/copy;
       try-and-retry git clone $origin ~/git.copy;
       commits=$(cd ~/git.copy; git log -n 999999 --date=raw --pretty=format:"%cd" | wc -l)
