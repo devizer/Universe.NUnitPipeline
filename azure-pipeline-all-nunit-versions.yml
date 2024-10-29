@@ -380,6 +380,13 @@ jobs:
     displayName: 'Test by Console Runner'
 
   - bash: |
+      set -eu; set -o pipefail
+      cd Scripts
+      . Test-All-Targets.sh
+    condition: eq(variables['Agent.OS'], 'Linux')
+    displayName: 'Test All the Target Framworks'
+
+  - bash: |
       # if Tests fails than nugets are not produced
       set -eu; set -o pipefail
       Say "Packing $SELF_VERSION"
