@@ -290,12 +290,20 @@ jobs:
 
   - bash: |
       set -eu; set -o pipefail
-      if [[ "$(uname -s)" == Linux ]]; then
+      if [[ -n "TRUE" ]] || [[ "$(uname -s)" == Linux ]]; then
         if [[ "$NUNIT_VERSION" == 3* ]]; then
-          tf="netstandard2.0;net35;net40"
+          tfLib="netstandard2.0;net35;net40;net45"
+          tfTest="net8.0;net6.0;netcoreapp3.1;net48;net462"
         else
-          tf="net462;net6.0"
+          tfLib="net462;net6.0"
+          tfTest="net8.0;net6.0;netcoreapp3.1;net48;net462;net45;net40;net35"
         fi
+        pushd Universe.NUnitPipeline.Tests
+        Reset-Target-Framwork -fw "$tfTest" -l latest
+        popd
+        pushd Universe.NUnitPipeline
+        Reset-Target-Framwork -fw "$tfLib" -l latest
+        popd
       fi
       for folder in Universe.NUnitPipeline.Tests Universe.NUnitPipeline; do
         pushd $folder
