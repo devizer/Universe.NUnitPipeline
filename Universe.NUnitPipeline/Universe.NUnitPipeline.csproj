@@ -6,7 +6,8 @@
     <!-- NUnit 3x: netstandard2.0;net35;net40
          NUnit 4x: net6.0;net462
     -->
-    <TargetFrameworks>net6.0;net462;net40;net35;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net6.0;net462</TargetFrameworks>
+    <!-- TargetFrameworks>net6.0;net462;net40;net35;netstandard2.0</TargetFrameworks -->
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputType>Library</OutputType>
     <NoWarn>CS0162</NoWarn>
