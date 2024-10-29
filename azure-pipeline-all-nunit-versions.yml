@@ -19,6 +19,25 @@ jobs:
   strategy:
     maxParallel: 10
     matrix:
+      "3.10.1 Windows":
+         NUNIT_VERSION: "3.10.1"
+         VMIMAGE: "windows-latest"
+      "3.10.1 Linux":
+         NUNIT_VERSION: "3.10.1"
+         VMIMAGE: "ubuntu-latest"
+      "3.10.1 MacOs":
+         NUNIT_VERSION: "3.10.1"
+         VMIMAGE: "macos-latest"
+      "3.10.0 Windows":
+         NUNIT_VERSION: "3.10.0"
+         VMIMAGE: "windows-latest"
+      "3.10.0 Linux":
+         NUNIT_VERSION: "3.10.0"
+         VMIMAGE: "ubuntu-latest"
+      "3.10.0 MacOs":
+         NUNIT_VERSION: "3.10.0"
+         VMIMAGE: "macos-latest"
+
       "3.7.0 Windows":
          NUNIT_VERSION: "3.7.0"
          VMIMAGE: "windows-latest"
@@ -128,24 +147,6 @@ jobs:
       # "3.11.0 MacOs":
       #    NUNIT_VERSION: "3.11.0"
       #    VMIMAGE: "macos-latest"
-      "3.10.1 Windows":
-         NUNIT_VERSION: "3.10.1"
-         VMIMAGE: "windows-latest"
-      "3.10.1 Linux":
-         NUNIT_VERSION: "3.10.1"
-         VMIMAGE: "ubuntu-latest"
-      "3.10.1 MacOs":
-         NUNIT_VERSION: "3.10.1"
-         VMIMAGE: "macos-latest"
-      "3.10.0 Windows":
-         NUNIT_VERSION: "3.10.0"
-         VMIMAGE: "windows-latest"
-      "3.10.0 Linux":
-         NUNIT_VERSION: "3.10.0"
-         VMIMAGE: "ubuntu-latest"
-      "3.10.0 MacOs":
-         NUNIT_VERSION: "3.10.0"
-         VMIMAGE: "macos-latest"
       "3.9.0 Windows":
          NUNIT_VERSION: "3.9.0"
          VMIMAGE: "windows-latest"
