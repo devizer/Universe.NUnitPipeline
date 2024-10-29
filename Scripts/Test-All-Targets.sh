@@ -1,4 +1,5 @@
-pushd Universe.NUnitPipeline.Tests 
+pushd $BUILD_SOURCESDIRECTORY
+cd Universe.NUnitPipeline.Tests
 echo "${TARGET_FRAMEWORKS_TEST:-}" | awk -FFS=";" 'BEGIN{FS=";"}{for(i=1;i<=NF;i++){print $i}}' | while IFS= read -r tf; do
   pushd .; mkdir -p bin; cd bin; mkdir -p public; cd public; outParent=$(pwd); mkdir $tf; cd tf; out=$(pwd); popd
   Say "Building tests for [$tf] v$SELF_VERSION into '$out'"
