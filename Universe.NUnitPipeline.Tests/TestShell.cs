@@ -31,9 +31,9 @@ namespace Tests
 			var types = new[] { typeof(TestShell), typeof(NUnitPipelineActionAttribute) };
 			foreach (var type in types)
 			{
-				Assembly typeAssembly = type.Assembly;
+				Assembly typeAssembly = type.GetAssemblyOfType();
 				string name = typeAssembly?.Location != null ? Path.GetFileName(typeAssembly?.Location) : "";
-				TargetFrameworkAttribute tfa = typeAssembly.GetCustomAttributes(typeof(TargetFrameworkAttribute), false).OfType<TargetFrameworkAttribute>().FirstOrDefault();
+				TargetFrameworkAttribute tfa = typeAssembly.GetAttributesOfAssembly(typeof(TargetFrameworkAttribute)).OfType<TargetFrameworkAttribute>().FirstOrDefault();
 				Console.WriteLine($"Assembly '{name}': \"{tfa?.FrameworkName}\"  \"{tfa?.FrameworkDisplayName}\"");
 			}
 	    }
@@ -47,7 +47,7 @@ namespace Tests
 				try
 				{
 					Console.WriteLine($"type is {type.FullName}");
-					Assembly typeAssembly = type.Assembly;
+					Assembly typeAssembly = type.GetAssemblyOfType();
 					Console.WriteLine($"ok: typeAssembly, {typeAssembly}");
 					string l = typeAssembly?.Location;
 					Console.WriteLine("ok: typeAssembly.Location");
@@ -66,7 +66,7 @@ namespace Tests
 						}
 					}
 					Console.WriteLine();
-					TargetFrameworkAttribute tfa = typeAssembly.GetCustomAttributes(typeof(TargetFrameworkAttribute), false).OfType<TargetFrameworkAttribute>().FirstOrDefault();
+					TargetFrameworkAttribute tfa = typeAssembly.GetAttributesOfAssembly(typeof(TargetFrameworkAttribute)).OfType<TargetFrameworkAttribute>().FirstOrDefault();
 					Console.WriteLine("ok: TargetFrameworkAttribute tfa ");
 
 					Console.WriteLine($"Assembly '{l}': {a}, {tfa?.FrameworkName}; {tfa?.FrameworkDisplayName}");

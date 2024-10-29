@@ -1,0 +1,1 @@
+call run-net-specific-fw.cmd net20 v3.12 Full

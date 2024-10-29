@@ -1,10 +1,11 @@
 extern alias nunit;
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
+using nunit::NUnit.Compatibility;
 using nunit::NUnit.Framework.Interfaces;
 
 namespace Tests
@@ -26,7 +27,7 @@ namespace Tests
 		}
 		public static string GetFullName()
 		{
-			return typeof(ITest).Assembly
+			return typeof(ITest).GetAssemblyOfType()
 				.GetCustomAttributes(typeof(TargetFrameworkAttribute), false)
 				.OfType<TargetFrameworkAttribute>()
 				.FirstOrDefault()
