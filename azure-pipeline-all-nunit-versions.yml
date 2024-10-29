@@ -28,7 +28,7 @@ jobs:
       COMMITS_COUNT="${commits}"
       echo "##vso[task.setvariable variable=COMMITS_COUNT;isoutput=true]$COMMITS_COUNT"
       echo "COMMITS_COUNT = [$COMMITS_COUNT]"
-    displayName: 'Bootstrap'
+    name: 'Bootstrap'
 
 - job: TestAndPack
   dependsOn:
