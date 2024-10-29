@@ -284,6 +284,18 @@ jobs:
       SELF_VERSION=${NUNIT_VERSION}.${commits}
       echo "##vso[task.setvariable variable=SELF_VERSION;]$SELF_VERSION"
       Say "SELF_VERSION = [$SELF_VERSION]"
+
+      if [[ "$NUNIT_VERSION" == 3* ]]; then
+        TARGET_FRAMEWORKS_LIB="netstandard2.0;net35;net40;net45"
+        TARGET_FRAMEWORKS_TEST="net8.0;net6.0;netcoreapp3.1;net48;net462;net45;net40;net35"
+      else
+        TARGET_FRAMEWORKS_LIB="net462;net6.0"
+        TARGET_FRAMEWORKS_TEST="net8.0;net6.0;net48;net462"
+      fi
+      echo "##vso[task.setvariable variable=TARGET_FRAMEWORKS_LIB;]$TARGET_FRAMEWORKS_LIB"
+      echo "##vso[task.setvariable variable=TARGET_FRAMEWORKS_TEST;]$TARGET_FRAMEWORKS_TEST"
+      Say "TARGET_FRAMEWORKS_LIB: [$TARGET_FRAMEWORKS_LIB]"
+      Say "TARGET_FRAMEWORKS_LIB: [$TARGET_FRAMEWORKS_TEST]"
     # condition: eq(variables['Agent.OS'], 'Linux')
     displayName: 'Assign Self Version'
 
@@ -291,13 +303,9 @@ jobs:
   - bash: |
       set -eu; set -o pipefail
       if [[ -n "TRUE" ]] || [[ "$(uname -s)" == Linux ]]; then
-        if [[ "$NUNIT_VERSION" == 3* ]]; then
-          tfLib="netstandard2.0;net35;net40;net45"
-          tfTest="net8.0;net6.0;netcoreapp3.1;net48;net462;net45;net40;net35"
-        else
-          tfLib="net462;net6.0"
-          tfTest="net8.0;net6.0;net48;net462"
-        fi
+        Say "TARGET_FRAMEWORKS_LIB: [$TARGET_FRAMEWORKS_LIB]"
+        Say "TARGET_FRAMEWORKS_LIB: [$TARGET_FRAMEWORKS_TEST]"
+
         pushd Universe.NUnitPipeline.Tests
         Reset-Target-Framework -fw "$tfTest" -l latest
         popd
