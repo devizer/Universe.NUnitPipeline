@@ -11,6 +11,21 @@ trigger:
 
 jobs:
 
+- job: Boot
+  pool:
+    vmImage: ubuntu-latest
+  steps:
+  - bash: |
+      set -eu; set -o pipefail
+      origin=$(git config --get remote.origin.url)
+      # try-and-retry git clone https://github.com/devizer/Universe.NUnitPipeline ~/copy;
+      try-and-retry git clone $origin ~/git.copy;
+      commits=$(cd ~/git.copy; git log -n 999999 --date=raw --pretty=format:"%cd" | wc -l)
+      SELF_VERSION_SHARED=${NUNIT_VERSION}.${commits}
+      echo "##vso[task.setvariable variable=SELF_VERSION;isoutput=true]$SELF_VERSION"
+      echo "SELF_VERSION_SHARED = [$SELF_VERSION_SHARED]"
+    displayName: 'Bootstrap'
+
 - job: TestAndPack
   displayName: 'Pack'
   pool:
@@ -267,15 +282,18 @@ jobs:
 
   steps:
 
-
   - bash: |
       set -eu; set -o pipefail
       script=https://raw.githubusercontent.com/devizer/test-and-build/master/install-build-tools-bundle.sh; (wget -q -nv --no-check-certificate -O - $script 2>/dev/null || curl -ksSL $script) | bash >/dev/null
       Say --Reset-Stopwatch
       Say "CPU: $(Get-CpuName)"
+      Say "SELF_VERSION_SHARED: [$SELF_VERSION_SHARED]"
+      echo "##vso[task.setvariable variable=SELF_VERSION;]$SELF_VERSION_SHARED"
       dotnet --info
     # condition: eq(variables['Agent.OS'], 'Linux')
     displayName: 'Bootstrap'
+    variables:
+      SELF_VERSION_SHARED: $[ dependencies.Boot.outputs['Bootstrap.SELF_VERSION_SHARED'] ]  
 
   - bash: |
       set -eu; set -o pipefail
