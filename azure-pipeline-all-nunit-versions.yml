@@ -307,10 +307,10 @@ jobs:
         Say "TARGET_FRAMEWORKS_LIB: [$TARGET_FRAMEWORKS_TEST]"
 
         pushd Universe.NUnitPipeline.Tests
-        Reset-Target-Framework -fw "$tfTest" -l latest
+        Reset-Target-Framework -fw "$TARGET_FRAMEWORKS_TEST" -l latest
         popd
         pushd Universe.NUnitPipeline
-        Reset-Target-Framework -fw "$tfLib" -l latest
+        Reset-Target-Framework -fw "$TARGET_FRAMEWORKS_LIB" -l latest
         popd
       fi
       for folder in Universe.NUnitPipeline.Tests Universe.NUnitPipeline; do
