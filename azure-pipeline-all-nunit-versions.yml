@@ -306,6 +306,7 @@ jobs:
         Say "TARGET_FRAMEWORKS_LIB: [$TARGET_FRAMEWORKS_LIB]"
         Say "TARGET_FRAMEWORKS_LIB: [$TARGET_FRAMEWORKS_TEST]"
 
+        chcp 65001 || true
         pushd Universe.NUnitPipeline.Tests
         Reset-Target-Framework -fw "$TARGET_FRAMEWORKS_TEST" -l latest
         popd
