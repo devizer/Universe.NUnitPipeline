@@ -1,0 +1,1 @@
+call run-net-specific-fw.cmd netcoreapp3.1 v3.18

@@ -1,7 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="..\Shared-Files\Net-2x-4x-Support.proj" />
+
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net48</TargetFrameworks>
+    <TargetFrameworks>net8.0;net6.0;netcoreapp3.1;net48;net462;net45;net40;net35</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
     <RootNamespace>Tests</RootNamespace>
@@ -15,12 +17,14 @@
     <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net40' Or '$(TargetFramework)' == 'net35' Or '$(TargetFramework)' == 'net30' Or '$(TargetFramework)' == 'net20' ">
-    <PackageReference Include="Theraot.Core" Version="3.2.11" />
+  <ItemGroup>
+    <ProjectReference Include="..\Universe.NUnitPipeline\Universe.NUnitPipeline.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Universe.NUnitPipeline\Universe.NUnitPipeline.csproj" />
+    <None Update="Universe.NUnitPipeline.Tests.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

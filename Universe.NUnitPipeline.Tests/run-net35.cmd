@@ -1,0 +1,1 @@
+call run-net-specific-fw.cmd net35 v3.12
