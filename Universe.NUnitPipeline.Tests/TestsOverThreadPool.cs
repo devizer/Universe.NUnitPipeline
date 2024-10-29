@@ -1,8 +1,9 @@
+extern alias nunit;
 using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using NUnit.Framework;
+using nunit::NUnit.Framework;
 using Universe.NUnitPipeline;
 using Universe.NUnitPipeline.Tests;
 

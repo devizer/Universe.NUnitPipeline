@@ -1,10 +1,11 @@
+extern alias nunit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
-using NUnit.Framework.Interfaces;
+using nunit::NUnit.Framework.Interfaces;
 
 namespace Tests
 {

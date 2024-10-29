@@ -1,13 +1,14 @@
+extern alias nunit;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using NUnit.Framework;
+using nunit::NUnit.Framework;
 using Universe.NUnitPipeline;
 using Universe.NUnitPipeline.Tests;
 
 namespace Tests
 {
-#if !NET35 && !NET40 && !NET45
+#if !NET35 && !NET40 && !NET45 && !NET20
 	[NUnitPipelineAction]
     [TestFixture]
     public class TestsAsync

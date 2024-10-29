@@ -1,6 +1,7 @@
+extern alias nunit;
 using System.Collections.Generic;
 using System.IO;
-using NUnit.Framework;
+using nunit::NUnit.Framework;
 using Universe.NUnitPipeline;
 
 [assembly: NUnitPipelineAction]

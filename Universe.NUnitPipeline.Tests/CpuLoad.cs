@@ -9,7 +9,7 @@ namespace Universe.NUnitPipeline.Tests
     public class CpuLoad
     {
 
-#if !NET35 && !NET40 && !NET45
+#if !NET35 && !NET40 && !NET45 && !NET20
 		public static async Task RunAsync(int milliseconds)
         {
             await Task.Factory.StartNew(() =>

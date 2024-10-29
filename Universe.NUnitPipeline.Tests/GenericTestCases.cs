@@ -1,5 +1,6 @@
+extern alias nunit;
 using System;
-using NUnit.Framework;
+using nunit::NUnit.Framework;
 using Universe.NUnitPipeline;
 
 namespace Tests
