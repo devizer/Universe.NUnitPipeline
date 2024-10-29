@@ -383,7 +383,7 @@ jobs:
       set -eu; set -o pipefail
       cd Scripts
       . Test-All-Targets.sh
-    condition: eq(variables['Agent.OS'], 'Linux')
+    # condition: eq(variables['Agent.OS'], 'Linux')
     displayName: 'Test All the Target Framworks'
 
   - bash: |
