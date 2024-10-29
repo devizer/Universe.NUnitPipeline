@@ -16,7 +16,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="NUnit" Version="3.10.1">
-		  <Aliases>nunit</Aliases>
+		  <!--<Aliases>nunit</Aliases>-->
 		</PackageReference>
 		<PackageReference Include="Universe.CpuUsage" Version="2.2.497.598" />
 		<PackageReference Include="Universe.GenericTreeTable" Version="1.1.12" />
@@ -42,8 +42,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Update="NUnit.System.Linq">
-	    <Aliases>NUnitSystemLinq</Aliases>
+	  <PackageReference Update="NUnit">
+	    <Aliases>nunit</Aliases>
 	  </PackageReference>
 	</ItemGroup>
 
