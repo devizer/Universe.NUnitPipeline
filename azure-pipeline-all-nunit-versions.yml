@@ -19,6 +19,22 @@ jobs:
   strategy:
     maxParallel: 10
     matrix:
+      "3.7.0 Windows":
+         NUNIT_VERSION: "3.7.0"
+         VMIMAGE: "windows-latest"
+         TARGET_FRAMEWORKS_LIB: "netstandard1.3;netstandard1.6;net20;net35;net45; netstandard2.0"
+         TARGET_FRAMEWORKS_TEST: "netcoreapp1.0;netcoreapp1.1;netcoreapp2.0;netcoreapp2.1;netcoreapp3.0;netcoreapp3.1;net20;net35;net45;net462;net48"
+      "3.7.0 Linux":
+         NUNIT_VERSION: "3.7.0"
+         VMIMAGE: "ubuntu-latest"
+         TARGET_FRAMEWORKS_LIB: "netstandard1.3;netstandard1.6;net20;net35;net45; netstandard2.0"
+         TARGET_FRAMEWORKS_TEST: "netcoreapp1.0;netcoreapp1.1;netcoreapp2.0;netcoreapp2.1;netcoreapp3.0;netcoreapp3.1;net20;net35;net45;net462;net48"
+      "3.7.0 MacOs":
+         NUNIT_VERSION: "3.7.0"
+         VMIMAGE: "macos-latest"
+         TARGET_FRAMEWORKS_LIB: "netstandard1.3;netstandard1.6;net20;net35;net45; netstandard2.0"
+         TARGET_FRAMEWORKS_TEST: "netcoreapp1.0;netcoreapp1.1;netcoreapp2.0;netcoreapp2.1;netcoreapp3.0;netcoreapp3.1;net20;net35;net45;net462;net48"
+
       "4.2.2 Windows":
          NUNIT_VERSION: "4.2.2"
          VMIMAGE: "windows-latest"
@@ -172,15 +188,6 @@ jobs:
       "3.7.1 MacOs":
          NUNIT_VERSION: "3.7.1"
          VMIMAGE: "macos-latest"
-      "3.7.0 Windows":
-         NUNIT_VERSION: "3.7.0"
-         VMIMAGE: "windows-latest"
-      "3.7.0 Linux":
-         NUNIT_VERSION: "3.7.0"
-         VMIMAGE: "ubuntu-latest"
-      "3.7.0 MacOs":
-         NUNIT_VERSION: "3.7.0"
-         VMIMAGE: "macos-latest"
       # "3.6.1 Windows":
       #    NUNIT_VERSION: "3.6.1"
       #    VMIMAGE: "windows-latest"
@@ -285,10 +292,13 @@ jobs:
       echo "##vso[task.setvariable variable=SELF_VERSION;]$SELF_VERSION"
       Say "SELF_VERSION = [$SELF_VERSION]"
 
+      
       if [[ "$NUNIT_VERSION" == 3* ]]; then
-        TARGET_FRAMEWORKS_LIB="netstandard2.0;net35;net40;net45"
-        TARGET_FRAMEWORKS_TEST="net8.0;net6.0;netcoreapp3.1;net48;net462;net45;net40;net35"
+        if [[ "${TARGET_FRAMEWORKS_LIB:-}" ]];  then TARGET_FRAMEWORKS_LIB="netstandard2.0;net35;net40;net45"; fi
+        if [[ "${TARGET_FRAMEWORKS_TEST:-}" ]]; then TARGET_FRAMEWORKS_TEST="net8.0;net6.0;netcoreapp3.1;net48;net462;net45;net40;net35"; fi
       else
+        if [[ "${TARGET_FRAMEWORKS_LIB:-}" ]];  then TARGET_FRAMEWORKS_LIB="net462;net6.0"; fi
+        if [[ "${TARGET_FRAMEWORKS_TEST:-}" ]]; then TARGET_FRAMEWORKS_TEST="net8.0;net6.0;net48;net462"; fi
         TARGET_FRAMEWORKS_LIB="net462;net6.0"
         TARGET_FRAMEWORKS_TEST="net8.0;net6.0;net48;net462"
       fi
