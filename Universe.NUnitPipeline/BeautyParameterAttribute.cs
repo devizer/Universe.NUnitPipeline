@@ -1,11 +1,15 @@
+extern alias nunit;
+using nunit::NUnit.Framework.Interfaces;
+using nunit::NUnit.Framework;
 using System;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using NUnit.Framework.Interfaces;
 
 namespace Universe.NUnitPipeline
 {
+	extern alias nunit;
+
 	[AttributeUsage(AttributeTargets.Parameter)]
 	public class BeautyParameterAttribute : Attribute
 	{

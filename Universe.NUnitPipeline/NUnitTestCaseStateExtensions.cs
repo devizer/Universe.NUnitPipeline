@@ -1,10 +1,13 @@
+extern alias nunit;
+using nunit::NUnit.Framework.Interfaces;
+using nunit::NUnit.Framework;
 using System;
-using NUnit.Framework;
-using NUnit.Framework.Interfaces;
 
 namespace Universe.NUnitPipeline
 {
-    public static class NUnitTestCaseStateExtensions
+	extern alias nunit;
+
+	public static class NUnitTestCaseStateExtensions
     {
         private static readonly object _TestCaseStateSync = new object();
 

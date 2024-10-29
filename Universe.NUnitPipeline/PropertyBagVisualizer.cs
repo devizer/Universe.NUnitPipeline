@@ -1,10 +1,10 @@
-﻿using System;
+extern alias nunit;
+using nunit::NUnit.Framework.Interfaces;
+using nunit::NUnit.Framework;
 using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
-using NUnit.Framework;
 
 namespace Universe.NUnitPipeline
 {

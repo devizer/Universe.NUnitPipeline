@@ -1,12 +1,14 @@
+extern alias nunit;
+using nunit::NUnit.Framework.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using NUnit.Framework.Interfaces;
 using Universe.GenericTreeTable;
 using Universe.NUnitPipeline.ConsoleTreeTable;
 using Universe.NUnitPipeline.Shared;
+
 
 namespace Universe.NUnitPipeline
 {

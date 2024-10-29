@@ -1,12 +1,10 @@
+extern alias nunit;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using NUnit.Framework;
-using NUnit.Framework.Interfaces;
+using nunit::NUnit.Framework;
+using nunit::NUnit.Framework.Interfaces;
 using Universe.NUnitPipeline.Shared;
 
 /*
@@ -14,13 +12,15 @@ using Universe.NUnitPipeline.Shared;
  */
 namespace Universe.NUnitPipeline
 {
+	extern alias nunit;
+
 	internal class TestResult
 	{
 		public string ResultOutcome { get; set; }
 		public string ResultMessage { get; set; }
 	}
 
-	[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Assembly, AllowMultiple = false)]
+	[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Assembly)]
     public class NUnitPipelineActionAttribute : Attribute, ITestAction
     {
         public ActionTargets Targets => ActionTargets.Test | ActionTargets.Suite;
@@ -49,7 +49,7 @@ namespace Universe.NUnitPipeline
 
             var resultMessage = TestContext.CurrentContext.Result.Message;
 			var resultOutcome = TestContext.CurrentContext.Result.Outcome.ToString();
-			test.GetPropertyOrAdd<TestResult>("Test Result", t => new TestResult() { ResultMessage = resultMessage, ResultOutcome = resultOutcome });
+			test.GetPropertyOrAdd("Test Result", t => new TestResult { ResultMessage = resultMessage, ResultOutcome = resultOutcome });
 
 			var actions = NUnitPipelineChain.OnEnd;
             if (actions == null) return;
@@ -77,7 +77,7 @@ namespace Universe.NUnitPipeline
 
         internal class PrivateCounter
         {
-            public int Count = 0;
+            public int Count;
 
             public override string ToString()
             {
@@ -87,12 +87,12 @@ namespace Universe.NUnitPipeline
 
         void BuildNUnitStage(ITest test, NUnitActionSide actionSide, out NUnitStage stage, out int counter)
         {
-            var selfCounter = test.GetPropertyOrAdd<PrivateCounter>($"Is First on {actionSide}", t => new PrivateCounter() { Count = 0 });
+            var selfCounter = test.GetPropertyOrAdd($"Is First on {actionSide}", t => new PrivateCounter { Count = 0 });
             selfCounter.Count++;
             counter = selfCounter.Count;
             // if (counter == 1 && actionSide == NUnitActionSide.Start) Console.WriteLine(EmptyLineBetweenTests());
 
-            stage = new NUnitStage() { Side = actionSide };
+            stage = new NUnitStage { Side = actionSide };
             if (test.Fixture == null)
             {
                 stage.NUnitActionAppliedTo = NUnitActionAppliedTo.Assembly;
@@ -149,7 +149,7 @@ namespace Universe.NUnitPipeline
                 {
                 }
 
-                IndexState indexState = new IndexState() { FixtureIndex = stage.FixtureIndex, TestIndex = stage.TestIndex };
+                IndexState indexState = new IndexState { FixtureIndex = stage.FixtureIndex, TestIndex = stage.TestIndex };
                 var _ = test.GetPropertyOrAdd("Index State", t => indexState);
             }
             else if (stage.Side == NUnitActionSide.Finish)

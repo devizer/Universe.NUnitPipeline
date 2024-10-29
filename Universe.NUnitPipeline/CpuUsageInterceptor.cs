@@ -1,3 +1,6 @@
+extern alias nunit;
+using nunit::NUnit.Framework.Interfaces;
+using nunit::NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -5,14 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using NUnit.Framework;
-using NUnit.Framework.Interfaces;
 using Universe.CpuUsage;
 using Universe.NUnitPipeline.ConsoleTreeTable;
 
 namespace Universe.NUnitPipeline
 {
-    public class CpuUsageInterceptor
+	extern alias nunit;
+
+	public class CpuUsageInterceptor
     {
         public static readonly string Title = "Cpu Usage";
         private static readonly object Sync = new object();

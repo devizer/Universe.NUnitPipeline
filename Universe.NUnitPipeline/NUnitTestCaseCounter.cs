@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
-using NUnit.Framework.Interfaces;
+extern alias nunit;
+using System.Collections.Generic;
+using nunit::NUnit.Framework.Interfaces;
 
 namespace Universe.NUnitPipeline
 {
-    public class TestCaseIndex
+	extern alias nunit;
+
+	public class TestCaseIndex
     {
         public int ClassIndex { get; set; }
         

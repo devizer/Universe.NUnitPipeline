@@ -1,9 +1,9 @@
+extern alias nunit;
+using nunit::NUnit.Framework.Interfaces;
+using nunit::NUnit.Framework;
 using System;
 using System.Diagnostics;
 using System.Threading;
-using System.Threading.Tasks;
-using NUnit.Framework;
-using NUnit.Framework.Internal;
 using Universe.NUnitPipeline.Shared;
 
 namespace Universe.NUnitPipeline

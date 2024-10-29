@@ -6,7 +6,7 @@
     <!-- NUnit 3x: netstandard2.0;net35;net40
          NUnit 4x: net6.0;net462
     -->
-    <TargetFrameworks>net6.0;net462</TargetFrameworks>
+    <TargetFrameworks>net6.0;net462;net20;net35;net40;net45</TargetFrameworks>
     <!-- TargetFrameworks>net6.0;net462;net40;net35;netstandard2.0</TargetFrameworks -->
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputType>Library</OutputType>
@@ -15,7 +15,9 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="NUnit" Version="3.14.0" />
+		<PackageReference Include="NUnit" Version="3.10.1">
+		  <Aliases>nunit</Aliases>
+		</PackageReference>
 		<PackageReference Include="Universe.CpuUsage" Version="2.2.497.598" />
 		<PackageReference Include="Universe.GenericTreeTable" Version="1.1.12" />
 		<None Include="Icon\NUnit.Pipeline.png" Pack="true" PackagePath="Icon" />
@@ -37,6 +39,12 @@
 	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' Or '$(TargetFramework)' == 'netstandard1.6' ">
 		<PackageReference Include="System.Threading.ThreadPool" Version="4.3.0" />
 		<PackageReference Include="System.Diagnostics.Process" Version="4.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="NUnit.System.Linq">
+	    <Aliases>NUnitSystemLinq</Aliases>
+	  </PackageReference>
 	</ItemGroup>
 
 

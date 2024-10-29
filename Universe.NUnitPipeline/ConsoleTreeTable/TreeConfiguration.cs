@@ -41,7 +41,7 @@ namespace Universe.NUnitPipeline.ConsoleTreeTable
 		{
 			double totalCpuUsage = detail.UserTime.GetValueOrDefault() + detail.KernelTime.GetValueOrDefault();
 			double? percents = detail.Duration > 0 ? totalCpuUsage / detail.Duration : (double?)null;
-			var outcomeStatus = "Passed".Equals(detail.OutcomeStatus, StringComparison.InvariantCultureIgnoreCase) ? "PASSED" : detail.OutcomeStatus;
+			var outcomeStatus = "Passed".Equals(detail.OutcomeStatus, StringComparison.OrdinalIgnoreCase) ? "PASSED" : detail.OutcomeStatus;
 			table.AddRow(
 				renderedKey,
 				outcomeStatus,

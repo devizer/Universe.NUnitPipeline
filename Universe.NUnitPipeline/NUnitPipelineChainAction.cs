@@ -1,5 +1,7 @@
+extern alias nunit;
+using nunit::NUnit.Framework.Interfaces;
+using nunit::NUnit.Framework;
 using System;
-using NUnit.Framework.Interfaces;
 
 namespace Universe.NUnitPipeline
 {

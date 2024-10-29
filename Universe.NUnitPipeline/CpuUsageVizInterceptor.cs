@@ -1,11 +1,14 @@
+extern alias nunit;
+using nunit::NUnit.Framework.Interfaces;
 using System;
-using NUnit.Framework;
-using NUnit.Framework.Interfaces;
+using nunit::NUnit.Framework;
 using Universe.NUnitPipeline.Shared;
 
 namespace Universe.NUnitPipeline
 {
-    public class CpuUsageResult
+	extern alias nunit;
+
+	public class CpuUsageResult
     {
         public TimeSpan Elapsed { get; set; }
         public CpuUsage.CpuUsage? CpuUsage { get; set; }
