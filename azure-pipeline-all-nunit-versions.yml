@@ -286,7 +286,7 @@ jobs:
       echo "##vso[task.setvariable variable=SELF_VERSION;]$SELF_VERSION"
       Say "SELF_VERSION = [$SELF_VERSION]"
 
-      Scripts/Assign-Versions-on-Build.sh 
+      . Scripts/Assign-Versions-on-Build.sh 
       echo "##vso[task.setvariable variable=TARGET_FRAMEWORKS_LIB;]$TARGET_FRAMEWORKS_LIB"
       echo "##vso[task.setvariable variable=TARGET_FRAMEWORKS_TEST;]$TARGET_FRAMEWORKS_TEST"
       Say "TARGET_FRAMEWORKS_LIB: [$TARGET_FRAMEWORKS_LIB]"
