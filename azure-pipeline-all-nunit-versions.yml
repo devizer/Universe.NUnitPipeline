@@ -12,9 +12,12 @@ trigger:
 jobs:
 
 - job: Boot
+  timeoutInMinutes: 2
   pool:
     vmImage: ubuntu-latest
+  
   steps:
+  
   - bash: |
       set -eu; set -o pipefail
       origin=$(git config --get remote.origin.url)
@@ -27,6 +30,8 @@ jobs:
     displayName: 'Bootstrap'
 
 - job: TestAndPack
+  dependsOn:
+    - Boot
   displayName: 'Pack'
   pool:
     vmImage: '$(VMIMAGE)'
