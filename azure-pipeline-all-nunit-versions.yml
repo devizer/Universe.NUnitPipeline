@@ -296,13 +296,6 @@ jobs:
         else
           tf="net462;net6.0"
         fi
-        pushd Universe.NUnitPipeline
-          Say "TARGET FRAMEWORKS: [$tf]"
-          Reset-Target-Framework -fw "$tf"
-          cmd="dotnet add package Microsoft.NETFramework.ReferenceAssemblies"
-          Say "$cmd"
-          try-and-retry eval $cmd
-        popd
       fi
       for folder in Universe.NUnitPipeline.Tests Universe.NUnitPipeline; do
         pushd $folder
