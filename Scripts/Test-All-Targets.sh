@@ -12,7 +12,11 @@ echo "${TARGET_FRAMEWORKS_TEST:-}" | awk -FFS=";" 'BEGIN{FS=";"}{for(i=NF;i>=1;i
   dotnet build -f $tf -c Release -verbosity:quiet -p:PackageVersion=$SELF_VERSION -p:Version=$SELF_VERSION -o "$out" Universe.NUnitPipeline.Tests.csproj 2>&1 | { grep -v ": warning"; true; } | { grep -v -e '^\s*$'; true; } || { echo "Errrrrrrrrrrrrrrrrrrrrrrooooooooor" | tee -a "$error"; }
   pushd "$out" >/dev/null
     if [[ "$(uname -s)" == Linux ]]; then
-      time nunit3-console --noheader --workers=1 --where "cat != Fail" --work=. Universe.NUnitPipeline.Tests.dll
+      if [[ "$tf" = *"."* ]]; then
+        Say --Display-As=Error "Skip net core test for [$tf]";
+      else
+        time nunit3-console-3.18.3 --noheader --workers=1 --where "cat != Fail" --work=. Universe.NUnitPipeline.Tests.dll
+      fi
       ls -la TestsOutput
       if [[ -n "${SYSTEM_ARTIFACTSDIRECTORY:-}" ]]; then
         touch "TestsOutput/$tf"
