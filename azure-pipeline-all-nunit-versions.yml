@@ -376,11 +376,13 @@ jobs:
 
   - bash: |
       set -eu; set -o pipefail
+      if [[ "$AGENT_OS" != Windows_NT ]]; then
       for v in 3.18.2 3.12.0; do
         export NUNIT_TEST_RUNNER_INSTALL_DIR=/opt/nunit.consolerunner NUNIT_TEST_RUNNER_VERSION=$v
         url=https://raw.githubusercontent.com/devizer/glist/master/bin/NUnit.ConsoleRunner/install.sh; (wget -q -nv --no-check-certificate -O - $url 2>/dev/null || curl -sfSL $url) | bash
         cp -v /usr/local/bin/nunit3-console /usr/local/bin/nunit3-console-$v
       done
+      fi
 
       cd Scripts
       . Test-All-Targets.sh
