@@ -369,6 +369,7 @@ jobs:
   - bash: |
       set -eu; set -o pipefail
       cd Universe.NUnitPipeline.Tests
+      export ENABLE_ANSI_COLORS=True
       dotnet test -c Release -f $FWVERSION --filter "TestCategory !~ Fail" --logger "console;verbosity=normal;consoleLoggerParameters=ErrorsOnly" -verbosity:minimal 
     # condition: eq(variables['Agent.OS'], 'Linux')
     displayName: 'Test by dotnet test'
@@ -390,7 +391,6 @@ jobs:
 
   - bash: |
       set -eu; set -o pipefail
-      export DISABLE_ANSI_COLORS=True
       mkdir -p $HOME/nunit
       pushd $HOME/nunit
       nuget install nunit.consolerunner -version 3.18.3

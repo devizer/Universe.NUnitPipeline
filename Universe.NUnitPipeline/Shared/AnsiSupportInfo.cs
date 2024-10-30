@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 
 namespace Universe.NUnitPipeline.Shared
 {
@@ -13,7 +8,8 @@ namespace Universe.NUnitPipeline.Shared
         {
             get
             {
-                if ("True".Equals(Environment.GetEnvironmentVariable("DISABLE_ANSI_COLORS"))) return false;
+                if ("True".Equals(Environment.GetEnvironmentVariable("ENABLE_ANSI_COLORS"))) return true;
+                return false;
 
                 var names = new[] { "GITHUB_ACTIONS", "TF_BUILD" };
                 bool isBuildServer = false;
@@ -24,15 +20,17 @@ namespace Universe.NUnitPipeline.Shared
                         isBuildServer = true;
                 }
 
+                /*
                 if (isBuildServer)
                 {
                     var process = TryAndForget.Evaluate(() => Process.GetCurrentProcess().ProcessName);
                     bool isNunit = process != null && process.IndexOf("nunit", StringComparison.OrdinalIgnoreCase) >= 0;
                     bool isDotnet = process != null && process.Equals("dotnet", StringComparison.OrdinalIgnoreCase);
-                    if (isNunit /*|| isDotnet*/) return false;
+                    if (isNunit /*|| isDotnet#1#) return false;
                 }
 
                 return isBuildServer;
+            */
             }
         }
     }
