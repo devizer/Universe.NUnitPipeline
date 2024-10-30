@@ -14,16 +14,26 @@ namespace Tests
 {
 	internal class TargetFrameworkInfo
 	{
-		public static string ShortNUnitTarget => GetNUnitTargetFramework(GetFullName(typeof(ITest))) ?? "Unknown Target";
-		public static string ShortPipelineTarget => GetNUnitTargetFramework(GetFullName(typeof(NUnitPipelineChain))) ?? "Unknown Target";
+		public static string ShortNUnitTarget => GetShortTargetFramework(typeof(ITest));
+		
+		public static string PipelineTarget => GetShortTargetFramework(typeof(NUnitPipelineChain));
+		public static string PipelineVersion => GetVersion(typeof(NUnitPipelineChain));
 
-		public static string GetNUnitVersion()
+		public static string NUnitVersion => GetVersion(typeof(ITest));
+
+		private static string GetShortTargetFramework(Type type)
 		{
-			var asm = typeof(ITest).GetAssemblyOfType();
+			return GetShortTargetByFull(GetFullTargetNameName(type)) ?? "Unknown Target";
+		}
+
+
+		private static string GetVersion(Type type)
+		{
+			var asm = type.GetAssemblyOfType();
 			return asm.GetName().Version?.ToString() ?? "vUnknown";
 		}
 
-		static string GetNUnitTargetFramework(string name)
+		static string GetShortTargetByFull(string name)
 		{
 			if (name == null) return null;
 			var arr = name.Split(new[] { ',', '=' });
@@ -34,7 +44,7 @@ namespace Tests
 
 			return null;
 		}
-		public static string GetFullName(Type type)
+		public static string GetFullTargetNameName(Type type)
 		{
 			return type.GetAssemblyOfType()
 				.GetAttributesOfAssembly(typeof(TargetFrameworkAttribute))

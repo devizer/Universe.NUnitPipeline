@@ -13,7 +13,7 @@ namespace Tests
 	{
 		public static void Configure()
 		{
-			NUnitPipelineChain.InternalReportFile = Path.Combine("TestsOutput", $"Flow {TargetFrameworkInfo.GetNUnitVersion()} for {TargetFrameworkInfo.ShortPipelineTarget} ({TargetFrameworkInfo.ShortNUnitTarget})");
+			NUnitPipelineChain.InternalReportFile = Path.Combine("TestsOutput", $"Flow Pipeline=[{TargetFrameworkInfo.PipelineVersion} for {TargetFrameworkInfo.PipelineTarget}] NUnit=[{TargetFrameworkInfo.NUnitVersion} for {TargetFrameworkInfo.ShortNUnitTarget}]");
 
 			NUnitPipelineChain.OnStart = new List<NUnitPipelineChainAction>()
 			{
