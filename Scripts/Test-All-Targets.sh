@@ -13,13 +13,17 @@ echo "${TARGET_FRAMEWORKS_TEST:-}" | awk -FFS=";" 'BEGIN{FS=";"}{for(i=NF;i>=1;i
   pushd "$out" >/dev/null
     if [[ "$(uname -s)" == Linux ]]; then
       if [[ "$tf" = *"."* ]]; then
-        Say --Display-As=Error "Skip net core test for [$tf]";
+        Say --Display-As=Error "Skip NET Core test for [$tf] on linux";
       else
-        time nunit3-console-3.12.0 --noheader --workers=1 --where "cat != Fail" --work=. Universe.NUnitPipeline.Tests.dll
-        ls -la TestsOutput
-        if [[ -n "${SYSTEM_ARTIFACTSDIRECTORY:-}" ]]; then
-          touch "TestsOutput/$tf"
-          cp -av TestsOutput "${SYSTEM_ARTIFACTSDIRECTORY:-}"
+        if [[ "$NUNIT_VERSION" == 3* ]]; then
+          time nunit3-console-3.12.0 --noheader --workers=1 --where "cat != Fail" --work=. Universe.NUnitPipeline.Tests.dll
+          ls -la TestsOutput
+          if [[ -n "${SYSTEM_ARTIFACTSDIRECTORY:-}" ]]; then
+            touch "TestsOutput/$tf"
+            cp -av TestsOutput "${SYSTEM_ARTIFACTSDIRECTORY:-}"
+          fi
+        else 
+          Say --Display-As=Error "Skip Nunit 4.x NET Framwork tests on linux [$tf]";
         fi
       fi
     fi
