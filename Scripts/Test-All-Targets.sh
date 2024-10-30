@@ -15,12 +15,12 @@ echo "${TARGET_FRAMEWORKS_TEST:-}" | awk -FFS=";" 'BEGIN{FS=";"}{for(i=NF;i>=1;i
       if [[ "$tf" = *"."* ]]; then
         Say --Display-As=Error "Skip net core test for [$tf]";
       else
-        time nunit3-console-3.18.3 --noheader --workers=1 --where "cat != Fail" --work=. Universe.NUnitPipeline.Tests.dll
-      fi
-      ls -la TestsOutput
-      if [[ -n "${SYSTEM_ARTIFACTSDIRECTORY:-}" ]]; then
-        touch "TestsOutput/$tf"
-        cp -av TestsOutput "${SYSTEM_ARTIFACTSDIRECTORY:-}"
+        time nunit3-console-3.12.0 --noheader --workers=1 --where "cat != Fail" --work=. Universe.NUnitPipeline.Tests.dll
+        ls -la TestsOutput
+        if [[ -n "${SYSTEM_ARTIFACTSDIRECTORY:-}" ]]; then
+          touch "TestsOutput/$tf"
+          cp -av TestsOutput "${SYSTEM_ARTIFACTSDIRECTORY:-}"
+        fi
       fi
     fi
   popd >/dev/null
