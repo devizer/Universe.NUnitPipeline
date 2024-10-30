@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using nunit::NUnit.Framework;
 using Universe.NUnitPipeline;
-using Universe.NUnitPipeline.Tests;
 
 namespace Tests
 {

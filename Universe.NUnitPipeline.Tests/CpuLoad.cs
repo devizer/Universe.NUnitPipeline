@@ -1,10 +1,10 @@
 using System;
 using System.Diagnostics;
-using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using Universe.NUnitPipeline;
 
-namespace Universe.NUnitPipeline.Tests
+namespace Tests
 {
     public class CpuLoad
     {
