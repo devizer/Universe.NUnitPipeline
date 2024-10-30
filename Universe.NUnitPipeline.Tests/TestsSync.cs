@@ -65,7 +65,7 @@ namespace Tests
                 Console.WriteLine($"TIMESPAN {timeSpan} --> \"{ElapsedFormatter.FormatElapsed(timeSpan)}\"");
             }
 
-            TestCleaner.OnDispose("ASYNC Delete File AsyncTemporary.Temp (from test body)", () => File.WriteAllText($"AsyncTemporary {DateTime.Now:yyyy-MM-dd HH-mm-ss}.Tmp", "OK"), TestDisposeOptions.AsyncTestCase);
+            TestCleaner.OnDispose("ASYNC Delete File AsyncTemporary.Temp (from test body)", () => {}, TestDisposeOptions.AsyncTestCase);
             TestCleaner.OnDispose("Delete File GlobalAsyncTemporary.Temp (from test body)", () => File.Delete("GlobalAsyncTemporary.Temp"), TestDisposeOptions.AsyncGlobal);
         }
 
