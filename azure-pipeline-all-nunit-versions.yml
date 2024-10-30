@@ -442,6 +442,8 @@ jobs:
 
 
 - job: 'Combine'
+  variables:
+      COMMITS_COUNT: $[ dependencies.Boot.outputs['Bootstrap.COMMITS_COUNT'] ]  
   condition: succeededOrFailed()
   pool:
     vmImage: 'ubuntu-latest'
@@ -461,7 +463,7 @@ jobs:
 
   - bash: |
        set -eu; set -o pipefail;
-       toDirectory=$SYSTEM_ARTIFACTSDIRECTORY/nupkg
+       toDirectory=$SYSTEM_ARTIFACTSDIRECTORY/nupkg-v.$COMMITS_COUNT
        mkdir -p $toDirectory
        for ext in nupkg snupkg; do
          find $SYSTEM_ARTIFACTSDIRECTORY/All -name "*.$ext" -exec cp -v {} $toDirectory \;
