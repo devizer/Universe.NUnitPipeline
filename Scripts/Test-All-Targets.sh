@@ -13,5 +13,6 @@ errors="(cat "$error" | wc -l)"
 echo "TOTAL ERRORS: $errors"
 if [ $errors -ne 0 ]; then exit 666; fi
 Say "Pack"
-7z a -mx=1 "$SYSTEM_ARTIFACTSDIRECTORY/Tests.7z" "bin/public/*"
+cd bin${PATH_SEPARATOR_CHAR}public
+7z a -mx=2 -ms=on -mqs=on "$SYSTEM_ARTIFACTSDIRECTORY/Tests-v$SELF_VERSION.7z"
 popd >/dev/null
