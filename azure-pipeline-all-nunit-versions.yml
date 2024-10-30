@@ -381,6 +381,15 @@ jobs:
 
   - bash: |
       set -eu; set -o pipefail
+      Say "Packing $SELF_VERSION"
+      pushd Universe.NUnitPipeline
+      dotnet pack -c Release -p:PackageVersion=$SELF_VERSION -p:Version=$SELF_VERSION -p:IncludeSymbols=True -p:SymbolPackageFormat=snupkg
+      popd
+    condition: eq(variables['Agent.OS'], 'Linux')
+    displayName: 'Pack (S)NuGet'
+
+  - bash: |
+      set -eu; set -o pipefail
       export DISABLE_ANSI_COLORS=True
       mkdir -p $HOME/nunit
       pushd $HOME/nunit
@@ -412,25 +421,17 @@ jobs:
     displayName: 'Test by Console Runner'
 
   - bash: |
-      # if Tests fails than nugets are not produced
-      set -eu; set -o pipefail
-      Say "Packing $SELF_VERSION"
-      pushd Universe.NUnitPipeline
-      dotnet pack -c Release -p:PackageVersion=$SELF_VERSION -p:Version=$SELF_VERSION -p:IncludeSymbols=True -p:SymbolPackageFormat=snupkg
-      popd
-    condition: eq(variables['Agent.OS'], 'Linux')
-    displayName: 'Pack (S)NuGet'
-
-  - bash: |
        set -eu; set -o pipefail
        cd "$BUILD_SOURCESDIRECTORY"
        7z a "$SYSTEM_ARTIFACTSDIRECTORY/Sources $AGENT_JOBNAME $BUILD_BUILDNUMBER.7z" -mx=5 -ms=on -mqs=on
+    condition: succeededOrFailed()
+    displayName: 'Deploy Sources'
 
+  - bash: |
        for ext in nupkg snupkg; do
          find . -name "*.$ext" -exec cp -v {} $SYSTEM_ARTIFACTSDIRECTORY \;
        done
-    condition: succeededOrFailed()
-    displayName: 'Pack Artifact'
+    displayName: 'Deploy Nuget Packages'
 
   - task: PublishBuildArtifacts@1
     condition: succeededOrFailed()
