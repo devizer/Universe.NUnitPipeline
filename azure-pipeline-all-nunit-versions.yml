@@ -375,6 +375,12 @@ jobs:
 
   - bash: |
       set -eu; set -o pipefail
+      cd Scripts
+      . Test-All-Targets.sh
+    displayName: 'Test All the Target Frameworks'
+
+  - bash: |
+      set -eu; set -o pipefail
       export DISABLE_ANSI_COLORS=True
       mkdir -p $HOME/nunit
       pushd $HOME/nunit
@@ -404,13 +410,6 @@ jobs:
       cat "$file"
     condition: succeededOrFailed()
     displayName: 'Test by Console Runner'
-
-  - bash: |
-      set -eu; set -o pipefail
-      cd Scripts
-      . Test-All-Targets.sh
-    # condition: eq(variables['Agent.OS'], 'Linux')
-    displayName: 'Test All the Target Frameworks'
 
   - bash: |
       # if Tests fails than nugets are not produced
