@@ -10,6 +10,16 @@ echo "${TARGET_FRAMEWORKS_TEST:-}" | awk -FFS=";" 'BEGIN{FS=";"}{for(i=NF;i>=1;i
   count=$((count+1))
   Say "($count) Building tests for [$tf] v$SELF_VERSION into '$out'"
   dotnet build -f $tf -c Release -verbosity:quiet -p:PackageVersion=$SELF_VERSION -p:Version=$SELF_VERSION -o "$out" Universe.NUnitPipeline.Tests.csproj 2>&1 | { grep -v ": warning"; true; } | { grep -v -e '^\s*$'; true; } || { echo "Errrrrrrrrrrrrrrrrrrrrrrooooooooor" | tee -a "$error"; }
+  pushd "$out" >/dev/null
+    if [[ "$(uname -s)" == Linux ]]; then
+      time nunit3-console --noheader --workers=1 --where "cat != Fail" --work=. Universe.NUnitPipeline.Tests.dll
+      ls -la TestsOutput
+      if [[ -n "${SYSTEM_ARTIFACTSDIRECTORY:-}" ]]; then
+        touch "TestsOutput/$tf"
+        cp -av TestsOutput "${SYSTEM_ARTIFACTSDIRECTORY:-}"
+      fi
+    fi
+  popd >/dev/null
 done
 errors="$(cat "$error" | wc -l)"
 echo "TOTAL ERRORS: $errors"
