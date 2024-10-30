@@ -10,7 +10,7 @@ echo "${TARGET_FRAMEWORKS_TEST:-}" | awk -FFS=";" 'BEGIN{FS=";"}{for(i=NF;i>=1;i
   # mkdir -p "$out"
   count=$((count+1))
   Say "($count) Building tests for [$tf] v$SELF_VERSION into '$out'"
-  dotnet build -f $tf -c Release -verbosity:quiet -p:PackageVersion=$SELF_VERSION -p:Version=$SELF_VERSION -o "$out" Universe.NUnitPipeline.Tests.csproj 2>&1 | { grep -v ": warning"; true; } | { grep -v -e '^\s*$'; true; } || { echo "Errrrrrrrrrrrrrrrrrrrrrrooooooooor" | tee -a "$error"; }
+  dotnet build --force --no-incremental -f $tf -c Release -verbosity:quiet -p:PackageVersion=$SELF_VERSION -p:Version=$SELF_VERSION -o "$out" Universe.NUnitPipeline.Tests.csproj 2>&1 | { grep -v ": warning"; true; } | { grep -v -e '^\s*$'; true; } || { echo "Errrrrrrrrrrrrrrrrrrrrrrooooooooor" | tee -a "$error"; }
 done
 errors="$(cat "$error" | wc -l)"
 echo "TOTAL ERRORS: $errors"
