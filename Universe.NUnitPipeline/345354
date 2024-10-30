@@ -1,5 +1,0 @@
-Severity	Code	Description	Project	File	Line	Suppression State
-Error (active)	CS0433	
-
-The type 'Action' exists in both 'NUnit.System.Linq, Version=0.6.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb' and 'Theraot.Core, Version=3.2.11.0, Culture=neutral, PublicKeyToken=b1460dff8a28f7a7'	Universe.NUnitPipeline (net20)	
-The type 'Action' exists in both 'NUnit.System.Linq' and 'Theraot.Core'	Universe.NUnitPipeline (net20)	

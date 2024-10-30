@@ -19,7 +19,7 @@
 		  <!--<Aliases>nunit</Aliases>-->
 		</PackageReference>
 		<PackageReference Include="Universe.CpuUsage" Version="2.2.497.598" />
-		<PackageReference Include="Universe.GenericTreeTable" Version="1.1.12" />
+		<PackageReference Include="Universe.GenericTreeTable" Version="1.1.14" />
 		<None Include="Icon\NUnit.Pipeline.png" Pack="true" PackagePath="Icon" />
 	</ItemGroup>
 

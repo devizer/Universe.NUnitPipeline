@@ -76,30 +76,11 @@ namespace Universe.NUnitPipeline
 			string plainReport = null;
 			try
 			{
-				var rawList = DetailsReportStorage.Instance.GetRawRows();
-				ConsoleTable ct = new ConsoleTable("Test", "Status",
-					"-Duration", "-CPU (%)", "-CPU (ms)", "-User", "-Kernel",
-					"Message"
-				);
-
-				foreach (var detail in rawList)
-				{
-					bool hasCpuUsage = detail.UserTime.HasValue || detail.KernelTime.HasValue;
-					double totalCpuUsage = detail.UserTime.GetValueOrDefault() + detail.KernelTime.GetValueOrDefault();
-					double? percents = detail.Duration > 0 ? totalCpuUsage / detail.Duration : (double?)null;
-					ct.AddRow(
-						detail.Key.ToString(),
-						detail.OutcomeStatus,
-						Math.Round(1000 * detail.Duration, 1),
-						percents * 100,
-						1000 * totalCpuUsage,
-						1000 * detail.UserTime,
-						1000 * detail.KernelTime,
-						detail.ErrorMessage
-					);
-				}
-
-				plainReport = ct.ToString();
+				List<DetailsReportRow> reportCopyRaw = DetailsReportStorage.Instance.GetRawRows();
+				var builder = new TreeTableBuilder<string, DetailsReportRow>(TestsTreeConfiguration.Instance);
+				reportCopyRaw = reportCopyRaw.OrderBy(x => x.Key.ToString()).ToList();
+				var consoleTable = builder.BuildPlain(reportCopyRaw.Select(x => new KeyValuePair<IEnumerable<string>, DetailsReportRow>(x.Key.Path, x)));
+				return consoleTable.ToString();
 			}
 			catch (Exception ex)
 			{

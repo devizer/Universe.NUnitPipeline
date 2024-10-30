@@ -3,7 +3,7 @@
   <Import Project="..\Shared-Files\Net-2x-4x-Support.proj" />
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net6.0;net48;net462;netcoreapp1.0;netcoreapp1.1;net2.0</TargetFrameworks>
+    <TargetFrameworks>net8.0;net6.0;net48;net462;netcoreapp1.0;netcoreapp1.1;net20;net35</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
     <RootNamespace>Tests</RootNamespace>

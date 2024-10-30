@@ -1,1 +1,1 @@
-call run-net-specific-fw.cmd net48 v3.18
+call run-net-specific-fw.cmd net48 v3.18 Full
