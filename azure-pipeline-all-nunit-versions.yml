@@ -410,7 +410,7 @@ jobs:
       cd Scripts
       . Test-All-Targets.sh
     # condition: eq(variables['Agent.OS'], 'Linux')
-    displayName: 'Test All the Target Framworks'
+    displayName: 'Test All the Target Frameworks'
 
   - bash: |
       # if Tests fails than nugets are not produced

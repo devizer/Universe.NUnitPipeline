@@ -1,3 +1,4 @@
+set -eu; set -o pipefail
 pushd $BUILD_SOURCESDIRECTORY >/dev/null
 cd Universe.NUnitPipeline.Tests
 count=0; 
@@ -10,7 +11,7 @@ echo "${TARGET_FRAMEWORKS_TEST:-}" | awk -FFS=";" 'BEGIN{FS=";"}{for(i=NF;i>=1;i
   Say "($count) Building tests for [$tf] v$SELF_VERSION into '$out'"
   dotnet build -f $tf -c Release -verbosity:quiet -p:PackageVersion=$SELF_VERSION -p:Version=$SELF_VERSION -o "$out" Universe.NUnitPipeline.Tests.csproj 2>&1 | { grep -v ": warning"; true; } | { grep -v -e '^\s*$'; true; } || { echo "Errrrrrrrrrrrrrrrrrrrrrror" | tee -a "$error"; }
 done
-errors="(cat "$error" | wc -l)"
+errors="$(cat "$error" | wc -l)"
 echo "TOTAL ERRORS: $errors"
 if [ "$errors" -ne 0 ]; then exit 666; fi
 Say "Pack"
