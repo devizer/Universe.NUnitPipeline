@@ -3,7 +3,7 @@ cd Universe.NUnitPipeline.Tests
 count=0; 
 error="${HOME}${PATH_SEPARATOR_CHAR}Error-TF.tmp"
 echo "${TARGET_FRAMEWORKS_TEST:-}" | awk -FFS=";" 'BEGIN{FS=";"}{for(i=NF;i>=1;i--){print $i}}' | while IFS= read -r tf; do
-  out="$(pwd)${PATH_SEPARATOR_CHAR}bin${PATH_SEPARATOR_CHAR}public${PATH_SEPARATOR_CHAR}$tf"
+  out="bin${PATH_SEPARATOR_CHAR}public${PATH_SEPARATOR_CHAR}$tf"
   mkdir -p "$out"
   count=$((count+1))
   Say "($count) Building tests for [$tf] v$SELF_VERSION into '$out'"
