@@ -303,6 +303,7 @@ jobs:
       echo "##vso[task.setvariable variable=PATH_SEPARATOR_CHAR;]$PATH_SEPARATOR_CHAR"
       echo "PATH_SEPARATOR_CHAR: [$PATH_SEPARATOR_CHAR]"
 
+      mono --version || true
       dotnet --info
     # condition: eq(variables['Agent.OS'], 'Linux')
     displayName: 'Bootstrap'
