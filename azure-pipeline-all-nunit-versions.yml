@@ -298,6 +298,11 @@ jobs:
       Say "COMMITS_COUNT: [$COMMITS_COUNT]"
       echo "uname -r: [$(uname -r)]"
       echo "uname -s: [$(uname -s)]"
+      PATH_SEPARATOR_CHAR='/'
+      [[ "$(uname -s)" == "MSYS"* || "$(uname -s)" == "MINGW"* ]] && PATH_SEPARATOR_CHAR='\'
+      echo "##vso[task.setvariable variable=PATH_SEPARATOR_CHAR;]$PATH_SEPARATOR_CHAR"
+      echo "PATH_SEPARATOR_CHAR: [$PATH_SEPARATOR_CHAR]"
+
       dotnet --info
     # condition: eq(variables['Agent.OS'], 'Linux')
     displayName: 'Bootstrap'
