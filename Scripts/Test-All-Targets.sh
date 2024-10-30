@@ -11,7 +11,7 @@ echo "${TARGET_FRAMEWORKS_TEST:-}" | awk -FFS=";" 'BEGIN{FS=";"}{for(i=NF;i>=1;i
 done
 errors="(cat "$error" | wc -l)"
 echo "TOTAL ERRORS: $errors"
-if [ $errors -ne 0 ]; then exit 666; fi
+if [ "$errors" -ne 0 ]; then exit 666; fi
 Say "Pack"
 cd bin${PATH_SEPARATOR_CHAR}public
 7z a -mx=2 -ms=on -mqs=on "$SYSTEM_ARTIFACTSDIRECTORY/Tests-v$SELF_VERSION.7z"
