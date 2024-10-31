@@ -362,7 +362,7 @@ jobs:
       pushd Universe.NUnitPipeline.Tests
       try-and-retry dotnet restore -v:q
       # msbuild /t:Build /p:Configuration=Release /verbosity:quiet Universe.NUnitPipeline.Tests.csproj
-      dotnet build -c Release -verbosity:quiet Universe.NUnitPipeline.Tests.csproj 2>&1 | { grep -v ": warning"; true; }
+      dotnet build -p:PackageVersion=$SELF_VERSION -p:Version=$SELF_VERSION -c Release -verbosity:quiet Universe.NUnitPipeline.Tests.csproj 2>&1 | { grep -v ": warning"; true; }
       popd
     # condition: eq(variables['Agent.OS'], 'Linux')
     displayName: 'Build'
