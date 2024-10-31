@@ -409,7 +409,7 @@ jobs:
       cd Universe.NUnitPipeline.Tests
       Say "Building"
       Reset-Target-Framework -fw net8.0
-      dotnet build -f net8.0 -c Release
+      dotnet build -f net8.0 -c Release -p:PackageVersion=$SELF_VERSION -p:Version=$SELF_VERSION
       cd bin/Release/net8.0
       if [[ "$AGENT_OS" == "Windows_NT" ]]; then
         invoke="$nunitexe"
