@@ -459,6 +459,7 @@ jobs:
   timeoutInMinutes: 15
   dependsOn:
     - TestAndPack
+    - Boot
 
   steps: 
 
