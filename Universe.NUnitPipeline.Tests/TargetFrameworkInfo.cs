@@ -17,6 +17,7 @@ namespace Tests
 		public static string ShortNUnitTarget => GetShortTargetFramework(typeof(ITest));
 		
 		public static string PipelineTarget => GetShortTargetFramework(typeof(NUnitPipelineChain));
+		public static string TestTarget => GetShortTargetFramework(typeof(TargetFrameworkInfo));
 		public static string PipelineVersion => GetVersion(typeof(NUnitPipelineChain));
 
 		public static string NUnitVersion => GetVersion(typeof(ITest));
