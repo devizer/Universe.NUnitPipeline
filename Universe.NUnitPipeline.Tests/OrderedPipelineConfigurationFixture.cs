@@ -2,6 +2,7 @@ extern alias nunit;
 using System.Collections.Generic;
 using System.IO;
 using nunit::NUnit.Framework;
+using Universe.CpuUsage;
 using Universe.NUnitPipeline;
 
 [assembly: NUnitPipelineAction]
@@ -13,7 +14,8 @@ namespace Tests
 	{
 		public static void Configure()
 		{
-			NUnitPipelineChain.InternalReportFile = Path.Combine("TestsOutput", $"{TargetFrameworkInfo.TestTarget} Flow꞉ Pipeline=[{TargetFrameworkInfo.PipelineVersion} for {TargetFrameworkInfo.PipelineTarget}] NUnit=[{TargetFrameworkInfo.NUnitVersion} for {TargetFrameworkInfo.ShortNUnitTarget}]");
+			var osPlatform = Universe.CrossInfo.ThePlatform;
+			NUnitPipelineChain.InternalReportFile = Path.Combine("TestsOutput", $"{TargetFrameworkInfo.TestTarget} Flow on {osPlatform}꞉ Pipeline=[{TargetFrameworkInfo.PipelineVersion} for {TargetFrameworkInfo.PipelineTarget}] NUnit=[{TargetFrameworkInfo.NUnitVersion} for {TargetFrameworkInfo.ShortNUnitTarget}]");
 
 			NUnitPipelineChain.OnStart = new List<NUnitPipelineChainAction>()
 			{
