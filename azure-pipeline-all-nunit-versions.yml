@@ -371,7 +371,7 @@ jobs:
       set -eu; set -o pipefail
       cd Universe.NUnitPipeline.Tests
       export ENABLE_ANSI_COLORS=True
-      dotnet test -c Release -f $FWVERSION --filter "TestCategory !~ Fail" --logger "console;verbosity=normal;consoleLoggerParameters=ErrorsOnly" -verbosity:minimal 
+      dotnet test -p:PackageVersion=$SELF_VERSION -p:Version=$SELF_VERSION -c Release -f $FWVERSION --filter "TestCategory !~ Fail" --logger "console;verbosity=normal;consoleLoggerParameters=ErrorsOnly" -verbosity:minimal
     # condition: eq(variables['Agent.OS'], 'Linux')
     displayName: 'Test by dotnet test'
 
