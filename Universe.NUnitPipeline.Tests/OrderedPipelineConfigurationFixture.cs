@@ -15,15 +15,19 @@ namespace Tests
 		public static void Configure()
 		{
 			var osPlatform = Universe.CrossInfo.ThePlatform;
-			NUnitPipelineChain.InternalReportFile = Path.Combine("TestsOutput", $"{TargetFrameworkInfo.TestTarget} Flow on {osPlatform}꞉ Pipeline=[{TargetFrameworkInfo.PipelineVersion} for {TargetFrameworkInfo.PipelineTarget}] NUnit=[{TargetFrameworkInfo.NUnitVersion} for {TargetFrameworkInfo.ShortNUnitTarget}]");
+			NUnitPipelineConfiguration.GetService<NUnitReportConfiguration>().InternalReportFile =
+				Path.Combine("TestsOutput",
+					$"{TargetFrameworkInfo.TestTarget} Flow on {osPlatform}꞉ Pipeline=[{TargetFrameworkInfo.PipelineVersion} for {TargetFrameworkInfo.PipelineTarget}] NUnit=[{TargetFrameworkInfo.NUnitVersion} for {TargetFrameworkInfo.ShortNUnitTarget}]"
+				);
 
-			NUnitPipelineChain.OnStart = new List<NUnitPipelineChainAction>()
+			NUnitPipelineChain chain = NUnitPipelineConfiguration.GetService<NUnitPipelineChain>();
+			chain.OnStart = new List<NUnitPipelineChainAction>()
 			{
 				new NUnitPipelineChainAction() { Title = CpuUsageInterceptor.Title, Action = CpuUsageInterceptor.OnStart },
 				new NUnitPipelineChainAction() { Title = CpuUsageVizInterceptor.Title, Action = CpuUsageVizInterceptor.OnStart },
 			};
 
-			NUnitPipelineChain.OnEnd = new List<NUnitPipelineChainAction>()
+			chain.OnEnd = new List<NUnitPipelineChainAction>()
 			{
 				new NUnitPipelineChainAction() { Title = CpuUsageInterceptor.Title, Action = CpuUsageInterceptor.OnFinish },
 				new NUnitPipelineChainAction() { Title = CpuUsageVizInterceptor.Title, Action = CpuUsageVizInterceptor.OnFinish },

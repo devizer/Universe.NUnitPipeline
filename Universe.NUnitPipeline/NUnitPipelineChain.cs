@@ -2,17 +2,15 @@ using System.Collections.Generic;
 
 namespace Universe.NUnitPipeline
 {
-    public static class NUnitPipelineChain
+	public class NUnitPipelineChain
     {
-        static List<NUnitPipelineChainAction> _OnStart;
-        static List<NUnitPipelineChainAction> _OnEnd;
-
-        public static string InternalReportFile { get; set; }
+        List<NUnitPipelineChainAction> _OnStart;
+        List<NUnitPipelineChainAction> _OnEnd;
 
 
 		private static readonly object SyncStart = new object(), SyncEnd = new object();
 
-        public static List<NUnitPipelineChainAction> OnStart
+        public List<NUnitPipelineChainAction> OnStart
         {
             get
             {
@@ -21,7 +19,7 @@ namespace Universe.NUnitPipeline
             set { lock (SyncStart) _OnStart = value; }
         }
 
-        public static List<NUnitPipelineChainAction> OnEnd
+        public List<NUnitPipelineChainAction> OnEnd
         {
             get
             {

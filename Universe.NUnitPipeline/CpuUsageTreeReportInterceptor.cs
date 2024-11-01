@@ -40,13 +40,14 @@ namespace Universe.NUnitPipeline
 
 			if (stage.NUnitActionAppliedTo == NUnitActionAppliedTo.Assembly)
 			{
+				var internalReportFile = NUnitPipelineConfiguration.GetService<NUnitReportConfiguration>().InternalReportFile;
 				// Build and Store Plain Table
 				var plainReport = BuildPlainReport();
-				var plainReportFileName = NUnitPipelineChain.InternalReportFile + ".Plain.Summary.txt";
+				var plainReportFileName = internalReportFile + ".Plain.Summary.txt";
 				FileEx.WriteAll(plainReportFileName, plainReport);
 
 				var treeReport = BuildTreeReport();
-				var treeReportFileName = NUnitPipelineChain.InternalReportFile + ".Tree.Summary.txt";
+				var treeReportFileName = internalReportFile + ".Tree.Summary.txt";
 				FileEx.WriteAll(treeReportFileName, treeReport);
 			}
 

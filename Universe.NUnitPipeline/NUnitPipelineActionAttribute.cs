@@ -30,7 +30,7 @@ namespace Universe.NUnitPipeline
             BuildNUnitStage(test, NUnitActionSide.Start, out var stage, out var counter);
             if (counter != 1) return;
 
-            var actions = NUnitPipelineChain.OnStart;
+            var actions = NUnitPipelineConfiguration.GetService<NUnitPipelineChain>().OnStart;
             if (actions == null) return;
             foreach (var a in actions)
             {
@@ -51,7 +51,7 @@ namespace Universe.NUnitPipeline
 			var resultOutcome = TestContext.CurrentContext.Result.Outcome.ToString();
 			test.GetPropertyOrAdd("Test Result", t => new TestResult { ResultMessage = resultMessage, ResultOutcome = resultOutcome });
 
-			var actions = NUnitPipelineChain.OnEnd;
+			var actions = NUnitPipelineConfiguration.GetService<NUnitPipelineChain>().OnEnd;
             if (actions == null) return;
             foreach (var a in actions)
             {
@@ -61,10 +61,12 @@ namespace Universe.NUnitPipeline
 
             if (stage.NUnitActionAppliedTo == NUnitActionAppliedTo.Assembly)
             {
-	            var files = new[] 
+	            var internalReportFile = NUnitPipelineConfiguration.GetService<NUnitReportConfiguration>().InternalReportFile;
+
+				var files = new[] 
 	            {
-		            new { Content = InternalLog.InternalBuffer.ToString(), Path = NUnitPipelineChain.InternalReportFile + ".Internal.Log" },
-		            new { Content = InternalLog.Buffer.ToString(), Path = NUnitPipelineChain.InternalReportFile + ".Log" }
+		            new { Content = InternalLog.InternalBuffer.ToString(), Path = internalReportFile + ".Internal.Log" },
+		            new { Content = InternalLog.Buffer.ToString(), Path = internalReportFile + ".Log" }
 	            };
 
 	            foreach (var file in files)
