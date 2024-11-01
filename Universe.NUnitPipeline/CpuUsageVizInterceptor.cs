@@ -30,7 +30,7 @@ namespace Universe.NUnitPipeline
 			else
 	            emptyLine = Environment.NewLine;
 
-            OutputConsole.WriteLine($"{emptyLine}→ {stage.FormattedIndex} {stage.FixtureFullName}::{stage.TestName} is starting");
+            PipelineLog.WriteLine($"{emptyLine}→ {stage.FormattedIndex} {stage.FixtureFullName}::{stage.TestName} is starting");
         }
         public static void OnFinish(NUnitStage stage, ITest test)
         {
@@ -59,7 +59,7 @@ namespace Universe.NUnitPipeline
             var outcomeStatus = TestContext.CurrentContext.Result.Outcome.Status.ToString().ToUpper();
             outcomeStatus = HighlightedOutcomeStatus(outcomeStatus);
 
-            OutputConsole.WriteLine($"← {stage.FormattedIndex} {stage.FixtureFullName}::{AsYellow(stage.TestName)} >{outcomeStatus}< in {elapsedFormatted}{cpuUsageHumanized}");
+            PipelineLog.WriteLine($"← {stage.FormattedIndex} {stage.FixtureFullName}::{AsYellow(stage.TestName)} >{outcomeStatus}< in {elapsedFormatted}{cpuUsageHumanized}");
         }
 
         static string AsYellow(string arg)

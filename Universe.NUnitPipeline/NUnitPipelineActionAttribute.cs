@@ -34,7 +34,7 @@ namespace Universe.NUnitPipeline
             if (actions == null) return;
             foreach (var a in actions)
             {
-                DebugConsole.WriteLine($"[DEBUG Pipeline.Action:OnStart] Invoke START Action '{a.Title}' for `{stage.InternalKey}` ({stage.NUnitActionAppliedTo})");
+                PipelineLog.LogTrace($"[DEBUG Pipeline.Action:OnStart] Invoke START Action '{a.Title}' for `{stage.InternalKey}` ({stage.NUnitActionAppliedTo})");
                 a.Action(stage, test);
             }
         }
@@ -55,7 +55,7 @@ namespace Universe.NUnitPipeline
             if (actions == null) return;
             foreach (var a in actions)
             {
-                DebugConsole.WriteLine($"[DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action '{a.Title}' for `{stage.InternalKey}` ({stage.NUnitActionAppliedTo})");
+                PipelineLog.LogTrace($"[DEBUG Pipeline.Action:OnFinish] Invoke FINISH Action '{a.Title}' for `{stage.InternalKey}` ({stage.NUnitActionAppliedTo})");
                 a.Action(stage, test);
             }
 
@@ -162,7 +162,7 @@ namespace Universe.NUnitPipeline
             }
 
             var scopeAsString = string.IsNullOrEmpty(test.TestType) ? "" : $" {test.TestType}-scoped";
-			DebugConsole.WriteLine($"[DEBUG Action:On{actionSide}] STAGE {stage.Side} '{stage.NUnitActionAppliedTo} Counter={counter}': {stage.FormattedIndex} [{string.Join(", ", stage.StructuredFullName)}] {scopeAsString}");
+			PipelineLog.LogTrace($"[DEBUG Action:On{actionSide}] STAGE {stage.Side} '{stage.NUnitActionAppliedTo} Counter={counter}': {stage.FormattedIndex} [{string.Join(", ", stage.StructuredFullName)}] {scopeAsString}");
         }
 
 

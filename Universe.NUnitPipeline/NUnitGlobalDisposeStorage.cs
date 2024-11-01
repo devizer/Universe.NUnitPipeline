@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Universe.NUnitPipeline
 {
-    internal class NUnitGlobalDisposeStorage
+	internal class NUnitGlobalDisposeStorage
     {
         private static Dictionary<string, List<System.Action>> OnDisposeList = new Dictionary<string, List<System.Action>>();
         private static readonly object OnDisposeListSync = new object();

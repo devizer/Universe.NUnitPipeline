@@ -4,11 +4,10 @@ using nunit::NUnit.Framework;
 using System;
 using System.Diagnostics;
 using System.Threading;
-using Universe.NUnitPipeline.Shared;
 
 namespace Universe.NUnitPipeline
 {
-    [Flags]
+	[Flags]
     public enum TestDisposeOptions
     {
         Global = 1,
@@ -80,20 +79,20 @@ namespace Universe.NUnitPipeline
                 {
                     action();
                     var msec = sw.ElapsedTicks * 1000d / Stopwatch.Frequency;
-                    OutputConsole.WriteLine($"[{prefix}] {title} success (took {msec:n1} milliseconds)");
+                    PipelineLog.WriteLine($"[{prefix}] {title} success (took {msec:n1} milliseconds)");
                 }
                 catch (Exception ex)
                 {
                     var msec = sw.ElapsedTicks * 1000d / Stopwatch.Frequency;
                     var err = isIgnoringError ? $". [{ex.GetType()}] {ex.Message}" : Environment.NewLine + ex;
-                    OutputConsole.WriteLine($"[{prefix}] {title} failed (took {msec:n1} milliseconds){err}");
+                    PipelineLog.WriteLine($"[{prefix}] {title} failed (took {msec:n1} milliseconds){err}");
                 }
             };
 
             var actionWrapped = actionWithLog;
             if (needAsync)
             {
-	            OutputConsole.WriteLine($"[Test Cleaner] Postpone asynchronously {title} for KEY='{collectionKey}'");
+	            PipelineLog.WriteLine($"[Test Cleaner] Postpone asynchronously {title} for KEY='{collectionKey}'");
                 ManualResetEventSlim manualWait = new ManualResetEventSlim(false);
                 AsyncDisposeWaiter.AddWaiter(manualWait.WaitHandle);
                 actionWrapped = () =>
@@ -113,7 +112,7 @@ namespace Universe.NUnitPipeline
             }
             else
             {
-	            OutputConsole.WriteLine($"[Test Cleaner] Enlisted dispose {title} for KEY='{collectionKey}'");
+	            PipelineLog.WriteLine($"[Test Cleaner] Enlisted dispose {title} for KEY='{collectionKey}'");
             }
 
 

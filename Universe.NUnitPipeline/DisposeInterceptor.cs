@@ -4,13 +4,12 @@ using nunit::NUnit.Framework.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Universe.NUnitPipeline.Shared;
 
 
 
 namespace Universe.NUnitPipeline
 {
-    public class DisposeInterceptor
+	public class DisposeInterceptor
     {
         public static readonly string Title = "Dispose";
 
@@ -40,16 +39,16 @@ namespace Universe.NUnitPipeline
             }
 
             List<Action> actionList = NUnitGlobalDisposeStorage.FetchDisposeActions(collectionKey);
-            DebugConsole.WriteLine($"[DISPOSE] Starting Dispose '{collectionKey}'. Actions: \"{actionList?.Count}\"");
+            PipelineLog.LogTrace($"[DISPOSE] Starting Dispose '{collectionKey}'. Actions: \"{actionList?.Count}\"");
 
             if (actionList != null && actionList.Count > 0)
             {
-                if (isGlobalDispose) OutputConsole.WriteLine($"{Environment.NewLine}[Dispose] Starting Global Dispose");
+                if (isGlobalDispose) PipelineLog.WriteLine($"{Environment.NewLine}[Dispose] Starting Global Dispose");
                 Stopwatch sw = Stopwatch.StartNew();
                 foreach (var action in actionList) action();
                 var msec = sw.ElapsedTicks * 1000d / Stopwatch.Frequency;
                 if (isGlobalDispose)
-	                OutputConsole.WriteLine($"[Dispose {collectionKey}] Completed in {msec:n1} milliseconds");
+	                PipelineLog.WriteLine($"[Dispose {collectionKey}] Completed in {msec:n1} milliseconds");
             }
 
             if (isGlobalDispose)
@@ -59,11 +58,11 @@ namespace Universe.NUnitPipeline
                 {
                     if (countAsyncWaiters.Incomplete > 0)
                     {
-	                    OutputConsole.WriteLine($"[Global Dispose] Waiting for {countAsyncWaiters.Incomplete} incomplete async cleaner(s). Already completed: {countAsyncWaiters.Completed}");
+	                    PipelineLog.WriteLine($"[Global Dispose] Waiting for {countAsyncWaiters.Incomplete} incomplete async cleaner(s). Already completed: {countAsyncWaiters.Completed}");
                         AsyncDisposeWaiter.WaitAll();
                     }
 
-                    OutputConsole.WriteLine($"[Global Dispose] All the {countAsyncWaiters.Total} async cleaner(s) is (are) finished");
+                    PipelineLog.WriteLine($"[Global Dispose] All the {countAsyncWaiters.Total} async cleaner(s) is (are) finished");
                 }
             }
 

@@ -9,6 +9,7 @@ namespace Universe.NUnitPipeline
 {
 	public static class NUnitPipelineConfiguration
 	{
+		// TODO: Concurrent Dictionary
 		private static Dictionary<object, Lazy<object>> Services = new Dictionary<object, Lazy<object>>();
 
 		static NUnitPipelineConfiguration()

@@ -10,7 +10,7 @@ namespace Universe.NUnitPipeline
 
 		private static readonly object SyncStart = new object(), SyncEnd = new object();
 
-        public List<NUnitPipelineChainAction> OnStart
+        public virtual List<NUnitPipelineChainAction> OnStart
         {
             get
             {
@@ -19,7 +19,7 @@ namespace Universe.NUnitPipeline
             set { lock (SyncStart) _OnStart = value; }
         }
 
-        public List<NUnitPipelineChainAction> OnEnd
+        public virtual List<NUnitPipelineChainAction> OnEnd
         {
             get
             {

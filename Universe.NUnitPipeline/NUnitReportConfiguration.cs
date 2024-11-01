@@ -2,6 +2,6 @@ namespace Universe.NUnitPipeline
 {
 	public class NUnitReportConfiguration
 	{
-		public string InternalReportFile { get; set; }
+		public virtual string InternalReportFile { get; set; }
 	}
 }
