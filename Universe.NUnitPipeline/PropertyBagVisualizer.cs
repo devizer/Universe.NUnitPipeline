@@ -30,9 +30,11 @@ namespace Universe.NUnitPipeline
                 if (item != null)
                 {
                     ret = $"{item.GetType()}[] Length={copy.Length}";
-                    if (item is NUnitTestCaseStateExtensions.MutableValue mv)
+                    if (item is NUnitTestCaseStateExtensions.MutableDictionary md)
                     {
-                        ret = $"{(mv.Value == null ? "mutable null" : $"[{mv.Value.GetType().Name} {{{mv.Value}}}]")}";
+                        // ret = $"{(mv.Value == null ? "mutable null" : $"[{mv.Value.GetType().Name} {{{mv.Value}}}]")}";
+                        var keys = md.Values.Keys.Select(k => $"\"{k}\"").ToArray();
+                        ret = $"MutableDictionary {{{string.Join(", ", keys)}}}";
                     }
                 }
             }

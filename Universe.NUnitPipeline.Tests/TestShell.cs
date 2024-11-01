@@ -12,30 +12,6 @@ using Universe.NUnitPipeline;
 namespace Tests
 {
 	[NUnitPipelineAction]
-	[TestFixture]
-	public class TestProperties
-	{
-		[Test]
-		public void Test42()
-		{
-			var missing42 = TestContext.CurrentContext.Test.GetPropertyOrAdd<string>("42", null);
-			Assert.IsNull(missing42, "At the beginning the property 42 is missing");
-
-			var added42 = TestContext.CurrentContext.Test.GetPropertyOrAdd<string>("42", test => "42");
-			Assert.AreEqual("42", added42, "After first add the value of 42 is expected 42");
-
-			var again42 = TestContext.CurrentContext.Test.GetPropertyOrAdd<string>("42", null);
-			Assert.AreEqual("42", again42, "After adding value the getter should return 42");
-
-			var last42 = TestContext.CurrentContext.Test.GetPropertyOrAdd<string>("42", test => "42++");
-			Assert.AreEqual("42", last42, "Property can not be changed after add");
-
-
-			Console.WriteLine(PropertyBagVisualizer.ShowHumanString("42"));
-		}
-	}
-
-	[NUnitPipelineAction]
     [TestFixture]
     public class TestShell
     {

@@ -2,80 +2,86 @@ extern alias nunit;
 using nunit::NUnit.Framework.Interfaces;
 using nunit::NUnit.Framework;
 using System;
+using System.Collections.Generic;
 
 namespace Universe.NUnitPipeline
 {
 	extern alias nunit;
 
 	public static class NUnitTestCaseStateExtensions
-    {
-
-        internal class MutableValue
+	{
+		private static readonly string PipelinePropertyName = "NUnitPipelineCollection";
+        internal class MutableDictionary
         {
-            public object Value { get; set; }
+	        public Dictionary<string, object> Values { get; } = new Dictionary<string, object>();
         }
         
         // Mandatory: Should be locked by a Monitor with serializable access
         public static T GetPropertyOrAdd<T>(this ITest test, string propertyName, /* nullable */ Func<ITest, T> getPropertyValue)
         {
-            T state = default(T);
-            bool isFound = false;
-            var tempCopy = test.Properties[propertyName];
+            var tempCopy = test.Properties[PipelinePropertyName];
             // version 1
-            MutableValue mutableValue = null;
+            MutableDictionary mutableDictionary = null;
             foreach (var v2 in tempCopy)
             {
-                if (v2 is MutableValue mv2)
+                if (v2 is MutableDictionary md2)
                 {
-                    mutableValue = mv2;
+	                mutableDictionary = md2;
                     break;
                 }
             }
-            // version 2
-            // var rawArray = (test.Properties[propertyName]).Cast<IEnumerable<object>>().ToArray();
-            // MutableValue mutableValue = rawArray.OfType<MutableValue>().FirstOrDefault();
-            isFound = mutableValue != null;
-            if (isFound) state = (T)(object)mutableValue.Value;
 
-            if (isFound) 
-                return state;
+            bool isDictionaryFound = mutableDictionary != null;
+            if (!isDictionaryFound)
+            {
+	            mutableDictionary = new MutableDictionary();
+				test.Properties.Set(PipelinePropertyName, mutableDictionary);
+            }
+
+            bool isFound = mutableDictionary.Values.TryGetValue(propertyName, out var rawValue);
+            if (isFound)
+	            return (T)(object)rawValue;
             else if (getPropertyValue != null)
             {
-                state = getPropertyValue(test);
-                test.Properties.Add(propertyName, new MutableValue() { Value = state });
-                return state;
+	            T state = getPropertyValue(test);
+	            mutableDictionary.Values[propertyName] = state;
+	            return state;
             }
             else
-                return default(T);
+	            return default(T);
         }
 
         public static T GetPropertyOrAdd<T>(this TestContext.TestAdapter test, string propertyName, /* nullable */ Func<TestContext.TestAdapter, T> getPropertyValue)
         {
-	        T state = default(T);
-	        bool isFound = false;
-	        var tempCopy = test.Properties[propertyName];
+	        var tempCopy = test.Properties[PipelinePropertyName];
 	        // version 1
-	        MutableValue mutableValue = null;
+	        MutableDictionary mutableDictionary = null;
 	        foreach (var v2 in tempCopy)
 	        {
-		        if (v2 is MutableValue mv2)
+		        if (v2 is MutableDictionary md2)
 		        {
-			        mutableValue = mv2;
+			        mutableDictionary = md2;
 			        break;
 		        }
 	        }
-	        // version 2
-	        // var rawArray = (test.Properties[propertyName]).Cast<IEnumerable<object>>().ToArray();
-	        // MutableValue mutableValue = rawArray.OfType<MutableValue>().FirstOrDefault();
-	        isFound = mutableValue != null;
-	        if (isFound) state = (T)(object)mutableValue.Value;
 
+	        bool isDictionaryFound = mutableDictionary != null;
+	        if (!isDictionaryFound)
+	        {
+		        // TODO: No Action or Exception?
+		        if (getPropertyValue != null)
+			        throw new InvalidOperationException($"Can't update value '{propertyName}' outside of pipeline context. Please add assembly and/or class attribute [NUnitPipelineAction]");
+		        else
+			        return default(T);
+	        }
+
+	        bool isFound = mutableDictionary.Values.TryGetValue(propertyName, out var rawValue);
 	        if (isFound)
-		        return state;
+		        return (T)(object)rawValue;
 	        else if (getPropertyValue != null)
 	        {
-		        state = getPropertyValue(test);
-		        test.Properties.Add(propertyName, new MutableValue() { Value = state });
+		        T state = getPropertyValue(test);
+		        mutableDictionary.Values[propertyName] = state;
 		        return state;
 	        }
 	        else
@@ -85,32 +91,29 @@ namespace Universe.NUnitPipeline
 
 		public static void SetProperty<T>(this ITest test, string propertyName, T newValue)
         {
-            T state = default(T);
-            bool isFound = false;
-            var tempCopy = test.Properties[propertyName];
-            // version 1
-            MutableValue mutableValue = null;
-            foreach (var v2 in tempCopy)
-            {
-                if (v2 is MutableValue mv2)
-                {
-                    mutableValue = mv2;
-                    break;
-                }
-            }
-            // version 2
-            // var rawArray = (test.Properties[propertyName]).Cast<IEnumerable<object>>().ToArray();
-            // MutableValue mutableValue = rawArray.OfType<MutableValue>().FirstOrDefault();
-            isFound = mutableValue != null;
-            if (isFound) state = (T)(object)mutableValue.Value;
+	        var tempCopy = test.Properties[PipelinePropertyName];
+	        // version 1
+	        MutableDictionary mutableDictionary = null;
+	        foreach (var v2 in tempCopy)
+	        {
+		        if (v2 is MutableDictionary md2)
+		        {
+			        mutableDictionary = md2;
+			        break;
+		        }
+	        }
 
-            if (isFound)
-                mutableValue.Value = newValue;
-            else
-                test.Properties.Set(propertyName, new MutableValue() { Value = state });
+	        bool isDictionaryFound = mutableDictionary != null;
+	        if (!isDictionaryFound)
+	        {
+		        mutableDictionary = new MutableDictionary();
+		        test.Properties.Set(PipelinePropertyName, mutableDictionary);
+	        }
+
+			mutableDictionary.Values[propertyName] = newValue;
         }
 
-        public static T GetProperty<T>(this TestContext.TestAdapter test, string propertyName)
+		public static T GetProperty<T>(this TestContext.TestAdapter test, string propertyName)
         {
 	        return GetPropertyOrAdd<T>(test, propertyName, null);
         }
