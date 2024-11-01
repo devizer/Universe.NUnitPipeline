@@ -27,8 +27,6 @@ namespace Tests
 			var last42 = TestContext.CurrentContext.Test.GetPropertyOrAdd<string>("42", test => "42++");
 			Assert.AreEqual("42", last42, "Property can not be changed after it is added");
 
-			Assert.That(last42, Is.EqualTo("42"), "Property can not be changed after it is added");
-
 		}
 	}
 }
