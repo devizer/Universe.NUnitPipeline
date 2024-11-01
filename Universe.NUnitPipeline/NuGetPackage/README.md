@@ -1,10 +1,6 @@
 ﻿### Universe.NUnitPipeline 
 Customizable NUnit pipeline for 3.x and 4.x+ NUnit. The main purpose is to measure and report CPU usage.
 
-<img src="https://raw.githubusercontent.com/devizer/Universe.NUnitPipeline/main/Universe.NUnitPipeline/NuGetPackage/Cpu-Usage-Screenshot.png" width="100%"></img>
-
-<img src="https://raw.githubusercontent.com/devizer/Universe.NUnitPipeline/main/Universe.NUnitPipeline/NuGetPackage/Cpu-Usage-Screenshot.png" width="100%" />
-
 ![CPU Usage Tree Report](https://raw.githubusercontent.com/devizer/Universe.NUnitPipeline/main/Universe.NUnitPipeline/NuGetPackage/Cpu-Usage-Screenshot.png)
 
 
