@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Universe.NUnitPipeline;
 
 namespace Universe {
     internal class AsyncDisposeWaiter
@@ -36,7 +38,7 @@ namespace Universe {
             };
         }
 
-        public static void WaitAll()
+        public static int WaitAll()
         {
             List<WaitHandle> copy;
             lock (Sync)
@@ -45,10 +47,22 @@ namespace Universe {
                 Waiters.Clear();
             }
 
-            foreach (var waitHandle in copy)
-            {
-                waitHandle.WaitOne();
-            }
+            // TODO: Move to configuration
+            int timeoutMilliseconds = 5*60*1000;
+			Stopwatch startAt = Stopwatch.StartNew();
+			int countWaiting;
+			do
+			{
+				countWaiting = copy.Count(x => !x.WaitOne(0));
+				if (countWaiting == 0) break;
+				Thread.Sleep(42);
+
+			} while (startAt.ElapsedMilliseconds < timeoutMilliseconds);
+
+			if (countWaiting > 0)
+				PipelineLog.LogTrace($"[DEBUG] Warning! Warning! Warning! {nameof(AsyncDisposeWaiter)}.{nameof(WaitAll)} Timeout ({timeoutMilliseconds / 1000}). {countWaiting} are still incomplete");
+
+			return countWaiting;
         }
     }
 }
