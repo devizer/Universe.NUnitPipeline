@@ -16,17 +16,16 @@ namespace Tests
 			// TODO: Async test
 
 			var missing42 = TestContext.CurrentContext.Test.GetPropertyOrAdd<string>("42", null);
-			Assert.IsNull(missing42, "At the beginning the property 42 is missing");
+			if (missing42 != null) Assert.Fail("At the beginning the property 42 is missing");
 
 			var added42 = TestContext.CurrentContext.Test.GetPropertyOrAdd<string>("42", test => "42");
-			Assert.AreEqual("42", added42, "After first addition of property '42' the value is expected");
+			if (added42 != "42") Assert.Fail("After first addition of property '42' the value is expected");
 
 			var again42 = TestContext.CurrentContext.Test.GetPropertyOrAdd<string>("42", null);
-			Assert.AreEqual("42", again42, "After adding value the getter should return 42");
+			if (again42 != "42") Assert.Fail("After adding value the getter should return 42");
 
 			var last42 = TestContext.CurrentContext.Test.GetPropertyOrAdd<string>("42", test => "42++");
-			Assert.AreEqual("42", last42, "Property can not be changed after it is added");
-
+			if (last42 != "42") Assert.Fail("Property can not be changed after it is added");
 		}
 	}
 }
