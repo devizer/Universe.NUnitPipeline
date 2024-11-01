@@ -11,7 +11,8 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputType>Library</OutputType>
     <NoWarn>CS0162</NoWarn>
-    <PackageIcon>Icon\NUnit.Pipeline.png</PackageIcon>
+    <PackageIcon>NuGetPackage\NUnit.Pipeline.png</PackageIcon>
+    <PackageReadmeFile>NuGetPackage\README.md</PackageReadmeFile>
   </PropertyGroup>
 
 	<ItemGroup>
@@ -20,7 +21,8 @@
 		</PackageReference>
 		<PackageReference Include="Universe.CpuUsage" Version="2.2.497.598" />
 		<PackageReference Include="Universe.GenericTreeTable" Version="1.1.14" />
-		<None Include="Icon\NUnit.Pipeline.png" Pack="true" PackagePath="Icon" />
+		<None Include="NuGetPackage\NUnit.Pipeline.png" Pack="true" PackagePath="NuGetPackage" />
+		<None Include="NuGetPackage\README.md" Pack="true" PackagePath="NuGetPackage" />
 	</ItemGroup>
 
     <PropertyGroup>
@@ -32,7 +34,7 @@
         <PackageProjectUrl>https://github.com/devizer/Universe.NUnitPipeline</PackageProjectUrl>
         <RepositoryUrl>https://github.com/devizer/Universe.NUnitPipeline</RepositoryUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageIconUrl>https://raw.githubusercontent.com/devizer/Universe.NUnitPipeline/main/Universe.NUnitPipeline/Icon/NUnit.Pipeline.png</PackageIconUrl>
+        <PackageIconUrl>https://raw.githubusercontent.com/devizer/Universe.NUnitPipeline/main/Universe.NUnitPipeline/NuGetPackage/NUnit.Pipeline.png</PackageIconUrl>
         <PackageTags>NUnit Extensions</PackageTags>
     </PropertyGroup>
 
