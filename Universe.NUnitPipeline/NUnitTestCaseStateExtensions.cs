@@ -51,7 +51,41 @@ namespace Universe.NUnitPipeline
                 return default(T);
         }
 
-        public static void SetProperty<T>(this ITest test, string propertyName, T newValue)
+        public static T GetPropertyOrAdd<T>(this TestContext.TestAdapter test, string propertyName, /* nullable */ Func<TestContext.TestAdapter, T> getPropertyValue)
+        {
+	        T state = default(T);
+	        bool isFound = false;
+	        var tempCopy = test.Properties[propertyName];
+	        // version 1
+	        MutableValue mutableValue = null;
+	        foreach (var v2 in tempCopy)
+	        {
+		        if (v2 is MutableValue mv2)
+		        {
+			        mutableValue = mv2;
+			        break;
+		        }
+	        }
+	        // version 2
+	        // var rawArray = (test.Properties[propertyName]).Cast<IEnumerable<object>>().ToArray();
+	        // MutableValue mutableValue = rawArray.OfType<MutableValue>().FirstOrDefault();
+	        isFound = mutableValue != null;
+	        if (isFound) state = (T)(object)mutableValue.Value;
+
+	        if (isFound)
+		        return state;
+	        else if (getPropertyValue != null)
+	        {
+		        state = getPropertyValue(test);
+		        test.Properties.Add(propertyName, new MutableValue() { Value = state });
+		        return state;
+	        }
+	        else
+		        return default(T);
+        }
+
+
+		public static void SetProperty<T>(this ITest test, string propertyName, T newValue)
         {
             T state = default(T);
             bool isFound = false;
@@ -104,5 +138,7 @@ namespace Universe.NUnitPipeline
 
             return default(T);
         }
-    }
+
+
+	}
 }
