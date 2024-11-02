@@ -48,18 +48,22 @@ namespace Universe.NUnitPipeline
             double kernel = finalCpuUsage.KernelUsage.TotalMicroSeconds / 1000d;
             double perCents = elapsed.TotalSeconds == 0d ? 0 : (user + kernel) / 1000d / elapsed.TotalSeconds;
 
-            var elapsedFormatted = ElapsedFormatter.FormatElapsed(elapsed);
+            string elapsedFormatted = ElapsedFormatter.FormatElapsed(elapsed);
 
-            var alreadyHasMilliseconds = elapsedFormatted.IndexOf("millisecond", StringComparison.OrdinalIgnoreCase) >= 0;
-            var cpuUsageHumanized =
+            bool alreadyHasMilliseconds = elapsedFormatted.IndexOf("millisecond", StringComparison.OrdinalIgnoreCase) >= 0;
+            string cpuUsageHumanized =
                 hasCpuUsage
                     ? $" (cpu: {perCents * 100:f0}%, {user + kernel:n3} = {user:n3} [user] + {kernel:n3} [kernel]{(!alreadyHasMilliseconds ? " milliseconds" : "")})"
                     : null;
 
-            var outcomeStatus = TestContext.CurrentContext.Result.Outcome.Status.ToString().ToUpper();
-            outcomeStatus = HighlightedOutcomeStatus(outcomeStatus);
+            string outcomeStatus = TestContext.CurrentContext.Result.Outcome.Status.ToString().ToUpper();
+            string resultMessage = TestContext.CurrentContext.Result.Message;
 
-            PipelineLog.WriteLine($"← {stage.FormattedIndex} {stage.FixtureFullName}::{AsYellow(stage.TestName)} >{outcomeStatus}< in {elapsedFormatted}{cpuUsageHumanized}");
+			bool isOk = "PASSED".Equals(outcomeStatus, StringComparison.OrdinalIgnoreCase);
+            var outcomeStatusColored = HighlightedOutcomeStatus(outcomeStatus);
+
+            var formattedMessage = isOk || string.IsNullOrEmpty(resultMessage) ? "" : $"{Environment.NewLine}  Details: {resultMessage}";
+			PipelineLog.WriteLine($"← {stage.FormattedIndex} {stage.FixtureFullName}::{AsYellow(stage.TestName)} >{outcomeStatusColored}< in {elapsedFormatted}{cpuUsageHumanized}{formattedMessage}");
         }
 
         static string AsYellow(string arg)
@@ -82,6 +86,5 @@ namespace Universe.NUnitPipeline
 
             return outcomeStatus;
         }
-
     }
 }
