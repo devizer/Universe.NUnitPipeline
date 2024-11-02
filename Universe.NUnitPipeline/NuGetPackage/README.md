@@ -1,11 +1,12 @@
 ﻿### Universe.NUnitPipeline 
-Customizable NUnit pipeline for 3.x and 4.x+ NUnit. The main purpose is to measure and report CPU usage. CPU Usage is properly measured for cpu load by:
+Customizable NUnit pipeline for 3.x and 4.x+ NUnit. The main purpose is to measure and report CPU usage. 
+
+![CPU Usage Tree Report](https://raw.githubusercontent.com/devizer/Universe.NUnitPipeline/main/Universe.NUnitPipeline/NuGetPackage/Cpu-Usage-Screenshot-V2.png)
+
+CPU Usage is properly measured for cpu load by:
 - Task.Run(), Task.Factory.StartNew(), await Task
 - ThreadPool.QueueUserWorkItem();
 - Thread.Start()
-
-
-![CPU Usage Tree Report](https://raw.githubusercontent.com/devizer/Universe.NUnitPipeline/main/Universe.NUnitPipeline/NuGetPackage/Cpu-Usage-Screenshot-V2.png)
 
 
 ### Supported OS
