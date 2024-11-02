@@ -15,7 +15,7 @@ namespace Tests
 		[Test]
 		[TestCase("First", 7)]
 		[TestCase("Next", 200)]
-		public void SuccessOverThreadStart(string title, [BeautyParameter] int milliseconds)
+		public void OverThreadStartSuccess(string title, [BeautyParameter] int milliseconds)
 		{
 			Console.WriteLine(PropertyBagVisualizer.ShowHumanString("SYNCHRONOUS"));
 			Thread thread = new Thread(() => {
@@ -31,7 +31,7 @@ namespace Tests
 		[Category("Fail")]
 		[TestCase("First", 7)]
 		[TestCase("Next", 200)]
-		public void ExceptionOverThreadStart(string title, [BeautyParameter] int milliseconds)
+		public void OverThreadStartException(string title, [BeautyParameter] int milliseconds)
 		{
 			Exception caught = null;
 			Console.WriteLine(PropertyBagVisualizer.ShowHumanString("SYNCHRONOUS"));
@@ -57,7 +57,7 @@ namespace Tests
 		[Category("Fail")]
 		[TestCase("First", 7)]
 		[TestCase("Next", 200)]
-		public void FailOverThreadStart(string title, [BeautyParameter] int milliseconds)
+		public void OverThreadStartFail(string title, [BeautyParameter] int milliseconds)
 		{
 			Exception caught = null;
 			Console.WriteLine(PropertyBagVisualizer.ShowHumanString("SYNCHRONOUS"));

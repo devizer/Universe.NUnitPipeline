@@ -16,7 +16,7 @@ namespace Tests
 		[Category("Fail")]
 		[TestCase("First", 7)]
 		[TestCase("Next", 200)]
-		public void SuccessOverThreadPool(string title, [BeautyParameter] int milliseconds)
+		public void OverThreadPoolSuccess(string title, [BeautyParameter] int milliseconds)
 		{
 			Console.WriteLine(PropertyBagVisualizer.ShowHumanString("SYNCHRONOUS"));
 			ManualResetEventSlim waiter = new ManualResetEventSlim(false);
@@ -34,7 +34,7 @@ namespace Tests
 		[Category("Fail")]
 		[TestCase("First", 7)]
 		[TestCase("Next", 200)]
-		public void FailOverThreadPoolFail(string title, [BeautyParameter] int milliseconds)
+		public void OverThreadPoolFail(string title, [BeautyParameter] int milliseconds)
 		{
 			Exception caught = null;
 			Console.WriteLine(PropertyBagVisualizer.ShowHumanString("SYNCHRONOUS"));
@@ -66,7 +66,7 @@ namespace Tests
 		[Category("Fail")]
 		[TestCase("First", 7)]
 		[TestCase("Next", 200)]
-		public void ExceptionOverThreadPool(string title, [BeautyParameter] int milliseconds)
+		public void OverThreadPoolException(string title, [BeautyParameter] int milliseconds)
 		{
 			Exception caught = null;
 			Console.WriteLine(PropertyBagVisualizer.ShowHumanString("SYNCHRONOUS"));
@@ -92,7 +92,5 @@ namespace Tests
 			waiter.Wait();
 			if (caught != null) throw caught;
 		}
-
-
 	}
 }

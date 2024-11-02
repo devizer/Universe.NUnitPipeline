@@ -1,6 +1,7 @@
 extern alias nunit;
 using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using nunit::NUnit.Framework;
 using Universe.NUnitPipeline;
@@ -15,7 +16,7 @@ namespace Tests
         [Test]
         [TestCase("First", 7)]
         [TestCase("Next", 200)]
-		public async Task AsyncSuccess(string title, [BeautyParameter] int milliseconds)
+		public async Task AwaitSuccess(string title, [BeautyParameter] int milliseconds)
         {
             Console.WriteLine(PropertyBagVisualizer.ShowHumanString("SYNCHRONOUS"));
             await CpuLoad.RunAsync(milliseconds);
@@ -26,7 +27,7 @@ namespace Tests
         [Category("Fail")]
         [TestCase("First", 7)]
         [TestCase("Next", 200)]
-        public async Task AsyncFail(string title, [BeautyParameter] int milliseconds)
+        public async Task AwaitFail(string title, [BeautyParameter] int milliseconds)
         {
             await Task.Run(function: async () =>
             {
@@ -40,7 +41,7 @@ namespace Tests
         [Category("Fail")]
         [TestCase("First", 7)]
         [TestCase("Next", 200)]
-        public async Task AsyncException(string title, [BeautyParameter] int milliseconds)
+        public async Task AwaitException(string title, [BeautyParameter] int milliseconds)
         {
             await Task.Run(function: async () =>
             {

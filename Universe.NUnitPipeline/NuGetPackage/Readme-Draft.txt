@@ -12,6 +12,7 @@
       │   └── AsyncSuccess                                         |            |        |       |        |      |      |
       │       ├── AsyncSuccess("First",milliseconds=7)             |PASSED      |    8.30| 109.31|    9.08|  6.42|  2.66|
       │       └── AsyncSuccess("Next",milliseconds=200)            |PASSED      |  200.70|  99.94|  200.60|137.24| 63.36|
+      │                                                            |            |        |       |        |      |      |
       ├── TestsOverThreadPool (fixture)                            |            |        |       |        |      |      |
       │   ├── ExceptionOverThreadPool                              |            |        |       |        |      |      |
       │   │   ├── ExceptionOverThreadPool("First",milliseconds=7)  |Failed:Error|    8.30| 104.09|    8.67|  5.97|  2.70|System.…
@@ -22,6 +23,7 @@
       │   └── SuccessOverThreadPool                                |            |        |       |        |      |      |
       │       ├── SuccessOverThreadPool("First",milliseconds=7)    |PASSED      |    7.80| 102.87|    8.00|  5.37|  2.63|
       │       └── SuccessOverThreadPool("Next",milliseconds=200)   |PASSED      |  202.20|  99.37|  200.95|137.15| 63.80|
+      │                                                            |            |        |       |        |      |      |
       ├── TestsOverThreadStart (fixture)                           |            |        |       |        |      |      |
       │   ├── ExceptionOverThreadStart                             |            |        |       |        |      |      |
       │   │   ├── ExceptionOverThreadStart("First",milliseconds=7) |Failed:Error|    8.50|  97.10|    8.25|  5.85|  2.39|System.…
@@ -32,6 +34,7 @@
       │   └── SuccessOverThreadStart                               |            |        |       |        |      |      |
       │       ├── SuccessOverThreadStart("First",milliseconds=7)   |PASSED      |    7.70|  98.06|    7.55|  5.26|  2.29|
       │       └── SuccessOverThreadStart("Next",milliseconds=200)  |PASSED      |  200.80|  99.75|  200.27|137.58| 62.69|
+      │                                                            |            |        |       |        |      |      |
       └── TestsSync (fixture)                                      |            |        |       |        |      |      |
           ├── ExceptionSynchronously                               |            |        |       |        |      |      |
           │   ├── ExceptionSynchronously("First",milliseconds=7)   |Failed:Error|    7.90| 100.01|    7.90|  5.64|  2.25|System.…
