@@ -5,7 +5,7 @@ Customizable NUnit pipeline for 3.x and 4.x+ NUnit. The main purpose is to measu
 - Thread.Start()
 
 
-![CPU Usage Tree Report](https://raw.githubusercontent.com/devizer/Universe.NUnitPipeline/main/Universe.NUnitPipeline/NuGetPackage/Cpu-Usage-Screenshot.png)
+![CPU Usage Tree Report](https://raw.githubusercontent.com/devizer/Universe.NUnitPipeline/main/Universe.NUnitPipeline/NuGetPackage/Cpu-Usage-Screenshot-V2.png)
 
 
 ### Supported OS
