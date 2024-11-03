@@ -10,7 +10,7 @@ CPU Usage is properly measured for cpu load by:
 
 
 ### Supported OS
-It supports Windows (Vista+, x86, x64, and arm), Linux (2.6.26+), and Mac OS (10.9+). Mono-only platforms are also supported.
+It supports Windows (Vista+, x86, x64, and arm), Linux (2.6.26+), and Mac OS (10.9+). WSL 1+ and mono-only platforms are also supported.
 
 
 ### Supported Target Frameworks
