@@ -25,7 +25,6 @@ namespace Universe.NUnitPipeline
 	    public static void OnDispose(string title, Action action)
 	    {
 			OnDispose(title, action, TestDisposeOptions.AsyncGlobal);
-
 	    }
 
 		// title is for meaningful exception details in case of fail
