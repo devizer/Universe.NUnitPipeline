@@ -63,16 +63,20 @@ namespace Universe.NUnitPipeline
             {
 	            var internalReportFile = NUnitPipelineConfiguration.GetService<NUnitReportConfiguration>().InternalReportFile;
 
-				var files = new[] 
+	            if (!string.IsNullOrEmpty(internalReportFile))
 	            {
-		            new { Content = InternalLog.InternalBuffer.ToString(), Path = internalReportFile + ".Internal.Log" },
-		            new { Content = InternalLog.Buffer.ToString(), Path = internalReportFile + ".Log" }
-	            };
 
-	            foreach (var file in files)
-	            {
-					Debug.WriteLine($"Internal Log: {Path.GetFullPath(file.Path)}");
-					FileEx.WriteAll(file.Path, file.Content);
+		            var files = new[]
+		            {
+			            new { Content = InternalLog.InternalBuffer.ToString(), Path = internalReportFile + ".Internal.Log" },
+			            new { Content = InternalLog.Buffer.ToString(), Path = internalReportFile + ".Log" }
+		            };
+
+		            foreach (var file in files)
+		            {
+			            Debug.WriteLine($"Internal Log: {Path.GetFullPath(file.Path)}");
+			            FileEx.WriteAll(file.Path, file.Content);
+		            }
 	            }
             }
         }

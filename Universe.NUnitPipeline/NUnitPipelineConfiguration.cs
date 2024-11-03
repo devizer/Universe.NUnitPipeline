@@ -31,6 +31,7 @@ namespace Universe.NUnitPipeline
 			if (Services.TryGetValue(typeof(T), out var raw) && raw.IsValueCreated)
 				throw new ArgumentException($"The requested services <{typeof(T).Name}> is already registered");
 
+			// TODO: Exception Error materializing typeof(T)
 			Services[typeof(T)] = new Lazy<object>(() => lazy(), LazyThreadSafetyMode.ExecutionAndPublication);
 		}
 	}

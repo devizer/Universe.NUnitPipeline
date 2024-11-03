@@ -41,6 +41,8 @@ namespace Universe.NUnitPipeline
 			if (stage.NUnitActionAppliedTo == NUnitActionAppliedTo.Assembly)
 			{
 				var internalReportFile = NUnitPipelineConfiguration.GetService<NUnitReportConfiguration>().InternalReportFile;
+				if (string.IsNullOrEmpty(internalReportFile)) return;
+					
 				// Build and Store Plain Table
 				var plainReport = BuildPlainReport();
 				var plainReportFileName = internalReportFile + ".Plain.Summary.txt";
