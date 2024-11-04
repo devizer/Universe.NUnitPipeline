@@ -1,0 +1,1 @@
+dotnet publish --self-contained -r linux-bionic-arm64

@@ -5,7 +5,9 @@ VisualStudioVersion = 17.10.35326.205
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Universe.NUnitPipeline", "Universe.NUnitPipeline\Universe.NUnitPipeline.csproj", "{3C3C7784-4AFA-47D5-8A43-30D8542210CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Universe.NUnitPipeline.Tests", "Universe.NUnitPipeline.Tests\Universe.NUnitPipeline.Tests.csproj", "{D512A8A0-5080-4A99-B31C-781BB167A41F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Universe.NUnitPipeline.Tests", "Universe.NUnitPipeline.Tests\Universe.NUnitPipeline.Tests.csproj", "{D512A8A0-5080-4A99-B31C-781BB167A41F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Universe.NUnitPipeline.Tests.Light", "Universe.NUnitPipeline.Tests.Light\Universe.NUnitPipeline.Tests.Light.csproj", "{18B6C67D-5F89-4C1E-ACE2-352AFF8E7148}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D512A8A0-5080-4A99-B31C-781BB167A41F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D512A8A0-5080-4A99-B31C-781BB167A41F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D512A8A0-5080-4A99-B31C-781BB167A41F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18B6C67D-5F89-4C1E-ACE2-352AFF8E7148}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18B6C67D-5F89-4C1E-ACE2-352AFF8E7148}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18B6C67D-5F89-4C1E-ACE2-352AFF8E7148}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18B6C67D-5F89-4C1E-ACE2-352AFF8E7148}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

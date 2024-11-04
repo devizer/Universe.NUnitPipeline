@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+		<!-- PublishAot>true</PublishAot -->
+		<!-- InvariantGlobalization>true</InvariantGlobalization -->
+	</PropertyGroup>
+
+	<ItemGroup>
+    <ProjectReference Include="..\Universe.NUnitPipeline.Tests\Universe.NUnitPipeline.Tests.csproj" />
+    <ProjectReference Include="..\Universe.NUnitPipeline\Universe.NUnitPipeline.csproj" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="NUnit" Version="3.14.0" />
+		<PackageReference Include="NUnitLite" Version="3.14.0" />
+	</ItemGroup>
+
+
+</Project>
