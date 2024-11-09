@@ -10,6 +10,6 @@ for tf in net8.0 net6.0 netcoreapp2.1 netcoreapp2.2 netcoreapp3.0 netcoreapp3.1 
   mkdir -p $out
   dotnet publish -c Release --self-contained -r linux-x64 -f $tf -o $out/ || true
   pushd $out
-  GZIP=-9 tar czf $SYSTEM_ARTIFACTSDIRECTORY/$tf-NUnit-Pipeline-Tests.tar.gz *
+  GZIP=-9 tar czf $SYSTEM_ARTIFACTSDIRECTORY/$tf-NUnit-Pipeline-Tests.tar.gz .
   popd
 done
