@@ -16,6 +16,9 @@ function publish() {
   Say "Publish [$tf] for linux-x64"
   out=bin/public/$tf
   mkdir -p $out
+  pushd ..
+    Reset-Target-Framework -fw $tf -l latest
+  popd
   dotnet publish -c Release --self-contained -r linux-x64 -f $tf -o $out/ || true
   pushd $out
   GZIP=-9 tar czf $SYSTEM_ARTIFACTSDIRECTORY/$tf-NUnit-Pipeline-Tests.tar.gz .
