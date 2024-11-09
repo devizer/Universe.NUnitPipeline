@@ -12,6 +12,31 @@ trigger:
 
 jobs:
 
+- job: PublishTests
+  timeoutInMinutes: 144
+  pool:
+    vmImage: ubuntu-latest
+  
+  steps:
+  
+  - bash: |
+      set -eu; set -o pipefail
+      script=https://raw.githubusercontent.com/devizer/test-and-build/master/install-build-tools-bundle.sh; (wget -q -nv --no-check-certificate -O - $script 2>/dev/null || curl -ksSL $script) | bash >/dev/null
+      Say --Reset-Stopwatch
+      Say "CPU: $(Get-CpuName)"
+      cd Scripts
+      bash -e Publish-Self-Contained-Tests.sh 
+    name: 'Build'
+
+  - task: PublishBuildArtifacts@1
+    condition: succeededOrFailed()
+    displayName: 'Publish'
+    inputs:
+      pathtoPublish: '$(SYSTEM.ARTIFACTSDIRECTORY)'
+      artifactName: 'NUnit Pipeline Self-Contained Tests $(Build.BUILDNUMBER)'
+
+
+
 - job: Boot
   timeoutInMinutes: 2
   pool:
