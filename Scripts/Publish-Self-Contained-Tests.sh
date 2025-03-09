@@ -34,7 +34,7 @@ publish netcoreapp2.0   2.0
 publish netcoreapp2.1   2.1
 publish netcoreapp2.2   2.2
 publish netcoreapp3.0   3.0
-publish netcoreapp3.0   3.0
+publish netcoreapp3.1   3.1
 publish net7.0          7.0
 publish net6.0          6.0
 publish net5.0          5.0

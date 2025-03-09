@@ -14,7 +14,8 @@ namespace Universe.NUnitPipeline
 {
 	extern alias nunit;
 
-	internal class TestResult
+	// Public because interceptor needs does the test fail
+	public class TestResult
 	{
 		public string ResultOutcome { get; set; }
 		public string ResultMessage { get; set; }
@@ -49,7 +50,7 @@ namespace Universe.NUnitPipeline
 
             var resultMessage = TestContext.CurrentContext.Result.Message;
 			var resultOutcome = TestContext.CurrentContext.Result.Outcome.ToString();
-			test.GetPropertyOrAdd("Test Result", t => new TestResult { ResultMessage = resultMessage, ResultOutcome = resultOutcome });
+			test.GetPropertyOrAdd<TestResult>("Test Result", t => new TestResult { ResultMessage = resultMessage, ResultOutcome = resultOutcome });
 
 			var actions = NUnitPipelineConfiguration.GetService<NUnitPipelineChain>().OnEnd;
             if (actions == null) return;

@@ -15,17 +15,16 @@ namespace Universe.NUnitPipeline.ConsoleTreeTable
 
 		public override string ToString()
 		{
-			return string.Join(TestsTreeConfiguration.Instance.Separator, Path);
+			return string.Join(TestsTreeConfiguration.TheSeparator, Path);
 		}
 	}
 	internal class TestsTreeConfiguration : ITreeTableConfiguration<string, DetailsReportRow>
 	{
 		public static readonly TestsTreeConfiguration Instance = new TestsTreeConfiguration();
-
 		public IEqualityComparer<string> EqualityComparer { get; } = StringComparer.Ordinal;
 		public string KeyPartToText(string keyPart) => keyPart;
-
-		public string Separator => " \x2192 ";
+		public static readonly string TheSeparator = " \x2192 ";
+		public string Separator => TheSeparator;
 
 		public ConsoleTable CreateColumns()
 		{
