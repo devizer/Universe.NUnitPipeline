@@ -68,6 +68,16 @@ jobs:
   strategy:
     maxParallel: 10
     matrix:
+      "4.3.2 Linux":
+         NUNIT_VERSION: "4.3.2"
+         VMIMAGE: "ubuntu-latest"
+      "4.3.1 Linux":
+         NUNIT_VERSION: "4.3.1"
+         VMIMAGE: "ubuntu-latest"
+      "4.3.0 Linux":
+         NUNIT_VERSION: "4.3.0"
+         VMIMAGE: "ubuntu-latest"
+
       "3.10.1 Windows":
          NUNIT_VERSION: "3.10.1"
          VMIMAGE: "windows-latest"
