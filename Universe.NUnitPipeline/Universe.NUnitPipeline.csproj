@@ -18,8 +18,8 @@
 		<PackageReference Include="NUnit" Version="3.10.0">
 		  <!--<Aliases>nunit</Aliases>-->
 		</PackageReference>
-		<PackageReference Include="Universe.CpuUsage" Version="2.2.497.598" />
-		<PackageReference Include="Universe.GenericTreeTable" Version="1.1.14" />
+		<PackageReference Include="Universe.CpuUsage" Version="2.2.778.893" />
+		<PackageReference Include="Universe.GenericTreeTable" Version="1.2.15" />
 		<None Include="NuGetPackage\NUnit.Pipeline.png" Pack="true" PackagePath="NuGetPackage" />
 		<None Include="NuGetPackage\README.md" Pack="true" PackagePath="NuGetPackage" />
 	</ItemGroup>
@@ -34,8 +34,7 @@
         <RepositoryUrl>https://github.com/devizer/Universe.NUnitPipeline</RepositoryUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageIconUrl>https://raw.githubusercontent.com/devizer/Universe.NUnitPipeline/main/Universe.NUnitPipeline/NuGetPackage/NUnit.Pipeline.png</PackageIconUrl>
-        <PackageTags>NUnit Extensions CpuUsage Windows Mac Linux</PackageTags>
-
+        <PackageTags>NUnit Cpu-Usage NUnit-Pipeline NUnit-CpuUsage Windows Mac Linux</PackageTags>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <DebugSymbols>true</DebugSymbols>
         <EmbedAllSources>true</EmbedAllSources>
