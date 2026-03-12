@@ -31,6 +31,17 @@ namespace Universe.NUnitPipeline
             BuildNUnitStage(test, NUnitActionSide.Start, out var stage, out var counter);
             if (counter != 1) return;
 
+			var testInfo = new TestInformation()
+			{
+				FixtureIndex = stage.FixtureIndex,
+				TestIndex = stage.TestIndex,
+				FormattedIndex = stage.FormattedIndex,
+				Method = stage.Method,
+				StructuredFullName = stage.StructuredFullName,
+			};
+
+			test.GetPropertyOrAdd(NUnitTestCaseStateExtensions.TestInfoKey, x => testInfo);
+
             var actions = NUnitPipelineConfiguration.GetService<NUnitPipelineChain>().OnStart;
             if (actions == null) return;
             foreach (var a in actions)

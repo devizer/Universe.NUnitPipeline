@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace Universe.NUnitPipeline
 {
-    public class NUnitStage
+	public class NUnitStage
     {
         public NUnitActionAppliedTo NUnitActionAppliedTo { get; set; }
         public NUnitActionSide Side { get; set; }
@@ -21,6 +21,7 @@ namespace Universe.NUnitPipeline
         public string FormattedIndex =>
             FixtureIndex.HasValue ? TestIndex.HasValue ? $"{FixtureIndex.Value}.{TestIndex.Value}" : $"{FixtureIndex.Value}" : "";
 
-        public string InternalKey { get; set; }
+		// Global|Class FixtureFullName|Test FixtureFullName::TestName
+		public string InternalKey { get; set; }
     }
 }

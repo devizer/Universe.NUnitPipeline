@@ -64,10 +64,21 @@ jobs:
   displayName: 'Pack'
   pool:
     vmImage: '$(VMIMAGE)'
-  timeoutInMinutes: 8
+  timeoutInMinutes: 10
   strategy:
     maxParallel: 10
     matrix:
+      "4.5.1 Linux":
+         NUNIT_VERSION: "4.5.1"
+         VMIMAGE: "ubuntu-latest"
+      "4.5.0 Linux":
+         NUNIT_VERSION: "4.5.0"
+         VMIMAGE: "ubuntu-latest"
+      "4.4.0 Linux":
+         NUNIT_VERSION: "4.4.0"
+         VMIMAGE: "ubuntu-latest"
+      
+      
       "4.3.2 Linux":
          NUNIT_VERSION: "4.3.2"
          VMIMAGE: "ubuntu-latest"

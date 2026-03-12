@@ -52,6 +52,5 @@ namespace Universe.NUnitPipeline.ConsoleTreeTable
 				detail.ErrorMessage
 			);
 		}
-
 	}
 }

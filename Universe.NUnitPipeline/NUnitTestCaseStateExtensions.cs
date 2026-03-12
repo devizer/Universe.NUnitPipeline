@@ -11,13 +11,23 @@ namespace Universe.NUnitPipeline
 	public static class NUnitTestCaseStateExtensions
 	{
 		private static readonly string PipelinePropertyName = "NUnitPipelineCollection";
+		public static readonly string TestInfoKey = "Test Basic Info";
         internal class MutableDictionary
         {
 	        public Dictionary<string, object> Values { get; } = new Dictionary<string, object>();
         }
-        
-        // Mandatory: Should be locked by a Monitor with serializable access
-        public static T GetPropertyOrAdd<T>(this ITest test, string propertyName, /* nullable */ Func<ITest, T> getPropertyValue)
+
+        public static TestInformation GetTestInformation(this ITest test)
+        {
+	        return GetPropertyOrAdd<TestInformation>(test, TestInfoKey, null);
+        }
+        public static TestInformation GetTestInformation(this TestContext.TestAdapter test)
+        {
+	        return GetPropertyOrAdd<TestInformation>(test, TestInfoKey, null);
+        }
+
+		// Mandatory: Should be locked by a Monitor with serializable access
+		public static T GetPropertyOrAdd<T>(this ITest test, string propertyName, /* nullable */ Func<ITest, T> getPropertyValue)
         {
             var tempCopy = test.Properties[PipelinePropertyName];
             // version 1
