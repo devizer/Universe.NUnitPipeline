@@ -97,7 +97,7 @@ jobs:
          VMIMAGE: "ubuntu-22.04"
       "3.10.1 MacOs":
          NUNIT_VERSION: "3.10.1"
-         VMIMAGE: "macos-latest"
+         VMIMAGE: "macos-14"
       "3.10.0 Windows":
          NUNIT_VERSION: "3.10.0"
          VMIMAGE: "windows-latest"
@@ -106,7 +106,7 @@ jobs:
          VMIMAGE: "ubuntu-22.04"
       "3.10.0 MacOs":
          NUNIT_VERSION: "3.10.0"
-         VMIMAGE: "macos-latest"
+         VMIMAGE: "macos-14"
 
       "3.7.0 Windows":
          NUNIT_VERSION: "3.7.0"
@@ -116,7 +116,7 @@ jobs:
          VMIMAGE: "ubuntu-22.04"
       "3.7.0 MacOs":
          NUNIT_VERSION: "3.7.0"
-         VMIMAGE: "macos-latest"
+         VMIMAGE: "macos-14"
 
       "4.2.2 Windows":
          NUNIT_VERSION: "4.2.2"
@@ -126,7 +126,7 @@ jobs:
          VMIMAGE: "ubuntu-22.04"
       "4.2.2 MacOs":
          NUNIT_VERSION: "4.2.2"
-         VMIMAGE: "macos-latest"
+         VMIMAGE: "macos-14"
       "4.2.1 Windows":
          NUNIT_VERSION: "4.2.1"
          VMIMAGE: "windows-latest"
@@ -135,7 +135,7 @@ jobs:
          VMIMAGE: "ubuntu-22.04"
       "4.2.1 MacOs":
          NUNIT_VERSION: "4.2.1"
-         VMIMAGE: "macos-latest"
+         VMIMAGE: "macos-14"
       "4.1.0 Windows":
          NUNIT_VERSION: "4.1.0"
          VMIMAGE: "windows-latest"
@@ -144,7 +144,7 @@ jobs:
          VMIMAGE: "ubuntu-22.04"
       "4.1.0 MacOs":
          NUNIT_VERSION: "4.1.0"
-         VMIMAGE: "macos-latest"
+         VMIMAGE: "macos-14"
       "4.0.1 Windows":
          NUNIT_VERSION: "4.0.1"
          VMIMAGE: "windows-latest"
@@ -153,7 +153,7 @@ jobs:
          VMIMAGE: "ubuntu-22.04"
       "4.0.1 MacOs":
          NUNIT_VERSION: "4.0.1"
-         VMIMAGE: "macos-latest"
+         VMIMAGE: "macos-14"
       "3.14.0 Windows":
          NUNIT_VERSION: "3.14.0"
          VMIMAGE: "windows-latest"
@@ -162,7 +162,7 @@ jobs:
          VMIMAGE: "ubuntu-22.04"
       "3.14.0 MacOs":
          NUNIT_VERSION: "3.14.0"
-         VMIMAGE: "macos-latest"
+         VMIMAGE: "macos-14"
       "3.13.3 Windows":
          NUNIT_VERSION: "3.13.3"
          VMIMAGE: "windows-latest"
@@ -171,7 +171,7 @@ jobs:
          VMIMAGE: "ubuntu-22.04"
       "3.13.3 MacOs":
          NUNIT_VERSION: "3.13.3"
-         VMIMAGE: "macos-latest"
+         VMIMAGE: "macos-14"
       "3.13.2 Windows":
          NUNIT_VERSION: "3.13.2"
          VMIMAGE: "windows-latest"
@@ -180,7 +180,7 @@ jobs:
          VMIMAGE: "ubuntu-22.04"
       "3.13.2 MacOs":
          NUNIT_VERSION: "3.13.2"
-         VMIMAGE: "macos-latest"
+         VMIMAGE: "macos-14"
       "3.13.1 Windows":
          NUNIT_VERSION: "3.13.1"
          VMIMAGE: "windows-latest"
@@ -189,7 +189,7 @@ jobs:
          VMIMAGE: "ubuntu-22.04"
       "3.13.1 MacOs":
          NUNIT_VERSION: "3.13.1"
-         VMIMAGE: "macos-latest"
+         VMIMAGE: "macos-14"
       "3.13.0 Windows":
          NUNIT_VERSION: "3.13.0"
          VMIMAGE: "windows-latest"
@@ -198,7 +198,7 @@ jobs:
          VMIMAGE: "ubuntu-22.04"
       "3.13.0 MacOs":
          NUNIT_VERSION: "3.13.0"
-         VMIMAGE: "macos-latest"
+         VMIMAGE: "macos-14"
       "3.12.0 Windows":
          NUNIT_VERSION: "3.12.0"
          VMIMAGE: "windows-latest"
@@ -207,7 +207,7 @@ jobs:
          VMIMAGE: "ubuntu-22.04"
       "3.12.0 MacOs":
          NUNIT_VERSION: "3.12.0"
-         VMIMAGE: "macos-latest"
+         VMIMAGE: "macos-14"
       # "3.11.0 Windows":
       #    NUNIT_VERSION: "3.11.0"
       #    VMIMAGE: "windows-latest"
@@ -216,7 +216,7 @@ jobs:
       #    VMIMAGE: "ubuntu-22.04"
       # "3.11.0 MacOs":
       #    NUNIT_VERSION: "3.11.0"
-      #    VMIMAGE: "macos-latest"
+      #    VMIMAGE: "macos-14"
       "3.9.0 Windows":
          NUNIT_VERSION: "3.9.0"
          VMIMAGE: "windows-latest"
@@ -225,7 +225,7 @@ jobs:
          VMIMAGE: "ubuntu-22.04"
       "3.9.0 MacOs":
          NUNIT_VERSION: "3.9.0"
-         VMIMAGE: "macos-latest"
+         VMIMAGE: "macos-14"
       "3.8.1 Windows":
          NUNIT_VERSION: "3.8.1"
          VMIMAGE: "windows-latest"
@@ -234,7 +234,7 @@ jobs:
          VMIMAGE: "ubuntu-22.04"
       "3.8.1 MacOs":
          NUNIT_VERSION: "3.8.1"
-         VMIMAGE: "macos-latest"
+         VMIMAGE: "macos-14"
       "3.8.0 Windows":
          NUNIT_VERSION: "3.8.0"
          VMIMAGE: "windows-latest"
@@ -243,7 +243,7 @@ jobs:
          VMIMAGE: "ubuntu-22.04"
       "3.8.0 MacOs":
          NUNIT_VERSION: "3.8.0"
-         VMIMAGE: "macos-latest"
+         VMIMAGE: "macos-14"
       "3.7.1 Windows":
          NUNIT_VERSION: "3.7.1"
          VMIMAGE: "windows-latest"
@@ -252,7 +252,7 @@ jobs:
          VMIMAGE: "ubuntu-22.04"
       "3.7.1 MacOs":
          NUNIT_VERSION: "3.7.1"
-         VMIMAGE: "macos-latest"
+         VMIMAGE: "macos-14"
       # "3.6.1 Windows":
       #    NUNIT_VERSION: "3.6.1"
       #    VMIMAGE: "windows-latest"
@@ -261,7 +261,7 @@ jobs:
       #    VMIMAGE: "ubuntu-22.04"
       # "3.6.1 MacOs":
       #    NUNIT_VERSION: "3.6.1"
-      #    VMIMAGE: "macos-latest"
+      #    VMIMAGE: "macos-14"
       # "3.6.0 Windows":
       #    NUNIT_VERSION: "3.6.0"
       #    VMIMAGE: "windows-latest"
@@ -270,7 +270,7 @@ jobs:
       #    VMIMAGE: "ubuntu-22.04"
       # "3.6.0 MacOs":
       #    NUNIT_VERSION: "3.6.0"
-      #    VMIMAGE: "macos-latest"
+      #    VMIMAGE: "macos-14"
       # "3.5.0 Windows":
       #    NUNIT_VERSION: "3.5.0"
       #    VMIMAGE: "windows-latest"
@@ -279,7 +279,7 @@ jobs:
       #    VMIMAGE: "ubuntu-22.04"
       # "3.5.0 MacOs":
       #    NUNIT_VERSION: "3.5.0"
-      #    VMIMAGE: "macos-latest"
+      #    VMIMAGE: "macos-14"
       # "3.4.1 Windows":
       #    NUNIT_VERSION: "3.4.1"
       #    VMIMAGE: "windows-latest"
@@ -288,7 +288,7 @@ jobs:
       #    VMIMAGE: "ubuntu-22.04"
       # "3.4.1 MacOs":
       #    NUNIT_VERSION: "3.4.1"
-      #    VMIMAGE: "macos-latest"
+      #    VMIMAGE: "macos-14"
       # "3.4.0 Windows":
       #    NUNIT_VERSION: "3.4.0"
       #    VMIMAGE: "windows-latest"
@@ -297,7 +297,7 @@ jobs:
       #    VMIMAGE: "ubuntu-22.04"
       # "3.4.0 MacOs":
       #    NUNIT_VERSION: "3.4.0"
-      #    VMIMAGE: "macos-latest"
+      #    VMIMAGE: "macos-14"
       # "3.2.1 Windows":
       #    NUNIT_VERSION: "3.2.1"
       #    VMIMAGE: "windows-latest"
@@ -306,7 +306,7 @@ jobs:
       #    VMIMAGE: "ubuntu-22.04"
       # "3.2.1 MacOs":
       #    NUNIT_VERSION: "3.2.1"
-      #    VMIMAGE: "macos-latest"
+      #    VMIMAGE: "macos-14"
       # "3.2.0 Windows":
       #    NUNIT_VERSION: "3.2.0"
       #    VMIMAGE: "windows-latest"
@@ -315,7 +315,7 @@ jobs:
       #    VMIMAGE: "ubuntu-22.04"
       # "3.2.0 MacOs":
       #    NUNIT_VERSION: "3.2.0"
-      #    VMIMAGE: "macos-latest"
+      #    VMIMAGE: "macos-14"
       # "3.0.1 Windows":
       #    NUNIT_VERSION: "3.0.1"
       #    VMIMAGE: "windows-latest"
@@ -324,7 +324,7 @@ jobs:
       #    VMIMAGE: "ubuntu-22.04"
       # "3.0.1 MacOs":
       #    NUNIT_VERSION: "3.0.1"
-      #    VMIMAGE: "macos-latest"
+      #    VMIMAGE: "macos-14"
       # "3.0.0 Windows":
       #    NUNIT_VERSION: "3.0.0"
       #    VMIMAGE: "windows-latest"
@@ -333,7 +333,7 @@ jobs:
       #    VMIMAGE: "ubuntu-22.04"
       # "3.0.0 MacOs":
       #    NUNIT_VERSION: "3.0.0"
-      #    VMIMAGE: "macos-latest"
+      #    VMIMAGE: "macos-14"
 
   steps:
 
